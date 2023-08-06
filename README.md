@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Program Evaluation for Public Service <a href='https://evalf22.classes.andrewheiss.com/'><img src='files/icon-512.png' align="right" height="139" /></a>
+# Educational Research and Evaluation <a href='https://educ157.de-barros.com/'><img src='files/icon-512.png' align="right" height="139" /></a>
 
-[PMAP 8521 • Fall 2022](https://evalf22.classes.andrewheiss.com/)  
-[Andrew Heiss](https://www.andrewheiss.com/) • Andrew Young School of
-Policy Studies • Georgia State University
+[EDUC 157 • Fall 2023](https://evalf22.classes.andrewheiss.com/)  
+[Andreas de Barros](https://www.de-barros.com/) • School of Education •
+University of California, Irvine
 
 ------------------------------------------------------------------------
 
@@ -92,11 +92,8 @@ The pipeline does several major tasks:
   documentation](https://quarto.org/docs/websites/) for more details.
 
 - **Upload resulting `_site/` folder to my remote server**: Quarto
-  places the compiled website in a folder named `/_site/`. The pipeline
-  uses `rsync` to upload this folder to my personal remote server. This
-  target will only run if the `UPLOAD_WEBSITES` environment variable is
-  set to `TRUE`, and it will only work if you have an SSH key set up on
-  my personal server, which only I do.
+  places the compiled website in a folder named `/_site/`. I push this
+  folder to my website using GitHub and IONOS’ DeployNow.
 
 The complete pipeline looks like this:
 
@@ -186,6 +183,15 @@ graph LR
     x9061f97ff2027ff8(["data_attendance"]):::queued --> x7b056887098d4c56(["copy_attendance"]):::queued
   end
 ```
+
+## Acknowledgments
+
+This page is largely inspired by [Andrew
+Heiss’s](https://www.andrewheiss.com/) site for his class [Program
+Evaluation for Public
+Service](https://github.com/andrewheiss/evalf22.classes.andrewheiss.com)
+as well as [Matt Blackwell’s](https://www.mattblackwell.org/) site for
+his class [Gov 50](https://github.com/mattblackwell/gov50-f23-site/).
 
 ## Licenses
 
