@@ -10,8 +10,25 @@
 # regular bash command (here `cd`). There's no intuitive way to concatenate
 # commands like `cd blah; zip bloop`, so we feed the second command (here `zip`)
 # as an argument to `cd`, which feels hacky, but it works :shrug:
+#zippy <- function(folder_to_zip, parent) {
+#  system2("cd", c(parent, "; zip", "-FSrX", paste0(folder_to_zip, ".zip"),
+#                  folder_to_zip, '-x "*.DS_Store"'))
+#  return(file.path(parent, paste0(folder_to_zip, ".zip")))
+#}
+
 zippy <- function(folder_to_zip, parent) {
-  system2("cd", c(parent, "; zip", "-FSrX", paste0(folder_to_zip, ".zip"),
-                  folder_to_zip, '-x "*.DS_Store"'))
+  current_dir <- getwd()  # Store the current working directory
+  setwd(parent)          # Change to the parent directory
+
+  # Construct the command for creating the zip archive on Windows
+  cmd <- sprintf('zip -FSrX "%s.zip" "%s" -x "*.DS_Store"', folder_to_zip, folder_to_zip)
+
+  # Execute the zip command
+  system2(command = "cmd", args = c("/c", cmd), wait = TRUE)
+
+  setwd(current_dir)     # Change back to the original working directory
   return(file.path(parent, paste0(folder_to_zip, ".zip")))
 }
+
+
+

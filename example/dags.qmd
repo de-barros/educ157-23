@@ -147,11 +147,6 @@ paths(simple_dag)
 
 The first open path is fine—we want a single *d*-connected relationship between treatment and outcome—but the other two indicate that there is confounding from `a` and `b`. We can see what each of these paths are with the `ggdag_paths()` function from the **ggdag** package:
 
-```{r plot-dag-paths, fig.width=8}
-ggdag_paths(simple_dag_with_coords) +
-  theme_dag()
-```
-
 Instead of listing out all the possible paths and identifying backdoors by hand, you can use the `adjustmentSets()` function in the **dagitty** package to programmatically find all the nodes that need to be adjusted. Here we see that both `a` and `b` need to be controlled for to isolate the `x -> y` relationship.
 
 ```{r find-adjustment-sets}
