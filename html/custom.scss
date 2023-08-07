@@ -15,16 +15,17 @@ $black:    #000 !default;
 
 // Inferno colors
 // viridisLite::viridis(8, option = "inferno", begin = 0.1, end = 0.9)
-$blue:    #42159D !default;
-$indigo:  #771C6D !default;
-$purple:  #480B6A !default;
-$pink:    #A52C60 !default;
-$red:     #CF4446 !default;
-$orange:  #EE6A24 !default;
-$yellow:  #FB9E07 !default;
-$green:   #02b875 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+
+$blue:    #26172AFF !default;
+$indigo:  #3B2D5AFF !default;
+$purple:  #40488DFF !default;
+$pink:    #366A9FFF !default;
+$red:     #348BA6FF !default;
+$orange:  #39ABACFF !default;
+$yellow:  #58CBADFF !default;
+$green:   #A8E1BCFF !default;
+$teal:    #EE6A24FF !default;
+$cyan:    #FB9E07FF !default;
 
 $primary:       $blue !default;
 $secondary:     $gray-500 !default;

@@ -3,7 +3,7 @@
 
 # Educational Research and Evaluation <a href='https://educ157.de-barros.com/'><img src='files/icon-512.png' align="right" height="139" /></a>
 
-[EDUC 157 • Fall 2023](https://evalf22.classes.andrewheiss.com/)  
+[EDUC 157 • Fall 2023](https://educ157.de-barros.com/)  
 [Andreas de Barros](https://www.de-barros.com/) • School of Education •
 University of California, Irvine
 

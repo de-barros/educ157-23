@@ -19,19 +19,19 @@ execute:
 
 bibliography: files/bib/references.bib
 csl: files/bib/chicago-author-date.csl
-description-meta: "Use modern statistical and data scientific tools to measure causal effects and evaluate public policy"
+description-meta: "Combine modern research design and program evaluation methods to measure the effects of educational programs"
 
 website:
-  title: "Program Evaluation"
-  site-url: "https://evalf22.classes.andrewheiss.com"
+  title: "EDUC 157"
+  site-url: "https://educ157.de-barros.com/"
 
   favicon: "/files/icon-512.png"
 
   twitter-card:
     image: "/files/social-image-f22.png"
     card-style: summary_large_image
-    creator: "@andrewheiss"
-    # site: "@andrewheiss"
+    creator: "@andydebarros"
+    # site: "@andydebarros"
 
   open-graph:
     image: "/files/social-image-f22.png"
@@ -39,7 +39,7 @@ website:
 
   navbar:
     pinned: true
-    background: "#EE6A24"
+    background: "#0064a4"
     right:
       - syllabus.qmd
       - schedule.qmd
@@ -54,7 +54,7 @@ website:
       - text: "News"
         file: news/index.qmd
       - icon: slack
-        href: "https://gsuevalf2022.slack.com"
+        href: "https://educ157-23.slack.com"
         aria-label: Slack
       - icon: cloud-fill
         href: "https://rstudio.cloud"

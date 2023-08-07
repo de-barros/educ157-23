@@ -1,8 +1,8 @@
 ---
-title: "Program Evaluation for Public Service"
-subtitle: "Combine research design, causal inference, and econometric tools to measure the effects of social programs"
+title: "Educational Research and Evaluation"
+subtitle: "Combine research design and program evaluation methods to measure the effects of educational programs"
 details: |
-  PMAP 8521 • Fall 2022<br>Andrew Young School of Policy Studies<br>Georgia State University
+  EDUC 157 • Fall 2023<br>School of Education<br>University of California, Irvine
 sidebar: false
 toc: false
 page-layout: full
