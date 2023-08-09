@@ -15,7 +15,7 @@ instructor:
 course:
   number: "EDUC 157"
   semester: "Fall 2023"
-  days: "Tuesdays, Thursdays"
+  days: "Tue/Thu"
   time: "2:00–3:20 PM"
   location: "Anteater Learning Pavilion 1100"
   dates: "September 25–December 15, 2023"
@@ -27,8 +27,8 @@ course:
 
 university:
   name: University of California, Irvine
-  url: "https://education.uci.edu/"
+  url: "https://uci.edu/"
 
 school:
   name: School of Education
-  url: "https://uci.edu/"
+  url: "https://education.uci.edu/"
