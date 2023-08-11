@@ -65,7 +65,7 @@ Specifically, at the end of the course, you should be able to do the following.
 - Know what makes evaluations valuable for education practitioners.
 - Become curious and confident in consuming and producing evaluations.
 
-## Expectations
+### Expectations
 
 In this course, you will be expected to
 
@@ -75,17 +75,17 @@ In this course, you will be expected to
 - take one in-class exam, and
 - complete four milestones, which lead up to one final evaluation plan.
 
-## Connections to other classes
+### Connections to other classes
 
-[EDUC 10](https://catalogue.uci.edu/search/?P=EDUC%2010) (Educational Research Design) and [EDUC 15](https://catalogue.uci.edu/search/?P=EDUC%2015) (Statistics for Education Research) are prerequisites for this class. That said, we will also dedicate a class to brush up on everyone's foundational statistics skills. The course does not assume any prior knowledge of statistical software. 
+[EDUC 10](https://catalogue.uci.edu/search/?P=EDUC%2010) (Educational Research Design) and [EDUC 15](https://catalogue.uci.edu/search/?P=EDUC%2015) (Statistics for Education Research) are prerequisites for this course. That said, we will also dedicate a class to brush up on everyone's foundational statistics skills. The course does not assume any prior knowledge of statistical software. 
 
-While we will learn about a mix of quantitative and qualitative approaches, the class emphasizes quantitative methods more strongly. In contrast, [EDUC 156](https://catalogue.uci.edu/search/?P=EDUC%20156) (Introduction to Field Methods in Education) provides a greater focus on qualitative methods. 
+While we will learn about a mix of quantitative and qualitative approaches, the course emphasizes quantitative methods more strongly. In contrast, [EDUC 156](https://catalogue.uci.edu/search/?P=EDUC%20156) (Introduction to Field Methods in Education) provides a greater focus on qualitative methods. 
 
-## My promise
+### My promise
 
-I *promise* you can succeed in this class.
+I *promise* you can succeed in this course.
 
-This class is all about practical application. You will notice "How will I ever use this?" is a question I consider for every class. 
+This course is all about practical application. You will notice "How will I ever use this?" is a question I consider for every class. 
 
 Now, you will have to tool up. You will hear about weird new concepts, use some unfamiliar maths, learn new software, and approach practical questions from a new perspective. Initially, some of this might pose challenges. Most everything will be new to you. But, it's perfectly normal not to grasp concepts immediately and make mistakes during your initial encounters. This is how you acquire new skills and build a strong toolkit. 
 
@@ -95,117 +95,149 @@ Many parallels come to mind. Learning to ride a bike. Learning a new language. L
 
 This syllabus reflects a plan for the quarter. Deviations may become necessary as the quarter progresses.
 
-We meet weekly from 4:30–7:00 PM on Mondays in 330 Aderhold. ***However***, despite policies and rhetoric to the contrary, we're still in the middle of a severe global pandemic, and the BA.5 variant of COVID-19 is raging.
+### Flow of the course
 
-Accordingly, this semester we're going to have a [flipped classroom](https://en.wikipedia.org/wiki/Flipped_classroom), which will let us maximize flexibility during this pandemic. 
+The course will follow a basic flow each week, with small differences if an assignment is due or not. 
 
-We will **not** have lectures during our regularly scheduled class time. Instead, you will do the readings and watch recorded lecture videos prior to each in-person class session. You can do the readings and watch the videos on your own schedule at whatever time works best for you. Many of you work full time and you have childcare and parental care responsibilities, leaving you with only evenings for coursework. I've designed this asynchronous system with *you specifically* in mind. I also can only really do teaching work at night when my kids are in bed—I recorded all these videos between like 10 PM and 2 AM. We're all in similar pandemic boats.
+- **Monday**: Complete reading/watching course material for Tuesday, submit your reactions by 11:55 PM. Weekly assignment posted.
+- **Tuesday**: Course meets in-person. 
+- **Wednesday**: Complete reading/watching course material for Thursday, submit your reactions by 11:55 PM. 
+- **Thursday**: Course meets in-person.
+- **Sunday**: Submit your assignment by 11:55 PM (if due)
 
-We will do several things during our Monday in-person classes:
+Aside from our class meetings on Tuesdays and Thursdays, there are no other lab meetings or sections.  
 
-- **Extensive Q&A**: As you do the readings and watch the videos prior to class, you will inevitably have questions. In [your weekly check-in assignment](/assignment/weekly-check-in.qmd), you'll submit (at least) 3 of those questions to me prior to class. We'll spend a good chunk of each class answering, clarifying, debating, and discussing your questions.
-- **Activities**: In some weeks, we'll do some in-class activities to help solidify concepts about logic models, DAGs, and other evaluation and causal inference principles.
-- **R labs**: We'll spend a substantial time during each class learning and working with R together. You'll need to bring a computer.
+### Canvas
 
+Our Canvas page is [here](https://canvas.eee.uci.edu/courses/56847). There are three main purposes for Canvas:
+
+1. **Assignments and grades**. I post assignments. You submit your solutions. I post your grades.
+2. **Additional materials**. I post PDF copies of additional reading materials. I post PDFs of my slides.
+3. **Announcements**. I may send out reminders or make announcements. 
+
+Everything else is on this website here and on Slack, not on Canvas.
+
+It is very important you update the Canvas settings and notifications to ensure you receive important messages and announcements. Click on ["setting"](https://canvas.eee.uci.edu/profile/settings) to add another email address and/or a cell phone number to receive notifications. Click on [“notification”](https://canvas.eee.uci.edu/profile/communication) to configure how you receive Canvas notifications.
+
+### Slack
+
+Our dedicated Slack channel is [here](https://educ157-23.slack.com/). Watch out for an email invitation from me. You will post your reading reactions on Slack, not on Canvas.
 
 ## Course materials
 
-Most of the readings in this class are free.
-
 ### Books
 
-There are two official textbooks for the class. Both are available digitally and both are free.
+There are three official textbooks for the class. All three are available digitally.
 
-- Paul J. Gertler et al., *Impact Evaluation in Practice*, 2nd ed. (Inter-American Development Bank; World Bank, 2016), <https://openknowledge.worldbank.org/handle/10986/25030>. ([**Free!**](https://openknowledge.worldbank.org/handle/10986/25030))
-- Nick Huntington-Klein, *The Effect: An Introduction to Research Design and Causality* (CRC Press, 2021), <https://theeffectbook.net/>. ([**Free as a HTML version!**](https://theeffectbook.net/) The print version is coming soon and is pre-orderable at Amazon.)
+- Paul J. Gertler et al., *Impact Evaluation in Practice*, 2nd ed. (Inter-American Development Bank; World Bank, 2016), <https://openknowledge.worldbank.org/handle/10986/25030>. ([**Free and also available in Portuguese and Spanish!**](https://openknowledge.worldbank.org/handle/10986/25030))
 
-Both of these books are written at a more general, easy-to-understand level with relatively minimal math. *You do not need to understand all the equations and notation.* If your eyes start to gloss over the Greek letters and subscripts, it's okay. Try to learn them, but don't stress out about it too much.
+- Rachel Glennerster and Kudzai Takavarasha, *Running Randomized Evaluations* (Princeton University Press, 2014), <https://press.princeton.edu/books/paperback/9780691159270/running-randomized-evaluations> ([**This book has a great companion website**](http://runningres.com/)). 
 
-In previous versions of this class I used two different books instead of *The Effect*, and they're still fantastic and I'd recommend checking them out. *The Mixtape* is a phenomenal, more detailed, more economics-focused, and mathier approach to these causal inference methods (and it's free!), while *'Metrics Matter* is a fairly canonical (and accessible!) book in the world of econometrics. I refer to these books a few times in the video lectures—don't worry, you'll get pretty much the same content in *The Effect*.
-
-- Scott Cunningham, *Causal Inference: The Mixtape* (New Haven, CT: Yale University Press, 2021), <https://mixtape.scunning.com/>. ([**Also free(!)**](https://mixtape.scunning.com/), but there's also a print version for <span>$35</span> that you might want to get for reference after the class is over)
-- Joshua D. Angrist and Jörn-Steffen Pischke, Mastering ’Metrics: The Path from Cause to Effect (Princeton, NJ: Princeton University Press, 2015). (**<span>$25</span> used or <span>$30</span> new at [Amazon](https://www.amazon.com/Mastering-Metrics-Path-Cause-Effect/dp/0691152845/)**)
+- Richard J. Murnane and John B. Willett, *Methods Matter* (Oxford University Press, 2011), <https://global.oup.com/academic/product/methods-matter-9780199753864>. 
 
 
 ### Articles, book chapters, and other materials
 
-There will also occasionally be additional articles and videos to read and watch. When this happens, links to these other resources will be included on the reading page for that week.
+There will also occasionally be additional articles and videos to read and watch. When this happens, links to these other resources will be included on the reading page for that week. For example, we will review two chapters from the following book.  
+
+- Nick Huntington-Klein, *The Effect: An Introduction to Research Design and Causality* (CRC Press, 2021), <https://theeffectbook.net/>. ([**Free as a HTML version!**](https://theeffectbook.net/))
 
 ### R and RStudio
 
-You will do all of your analysis with the open source (and free!) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.
+This course will expose you to [R](https://cran.r-project.org/)—one of the most popular, sought-after, and in-demand statistical programming languages. Armed with the foundation of R skills you'll learn in this class, you'll know enough to be able to find how to analyze any sort of data-based question in the future.
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We will have a shared class workspace in RStudio.cloud that will let you quickly copy templates for labs and problem sets.
+You will use [RStudio](https://www.rstudio.com/) as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.
 
-RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis. Over the course of the semester, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of RStudio.cloud. This isn't necessary, but it's helpful.
+R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! RStudio.cloud is all you need for our course.
 
-You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install/)
+RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis. Over the course of the semester, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of RStudio.cloud. This isn't necessary, but it's helpful. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install.html)
 
-### Online help
+There are tons of online resources to help you with R and RStudio. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/). Also, ChatGPT will sometimes fool you but, as it was trained on StackOverflow (among other websites), it is quite good at writing R code.
 
-Data science and statistical programming can be difficult. Computers are stupid and little errors in your code can cause hours of headache (even if you've been doing this stuff for years!).
-
-Fortunately there are tons of online resources to help you with this. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/) (a forum specifically designed for people using RStudio and the tidyverse (i.e. you)).
-
-If you use Twitter, post R-related questions and content with [#rstats](https://twitter.com/search?q=%23rstats). The community there is exceptionally generous and helpful.
-
-Searching for help with R on Google can sometimes be tricky because the program name is, um, a single letter. Google is generally smart enough to figure out what you mean when you search for "r scatterplot", but if it does struggle, try searching for "rstats" instead (e.g. "rstats scatterplot").
-
-Additionally, we have a class chatroom at [Slack](https://gsuevalf2021.slack.com) where anyone in the class can ask questions and anyone can answer. **I will monitor Slack regularly and will respond quickly.** (It's one of the rare Slack workspaces where I actually have notifications enabled!) Ask questions about the readings, assignments, and project. You'll likely have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
+An the [resources page](/resource/index.html), you will find a long list of additional resources. All of this is *way too much information*, but certainly good to have as a backup for any of your future work after our course. And, if all of this sounds overwhelming, don't worry. **Once we get to it, I will point you to all the materials you do need.**
 
 ## Assignments and grades
 
-You can find descriptions for all the assignments on the [assignments page](/assignment/).
+### Participation
 
-```{r assignments-grades, include=FALSE}
-assignments <- tribble(
-  ~Points,   ~Assignment,
-  14 * 10,   "Weekly check-ins (14 × 10)",
-  9 * 30,    "Problem sets (9 × 30)",
-  4 * 30,    "Evaluation assignments (4 × 30)",
-  100,       "Exam 1",
-  100,       "Exam 2",
-  200,       "Final project"
-) %>%
-  mutate(Percent = Points / sum(Points),
-         Percent = scales::percent(Percent))
+You should actively participate in class, do all the readings, and discuss them outside of class. To that end, you should post reactions to at least 14 of our readings on Slack. You may (and should) engage with the other reactions you see posted on Slack. However, it'll be up to me to decide whether a comment engages with the assigned reading and adds to the discussion, meaningfully.[^Yey] 
 
-grading <- tribble(
-  ~Grade, ~Range, ~Grade1, ~Range1,
-  "A",  "93–100%", "C",  "73–76%",
-  "A−", "90–92%", "C−", "70–72%",
-  "B+", "87–89%", "D+", "67–69%",
-  "B",  "83–86%", "D",  "63–66%",
-  "B−", "80–82%", "D−", "60–62%",
-  "C+", "77–79%", "F",  "< 60%"
-)
-```
+[^Yey]: "Yey" won't do.
 
-<div class="centered-table">
+### Data-analytic memos
 
-```{r show-assignments-table, echo=FALSE, results="asis"}
-assignments_total <- tibble(Assignment = "Total",
-                            Points = sum(assignments$Points),
-                            Percent = NA)
+Over the quarter, you will write four "data-analytic memos" (DAMs). You will complete these memos at home, individually. Each DAM will task you to use your newly-acquired evaluation skills. Many of the questions will be similar to what you may be asked to do on a future job (whether as an education practitioner, analyst, or researcher). You will also work with real-life education datasets.
 
-bind_rows(assignments, assignments_total) %>%
-  select(Assignment, Points, Percent) %>%
-  pandoc.table(justify = "lcc", missing = "—")
-```
-</div>
+### Plus-delta 
 
-<div class="centered-table">
+Twice during the quarter, I will ask you to complete a survey. At the beginning of the course, your answers will help me better understand your personal background and interests. Towards the middle of the course, I will ask you for feedback on how to improve the course and make changes if needed. Finally, at the end of the quarter, please leave a course evaluation on EEE.
 
-```{r show-grades-table, echo=FALSE, results="asis"}
-grading %>%
-  pandoc.table(justify = "lclc",
-               col.names = c("Grade", "Range", "Grade", "Range"))
-```
+Personally, I like the plus-delta approach. Start by telling me what you like. These are things I should maintain and build on. Then, provide opportunities for improvements. These should be action-oriented suggestions as to how I can provide a more effective course. 
 
-<div>
+This feedback is very important to me, and I appreciate your input. 
 
+### Exam
 
-You will lose 1 point per day for each day an assignment is late. This is designed to not be a huge penalty (3 days late = 27/30 points on a problem set that gets a ✓), but instead is a commitment device to help you stay on schedule.
+You will also take one in-class exam, which serves as an important mid-quarter check of your understanding. This exam will be closed book and without access to the internet. I will provide more information about the exam as it approaches. 
+
+### Your evaluation project
+
+For the final course project, you will develop an evalution plan for a new education program that excites you. That could be any new educational program a school district, state, charter organization, or NGO has established recently. No matter the topic, you will formulate a key research question and design a state-of-the-art evaluation plan to measure the program's effects. 
+
+Throughout the quarter, there will be three milestones related to the evaluation plan. During the final exam period you will finalize the plan and submit your document to me. You are not asked to execute the evaluation (but you may after the course).[^IRB]
+
+[^IRB]: Executing the evaluation [might require review](https://research.uci.edu/human-research-protections/do-you-need-irb-review/) from UC Irvine's Institional Review Board (IRB). We will learn about the ethics of evaluations as part of our course.    
+
+You will work in small groups of two or three (at the beginning of the course, I will randomly assign you to a group). This structure will be most similar to the professional work environments to which you will soon be transitioning. Evaluations are also far easier to design and implement when you have the benefit of a team with whom you can generate and critique ideas. The goal is to develop a *professional* project that you can use to showcase the skills that you have gained to potential employers.  
+
+### Calendar
+
+You can find a detailed class calendar on the [schedule page](/schedule/index.html).
+
+Here, I am providing a brief summary of the assignment dates.
+
+| Category          | Release date         | Due date            |
+|:------------------|:---------------------|:--------------------|
+| Survey 1          | Mon, Sep 25 09:00am  | Sun, Oct 01 11:55pm |
+| Milestone 1       |                      | Sun, Oct 08 11:55pm |
+| Milestone 2       |                      | Sun, Oct 15 11:55pm |
+| DAM 1             | Mon, Oct 16 09:00am  | Sun, Oct 22 11:55pm |
+| DAM 2             | Mon, Oct 23 09:00am  | Sun, Oct 29 11:55pm |
+| Survey 2          | Mon, Oct 30 09:00am  | Sun, Nov 05 11:55pm |
+| DAM 3             | Mon, Nov 06 09:00am  | Sun, Nov 12 11:55pm |
+| DAM 4             | Mon, Nov 13 09:00am  | Sun, Nov 19 11:55pm |
+| Exam              | Tue, Nov 21 02:00pm  | Tue, Nov 21 03:20pm |
+| Milestone 3       |                      | Sun, Dec 03 11:55pm |
+| Evaluation plan   |                      | Sun, Dec 15 11:55pm |
+| Course evaluation |                      | Sun, Dec 15 11:55pm |
+
+All reading reactions are due by 11:55pm on the day before class. All times are in Pacific time.
+
+### Grading
+
+You (the student) and I (the instructor) should care the most about what you *learn*, not what numerical/letter summary of that learning you get at the end of the semester. So I would love to not have grades at all, but unfortunately we humans are very good at procrastinating on our good intentions when there is no incentive not to. Thus, we have grades to help solve this commitment problem and to encourage you to put effort into learning the course material. 
+
+Here is how each of your various course contributions and assignments contribute to your overall grade. For group assignments, all group members will receive the same grade. All other contributions are graded individually.
+
+| Category                           | Percent of final grade |
+|:-----------------------------------|:-----------------------|
+| Participation, reading reactions   | 14%                    |
+| Data-analytic memos (DAMs)         | 30%                    |
+| Exam                               | 25%                    |
+| Milestones 1-3                     | 2% each                |
+| Your evaluation plan               | 25%                    |
+
+:::{.callout-note}
+## Grace policy
+
+When calculating the final DAM portion of the overall grade, I will drop the lowest score and use the remaining scores. Thus, if you have an emergency that forces you to miss one submission, your grade will not be severely affected.
+
+:::
+
+All grades will be posted through Canvas. 
+
+**Bump-up policy**: I reserve the right to "bump up" the grades of students who have made valuable contributions to the course in the in-person course and discussions/Slack. This also applies to students who show tremendous progress and growth over the semester. 
+
 
 ## Course policies
 
@@ -219,7 +251,7 @@ Attendance and participation are important to your success in this course. You a
 
 Missing a class has the potential to put you significantly behind. Still, life happens and, therefore, you may miss one class without contacting me (except for the midterm exam).
 
-If you test positive for COVID-19, hunker down and focus on getting better! Please do not come to class. If you have an absence due to such an unavoidable health or emergency situation, you should message me before this class starts. Similarly, if you have to miss a class due to religious reasons, please remember to message me before the affected class starts.
+If you test positive for COVID-19, hunker down and focus on getting better! Please do not come to class. If you have an absence due to such an unavoidable health or emergency situation, you should message me before class starts. Similarly, if you have to miss a class due to religious reasons, please remember to message me before the affected class starts.
 
 You are expected to arrive before the start of each class to allow us to begin on time. Unexcused absences and late arrivals will be considered in your course participation score.  
 
@@ -264,7 +296,7 @@ If you tell me you're having trouble, I will not judge you or think less of you.
 
 You *never* owe me personal information about your health (mental or physical). You are *always* welcome to talk to me about things that you're going through, though. If I can't help you, I usually know somebody who can.
 
-If you need extra help, or if you feel like you're behind or not understanding everything, **do not suffer in silence!** Talk to me! I will work with you. 
+If you need extra help, or if you feel like you're behind or not understanding everything, **do not suffer in silence.** Talk to me! I will work with you. 
 
 ### Student hours
 
@@ -315,35 +347,10 @@ If you wish to request academic accommodations you may do so through the [Disabi
 
 I will do everything possible to make sure our course materials are accessible. *Please* let me know if you know of ways to improve on this further. Even a short message on, say, the colors I use on a slide can help a lot.  
 
-## Course philosophy
-
-Classical statistics classes spend substantial time covering probability theory, null hypothesis testing, and other statistical tests first developed hundreds of years ago. Some classes don't use software or actual real data and instead live in the world of mathematical proofs. They can be math-heavy and full of often unintuitive concepts and equations.
-
-In this class, we will take the opposite approach. We *begin* with data and learn how to tidy, wrangle, manipulate, and visualize it with code. Later in the semester we'll turn to the powerful toolbox of causal inference approaches, but continue to keep the focus on data as we do so.
-
-In other words, there's way less of this:
-
-$$
-f(x) = \dfrac{1}{\sqrt{2\pi}} e^{-\frac12 x^2}
-$$
-
-And way more of this:
-
-```{r eval=FALSE}
-summary_monthly_temp <- weather %>%
-  group_by(month) %>%
-  summarize(mean = mean(temp),
-            std_dev = sd(temp))
-```
-
-Over the last decade there has been a revolution in statistical and scientific computing. Open source languages like R and Python have overtaken older (and expensive!) corporate software packages like SAS and SPSS, and there are now thousands of books and blog posts and other online resources with excellent tutorials about how to analyze pretty much any kind of data.
-
-This class will expose you to [R](https://cran.r-project.org/)—one of the most popular, sought-after, and in-demand statistical programming languages. Armed with the foundation of R skills you'll learn in this class, you'll know enough to be able to find how to analyze any sort of data-based question in the future.
-
 
 ## Petr
 
-Once you have read this entire syllabus and [the assignments page](/assignment/), please [click here](mailto:adb@uci.edu) and e-mail me your *favorite* picture of Peter the Anteater.[^Petr] Extra credit if it's animated.
+Once you have read this entire syllabus and [the assignments page](/assignment/index.html), please [click here](mailto:adb@uci.edu) and e-mail me your *favorite* picture of Peter the Anteater.[^Petr] Extra credit if it's animated.
 
 [^Petr]: Petr stickers are *great*. [Fun facts](https://www.reddit.com/r/UCI/comments/spp8db/fun_uci_history_our_mascot_is_the_anteater/) count, too.
 
