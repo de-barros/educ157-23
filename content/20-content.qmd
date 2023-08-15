@@ -1,0 +1,12 @@
+---
+title: "Review"
+date: "2023-12-07"
+---
+
+## Readings
+
+- {{< fa file-pdf >}} Chapter 6 in *Mastering Metrics* (2015) [Get the PDF here.](https://canvas.eee.uci.edu/files/23579377/) [@AngristPischke:2015] 
+
+## Slides
+
+On the day of class, you will find my slides on Canvas. 

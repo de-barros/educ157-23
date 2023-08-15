@@ -12,6 +12,14 @@ instructor:
     E-mail and Slack are the best ways to contact me. From Monday to Friday, I will try to respond to all course-related messages within 24 hours. At the same time, my work day may look different than your work day. Please do not feel obligated to respond out of your normal working hours.
   appointment_url: https://calendly.com/de-barros/
 
+attribution:
+  name: Dr. Andrew Heiss
+  name_no_title: Andrew Heiss
+  email: aheiss@gsu.edu
+  url: "https://www.andrewheiss.com/"
+  twitter: andrewheiss
+  github: andrewheiss
+
 course:
   number: "EDUC 157"
   semester: "Fall 2023"

@@ -74,34 +74,46 @@ website:
             - content/index.qmd
         - section: "Course content"
           contents:
-            - text: "1: Evaluation and the causal revolution"
+            - text: "1: Setting goals and norms for the class"
               file: content/01-content.qmd
-            - text: "2: Regression and inference"
+            - text: "2: Theory of Change"
               file: content/02-content.qmd
-            - text: "3: Theories of change and logic models"
+            - text: "3: Measurement and data collection"
               file: content/03-content.qmd
-            - text: "4: Measurement and DAGs"
+            - text: "4: Data collection and research ethics"
               file: content/04-content.qmd
-            - text: "5: DAGs and potential outcomes"
+            - text: "5: Review and extension of applied statistics"
               file: content/05-content.qmd
-            - text: "6: Threats to validity"
+            - text: "6: The fundamental problem of causality"
               file: content/06-content.qmd
-            - text: "7: Randomization and matching"
+            - text: "7: Experimental evaluations"
               file: content/07-content.qmd
-            - text: "8: Diff-in-diff I"
+            - text: "8: Threats to internal validity"
               file: content/08-content.qmd
-            - text: "9: Diff-in-diff II"
+            - text: "9: Sampling and sample size"
               file: content/09-content.qmd
-            - text: "10: RDD I"
+            - text: "10: Qualitative and mixed methods"
               file: content/10-content.qmd
-            - text: "11: IV I"
+            - text: "11: Linear regression, matching, and 'big data'"
               file: content/11-content.qmd
-            - text: "12: IV II & RDD II"
+            - text: "12: Instrumental variables"
               file: content/12-content.qmd
-            - text: "13: Choosing and planning ethical evaluations"
+            - text: "13: Regression discontinuity"
               file: content/13-content.qmd
-            - text: "14: Ethics, stories, and curiosity"
+            - text: "14: Difference-in-difference"
               file: content/14-content.qmd
+            - text: "15: Fixed effects and panel data"
+              file: content/15-content.qmd
+            - text: "16: In-class exam"
+              file: content/16-content.qmd
+            - text: "17: Aggregating evidence, cost-effectiveness, and generalizability"
+              file: content/17-content.qmd
+            - text: "18: Open science and multiple hypothesis testing"
+              file: content/18-content.qmd
+            - text: "19: Learning with practitioners"
+              file: content/19-content.qmd
+            - text: "20: Review"
+              file: content/20-content.qmd
 
     - title: "Assignments"
       contents:
@@ -187,7 +199,8 @@ website:
 
   page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
+      Original content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var attribution.name_no_title >}}]({{< var instructor.url >}}) <br>
+      Additional content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
       All content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
       [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)

@@ -1,0 +1,19 @@
+---
+title: "Open science and multiple hypothesis testing"
+date: "2023-11-30"
+---
+
+## Readings
+
+- {{< fa arrow-up-right-from-square >}} Daniel Stein. ["More Outcomes, More Problems: A Practical Guide to Multiple Hypothesis Testing in Impact Evaluations (Parts 1, 2, and 3),"](https://www.idinsight.org/article/more-outcomes-more-problems-a-practical-guide-to-multiple-hypothesis-testing-in-impact-evaluations-part-1/) *IDinsight*, November 12, 2019.
+
+## Audio
+
+Listen to the following podcast where "[h]ost Jeff Greene sits down for a discussion with Hunter Gehlbach and Carly Robinson, who recently served as guest editors for a [special issue](https://www.tandfonline.com/toc/hedp20/56/2?nav=tocList) of Educational Psychologist entitled 'Educational Psychology in the Open Science Era.'"
+
+- {{< fa podcast >}} The Division 15 Podcast Series, ["Hunter Gehlbach and Carly Robinson,"](https://soundcloud.com/user-883650452/hunter-gehlbach-carly-robinson) *APA Division 15*, 2021.
+
+
+## Slides
+
+On the day of class, you will find my slides on Canvas. 

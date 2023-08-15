@@ -1,0 +1,13 @@
+---
+title: "Aggregating evidence, cost-effectiveness, and generalizability"
+date: "2023-11-28"
+---
+
+## Readings
+
+- {{< fa book >}} Chapter 9 in *Running Randomized Evaluations* [@glennerster_running_2013]
+- {{< fa file-pdf >}} Bates, Mary Ann, and Rachel Glennerster *The Generalizability Puzzle* (2017) [Get the PDF here.](https://ssir.org/articles/entry/the_generalizability_puzzle) [@bates_generalizability_2017] 
+
+## Slides
+
+On the day of class, you will find my slides on Canvas. 

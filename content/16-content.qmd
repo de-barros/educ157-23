@@ -1,0 +1,12 @@
+---
+title: "In-class exam"
+date: "2023-11-21"
+---
+
+## Readings
+
+- {{< fa file-pdf >}} The Abdul Latif Jameel Poverty Action Lab (J-PAL) *Impact Evaluation Methods* (no date) [Get the PDF here.](https://www.povertyactionlab.org/sites/default/files/research-resources/impact-evaluation-methods-table.pdf) 
+
+## Slides
+
+On the day of class, you will find my slides on Canvas. 

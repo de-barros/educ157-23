@@ -138,7 +138,7 @@ There are three official textbooks for the class. All three are available digita
 
 ### Articles, book chapters, and other materials
 
-There will also occasionally be additional articles and videos to read and watch. When this happens, links to these other resources will be included on the reading page for that week. For example, we will review two chapters from the following book.  
+There will also occasionally be additional articles and videos to read and watch. When this happens, links to these other resources will be included on the reading page for that week. For example, we will review three chapters from the following book.  
 
 - Nick Huntington-Klein, *The Effect: An Introduction to Research Design and Causality* (CRC Press, 2021), <https://theeffectbook.net/>. ([**Free as a HTML version!**](https://theeffectbook.net/))
 
@@ -148,7 +148,7 @@ This course will expose you to [R](https://cran.r-project.org/)—one of the mos
 
 You will use [RStudio](https://www.rstudio.com/) as the main program to access R. Think of R as an engine and RStudio as a car dashboard—R handles all the calculations and the actual statistics, while RStudio provides a nice interface for running R code.
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! RStudio.cloud is all you need for our course.
+R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! *RStudio.cloud is all you need for our course.*
 
 RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis. Over the course of the semester, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of RStudio.cloud. This isn't necessary, but it's helpful. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install.html)
 

@@ -1,0 +1,12 @@
+---
+title: "Fixed effects and panel data"
+date: "2023-11-16"
+---
+
+## Readings
+
+- {{< fa book >}} Chapter 16 in *The Effect* [@Huntington-Klein:2021]
+
+## Slides
+
+On the day of class, you will find my slides on Canvas. 
