@@ -38,7 +38,7 @@ library(pander)
 
 This page has important information about the course, including structure, assignments, grading, and office hours, [among many others](https://twitter.com/PHDcomics/status/333007240502063106).
 
-<b><a href="https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy" style="color: #e0706c">Even Snoop Dogg wants you to read the syllabus!</a></b>
+<b><a href="https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy" style="color: #981e32">Even Snoop Dogg wants you to read the syllabus!</a></b>
 
 :::
 
@@ -198,20 +198,20 @@ Here, I am providing a brief summary of the assignment dates.
 
 | Category          | Release date         | Due date            |
 |:------------------|:---------------------|:--------------------|
-| Survey 1          | Mon, Sep 25 09:00am  | Sun, Oct 01 11:55pm |
-| Milestone 1       |                      | Sun, Oct 08 11:55pm |
-| Milestone 2       |                      | Sun, Oct 15 11:55pm |
-| DAM 1             | Mon, Oct 16 09:00am  | Sun, Oct 22 11:55pm |
-| DAM 2             | Mon, Oct 23 09:00am  | Sun, Oct 29 11:55pm |
-| Survey 2          | Mon, Oct 30 09:00am  | Sun, Nov 05 11:55pm |
-| DAM 3             | Mon, Nov 06 09:00am  | Sun, Nov 12 11:55pm |
-| DAM 4             | Mon, Nov 13 09:00am  | Sun, Nov 19 11:55pm |
-| Exam              | Tue, Nov 21 02:00pm  | Tue, Nov 21 03:20pm |
-| Milestone 3       |                      | Sun, Dec 03 11:55pm |
-| Evaluation plan   |                      | Sun, Dec 15 11:55pm |
-| Course evaluation |                      | Sun, Dec 15 11:55pm |
+| Survey 1          | Mon, Sep 25 09:00AM  | Sun, Oct 01 11:55PM |
+| Milestone 1       |                      | Sun, Oct 08 11:55PM |
+| Milestone 2       |                      | Sun, Oct 15 11:55PM |
+| DAM 1             | Mon, Oct 16 09:00AM  | Sun, Oct 22 11:55PM |
+| DAM 2             | Mon, Oct 23 09:00AM  | Sun, Oct 29 11:55PM |
+| Survey 2          | Mon, Oct 30 09:00AM  | Sun, Nov 05 11:55PM |
+| DAM 3             | Mon, Nov 06 09:00AM  | Sun, Nov 12 11:55PM |
+| DAM 4             | Mon, Nov 13 09:00AM  | Sun, Nov 19 11:55PM |
+| Exam              | Tue, Nov 21 02:00PM  | Tue, Nov 21 03:20PM |
+| Milestone 3       |                      | Sun, Dec 03 11:55PM |
+| Evaluation plan   |                      | Sun, Dec 15 11:55PM |
+| Course evaluation |                      | Sun, Dec 15 11:55PM |
 
-All reading reactions are due by 11:55pm on the day before class. All times are in Pacific time.
+All reading reactions are due by 11:55PM on the day before class. All times are in Pacific time.
 
 ### Grading
 

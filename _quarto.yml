@@ -59,6 +59,9 @@ website:
       - icon: cloud-fill
         href: "https://rstudio.cloud"
         aria-label: RStudio.cloud
+      - icon: cloud
+        href: "https://canvas.eee.uci.edu/courses/56847"
+        aria-label: Canvas
 
   sidebar:
     - title: "Content"
