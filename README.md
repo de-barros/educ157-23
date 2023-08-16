@@ -191,7 +191,19 @@ Heiss’s](https://www.andrewheiss.com/) site for his class [Program
 Evaluation for Public
 Service](https://github.com/andrewheiss/evalf22.classes.andrewheiss.com)
 as well as [Matt Blackwell’s](https://www.mattblackwell.org/) site for
-his class [Gov 50](https://github.com/mattblackwell/gov50-f23-site/).
+his class [Gov 50](https://github.com/mattblackwell/gov50-f23-site/). If
+you re-use any of the materials, please respect the licences (see below)
+and give credit to original authors.
+
+I am grateful for additional help and materials from [David
+Blazar](https://education.umd.edu/directory/david-blazar), [Fiona
+Burlig](https://www.fionaburlig.com/), [Pierre de
+Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro
+Ganimian](https://www.alejandroganimian.com/), [Andrew
+Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine
+Knebelmann](https://sites.google.com/view/justine-knebelmann/home), and
+[Fernanda
+Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/).
 
 ## Licenses
 
