@@ -166,7 +166,9 @@ You should actively participate in class, do all the readings, and discuss them 
 
 ### Data-analytic memos
 
-Over the quarter, you will write four "data-analytic memos" (DAMs). You will complete these memos at home, individually. Each DAM will task you to use your newly-acquired evaluation skills. Many of the questions will be similar to what you may be asked to do on a future job (whether as an education practitioner, analyst, or researcher). You will also work with real-life education datasets.
+Over the quarter, you will write four "data-analytic memos" (DAMs). Each DAM will task you to use your newly-acquired evaluation skills. Many of the questions will be similar to what you may be asked to do on a future job (whether as an education practitioner, analyst, or researcher). You will also work with real-life education datasets. 
+
+You will complete these memos at home, individually. You may (and should!) work together on the DAMs, but *you must turn in your own answers.* You cannot work in groups of more than **three** people, and you must note who participated in the group in your assignment.
 
 ### Plus-delta 
 

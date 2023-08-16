@@ -1,73 +1,49 @@
 ---
-title: "Assignments"
+title: "Overview"
 ---
 
-The main goals of this class are to help you design, critique, code, and run rigorous, valid, and feasible evaluations of public sector programs. Each type of assignment in this class is designed to help you achieve one or more of these goals.
+The main goals of this class are to help you design, critique, code, and run rigorous, valid, and feasible evaluations of educational programs. Each type of assignment in this class is designed to help you achieve one or more of these goals.
 
+For more detailed instructions, please refer to the pages for the [reading reactions](/assignment/weekly-check-in.qmd), [data-analytic memos](/assignment/dams.qmd), and the [exam](/assignment/exam.qmd). For the [final course project](/assignment/final-project.qmd), you will develop an evalution plan for a new education program that excites you. Throughout the quarter, there will be three milestones related to the evaluation plan. 
 
-## Weekly check-in
+As you've seen on the [syllabus](/syllabus/index.html) and [schedule](/schedule/index.html) pages, the assignment dates are as follows.
 
-Every week, after you finish working through the content, I want to hear about what you learned and what questions you still have. Because the content in this course is flipped, these questions are **crucial** for our weekly in-class discussions.
+| Category          | Release date         | Due date            |
+|:------------------|:---------------------|:--------------------|
+| Survey 1          | Mon, Sep 25 09:00AM  | Sun, Oct 01 11:55PM |
+| Milestone 1       |                      | Sun, Oct 08 11:55PM |
+| Milestone 2       |                      | Sun, Oct 15 11:55PM |
+| DAM 1             | Mon, Oct 16 09:00AM  | Sun, Oct 22 11:55PM |
+| DAM 2             | Mon, Oct 23 09:00AM  | Sun, Oct 29 11:55PM |
+| Survey 2          | Mon, Oct 30 09:00AM  | Sun, Nov 05 11:55PM |
+| DAM 3             | Mon, Nov 06 09:00AM  | Sun, Nov 12 11:55PM |
+| DAM 4             | Mon, Nov 13 09:00AM  | Sun, Nov 19 11:55PM |
+| Exam              | Tue, Nov 21 02:00PM  | Tue, Nov 21 03:20PM |
+| Milestone 3       |                      | Sun, Dec 03 11:55PM |
+| Evaluation plan   |                      | Sun, Dec 15 11:55PM |
+| Course evaluation |                      | Sun, Dec 15 11:55PM |
 
-To encourage engagement with the course content—and to allow me to collect the class's questions each week—you'll need to fill out a short response on iCollege. This should be ≈150 words. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced). 
+All reading reactions are due by 11:55PM on the day before class. All times are in Pacific time.
 
-These check-ins are **due by noon on the days we have class**. This is so I can look through the responses and start structuring the discussion for the evening's class.
+Also, to recap what you already saw on the [syllabus](/syllabus/index.html) page, here is how each of your various course contributions and assignments contribute to your overall grade. For group assignments, all group members will receive the same grade. All other contributions are graded individually.
 
-You should answer these two questions each week:
+| Category                           | Percent of final grade |
+|:-----------------------------------|:-----------------------|
+| Participation, reading reactions   | 14%                    |
+| Data-analytic memos (DAMs)         | 30%                    |
+| Exam                               | 25%                    |
+| Milestones 1-3                     | 2% each                |
+| Your evaluation plan               | 25%                    |
 
-1. What were the **three (3)** most interesting or exciting things you learned from the session? Why?
-2. What were the **three (3)** muddiest or unclear things from the session this week? What are you still wondering about?    
+:::{.callout-note}
+## Grace policy
 
-You can include more than three interesting or muddiest things, but you must include at least three. There should be six easily identifiable things in each check-in: three exciting things and three questions.
+When calculating the final DAM portion of the overall grade, I will drop the lowest score and use the remaining scores. Thus, if you have an emergency that forces you to miss one submission, your grade will not be severely affected.
 
-I will grade these check-ins using a check system:
+:::
 
-- ✔+: (*11.5 points (115%) in gradebook*) Response shows phenomenal thought and engagement with the course content. I will not assign these often.
-- ✔: (*10 points (100%) in gradebook*) Response is thoughtful, well-written, and shows engagement with the course content. This is the expected level of performance.
-- ✔−: (*5 points (50%) in gradebook*) Response is hastily composed, too short, and/or only cursorily engages with the course content. This grade signals that you need to improve next time. I will hopefully not assign these often.
+All grades will be posted through Canvas. 
 
-Notice that is essentially a pass/fail or completion-based system. I'm not grading your writing ability, I'm not counting the exact number of words you're writing, and I'm not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I'm looking for thoughtful engagement, three interesting things, and three questions. That's all. Do good work and you'll get a ✓.
+**Bump-up policy**: I reserve the right to "bump up" the grades of students who have made valuable contributions to the course in the in-person course and discussions/Slack. This also applies to students who show tremendous progress and growth over the semester. 
 
-You will submit these check-ins via iCollege.
-
-
-## Problem sets
-
-To practice writing R code, running inferential models, and thinking about causation, you will complete a series of problem sets. 
-
-You need to show that you made a good faith effort to work each question. I will not grade these in detail. The problem sets will be graded using a check system:
-
-- ✔+: (*33 points (110%) in gradebook*) Assignment is 100% completed. Every question was attempted and answered, and most answers are correct. Document is clean and easy to follow. Work is exceptional. I will not assign these often.
-- ✔: (*30 points (100%) in gradebook*) Assignment is 70–99% complete and most answers are correct. **This is the expected level of performance.**
-- ✔−: (*15 points (50%) in gradebook*) Assignment is less than 70% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not asisgn these often.
-
-You may (and should!) work together on the problem sets, but *you must turn in your own answers.* You cannot work in groups of more than **four** people, and you must note who participated in the group in your assignment.
-
-
-## Evaluation assignments
-
-For your [final project](/assignment/final-project.qmd), you will conduct a pre-registered evaluation of a social program using synthetic data. To (1) give you practice with the principles of program evaluation, research design, measurement, and causal diagrams, and (2) help you with the foundation of your final project, you will complete a set of four evaluation-related assignments. 
-
-Ideally these will become major sections of your final project. However, there is no requirement that the programs you use in these assignments must be the same as the final project. If, through these assignments, you discover that your initially chosen program is too simple, too complex, too boring, etc., you can change at any time.
-
-These assignments will be graded using a check system:
-
-- ✔+: (*33 points (110%) in gradebook*) Assignment is 100% completed. Every question was attempted and answered, and most answers are correct. Document is clean and easy to follow. Work is exceptional. I will not assign these often.
-- ✔: (*30 points (100%) in gradebook*) Assignment is 70–99% complete and most answers are correct. **This is the expected level of performance.**
-- ✔−: (*15 points (50%) in gradebook*) Assignment is less than 70% complete and/or most answers are incorrect. This indicates that you need to improve next time. I will hopefully not asisgn these often.
-
-
-## Exams
-
-There will be two exams covering (1) program evaluation, design, and causation, and (2) the core statistical tools of program evaluation and causal inference.
-
-You will take these exams online through iCollege. The exams will have a time limit, but you can use notes and readings and [the Google](https://www.youtube.com/watch?v=AQ45fO1uiOQ). You must take the exams on your own though, and not talk to anyone about them.
-
-
-## Final project
-
-At the end of the course, you will demonstrate your knowledge of program evaluation and causal inference by completing a final project.
-
-[Complete details for the final project are here.](/assignment/final-project.qmd)
-
-There is no final exam. This project is your final exam.
+Please refer to the [syllabus](/syllabus/index.html) page for the course policies. 

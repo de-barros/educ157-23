@@ -1,0 +1,17 @@
+---
+title: "Data-analytic memos"
+---
+
+Over the quarter, you will write four “data-analytic memos” (DAMs). Each DAM will task you to use your newly-acquired evaluation skills. Many of the questions will be similar to what you may be asked to do on a future job (whether as an education practitioner, analyst, or researcher). You will also work with real-life education datasets.
+
+You need to show that you made a good faith effort to work each question. Mostly, I will grade your memos using a check system:
+
+- ✔+: (*10 points*) Assignment is 100% completed. Every question was attempted and answered, and all answers are correct. Document is clean and easy to follow. Work is exceptional. 
+- ✔: (*7 points*) Assignment is 70–99% complete and most answers are correct. 
+- ✔−: (*4 points*) Assignment is less than 70% complete and/or many answers are incorrect. This indicates that you need to improve next time. I will hopefully not asisgn these often.
+
+I will use these three levels as anchors, but may use the full ten-point range for your grade.
+
+You may (and should!) work together on the DAMs, but *you must turn in your own answers.* You cannot work in groups of more than **three** people, and you must note who participated in the group in your assignment.
+
+I will release the memos via Canvas, and you will submit your answers there.
