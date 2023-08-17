@@ -1,11 +1,32 @@
 ---
-title: "Review and extension of applied statistics"
+title: "The fundamental problem of causality"
 date: "2023-10-12"
 ---
 
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- "PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8"
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "WwW8y5dZs80", "Econometrics: The Path from Cause to Effect", "1", TRUE,
+  "iPBV3BlV7jk", "Ceteris Paribus: Public vs. Private University", "magic-randomization", FALSE,
+  "W0NyALrjLA4", "Selection Bias: Will You Make More Going to a Private University?", "rct-how", FALSE
+)
+```
+
+## Videos
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id)
+```
+
 ## Readings
 
-- {{< fa book >}} Chapters 4 and 13 in *The Effect* [@Huntington-Klein:2021]
+- {{< fa book >}} Chapter 3 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapter 2 in *Running Randomized Evaluations* [@glennerster_running_2013]
 
 ## Slides
 

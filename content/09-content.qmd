@@ -6,7 +6,10 @@ date: "2023-10-26"
 ## Readings
 
 - {{< fa book >}} Chapter 6 in *Running Randomized Evaluations* [@glennerster_running_2013]
-- {{< fa book >}} Chapter 6 and 7 in *Methods Matter* [@MurnaneWillett:2011]
+
+The following two chapters are (highly recommended but) optional.
+
+- {{< fa book >}} Chapters 6 and 7 in *Methods Matter* [@MurnaneWillett:2011]
 
 ## Slides
 

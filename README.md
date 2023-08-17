@@ -197,7 +197,8 @@ and give credit to original authors.
 
 I am grateful for additional help and materials from [David
 Blazar](https://education.umd.edu/directory/david-blazar), [Fiona
-Burlig](https://www.fionaburlig.com/), [Pierre de
+Burlig](https://www.fionaburlig.com/), [Arja
+Dayal](https://steinhardt.nyu.edu/arja-dayal), [Pierre de
 Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro
 Ganimian](https://www.alejandroganimian.com/), [Andrew
 Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine

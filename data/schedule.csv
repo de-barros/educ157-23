@@ -1,5 +1,5 @@
-group,subgroup,date,date_end,title,deadline,content,example,assignment,note
-"Theory, measurement, and research ethics",Setting goals and norms for the class,2023-09-28,,Class (in-person),,content/01-content,example/rstudio-tidyverse,,No reading reaction required
+group,subgroup,date,date_end,title,deadline,content,resource,assignment,note
+"Theory, measurement, and research ethics",Setting goals and norms for the class,2023-09-28,,Class (in-person),,content/01-content,resource/install,,No reading reaction required
 "Theory, measurement, and research ethics",Setting goals and norms for the class,2023-10-01,,Survey 1,11:55 PM,,,,
 "Theory, measurement, and research ethics",Theory of Change,2023-10-02,,Reading reaction,11:55 PM,content/02-content,,assignment/weekly-check-in,
 "Theory, measurement, and research ethics",Theory of Change,2023-10-03,,Class (in-person),,,,,
@@ -9,10 +9,10 @@ group,subgroup,date,date_end,title,deadline,content,example,assignment,note
 "Theory, measurement, and research ethics",Data collection and research ethics,2023-10-09,,Reading reaction,11:55 PM,content/04-content,,assignment/weekly-check-in,
 "Theory, measurement, and research ethics",Data collection and research ethics,2023-10-10,,Class (in-person),,,,,
 "Theory, measurement, and research ethics",Data collection and research ethics,2023-10-15,,Milestone 2,11:55 PM,,,,
-"Theory, measurement, and research ethics",Review and extension of applied statistics,2023-10-11,,Reading reaction,11:55 PM,content/05-content,,assignment/weekly-check-in,
-"Theory, measurement, and research ethics",Review and extension of applied statistics,2023-10-12,,Class (in-person),,,,,
-"Theory, measurement, and research ethics",The fundamental problem of causality,2023-10-16,,Reading reaction,11:55 PM,content/06-content,,assignment/weekly-check-in,
-"Theory, measurement, and research ethics",The fundamental problem of causality,2023-10-17,,Class (in-person),,,,,
+"Theory, measurement, and research ethics",The fundamental problem of causality,2023-10-11,,Reading reaction,11:55 PM,content/05-content,,assignment/weekly-check-in,
+"Theory, measurement, and research ethics",The fundamental problem of causality,2023-10-12,,Class (in-person),,,,,
+Tools and methods,Review and extension of applied statistics,2023-10-16,,Reading reaction,11:55 PM,content/06-content,,assignment/weekly-check-in,
+Tools and methods,Review and extension of applied statistics,2023-10-17,,Class (in-person),,,,,
 Tools and methods,Experimental evaluations,2023-10-18,,Reading reaction,11:55 PM,content/07-content,,assignment/weekly-check-in,
 Tools and methods,Experimental evaluations,2023-10-19,,Class (in-person),,,,,
 Tools and methods,Experimental evaluations,2023-10-22,,Data-analytic memo 1,11:55 PM,,,,
@@ -36,7 +36,7 @@ Tools and methods,Difference-in-difference,2023-11-14,,Class (in-person),,,,,
 Tools and methods,Fixed effects and panel data,2023-11-15,,Reading reaction,11:55 PM,content/15-content,,assignment/weekly-check-in,
 Tools and methods,Fixed effects and panel data,2023-11-16,,Class (in-person),,,,,
 Tools and methods,Fixed effects and panel data,2023-11-19,,Data-analytic memo 4,11:55 PM,,,,
-Exam,In-class exam,2023-11-21,,In-class exam,,content/16-content,,,No reading reaction required
+Exam,In-class exam,2023-11-21,,In-class exam,,content/16-content,,assignment/exam,No reading reaction required
 Learning with evaluations,No class,2023-11-23,,No class,,,,,Thanksgiving break
 Learning with evaluations,"Aggregating evidence, cost-effectiveness, and generalizability",2023-11-27,,Reading reaction,11:55 PM,content/17-content,,assignment/weekly-check-in,
 Learning with evaluations,"Aggregating evidence, cost-effectiveness, and generalizability",2023-11-28,,Class (in-person),,,,,

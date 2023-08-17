@@ -5,7 +5,7 @@ date: "2023-09-28"
 
 ## Readings
 
-- The [syllabus](/syllabus.qmd), [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class
+- The [syllabus](/syllabus.qmd), [content](/content/index.qmd), and [assignments](/assignment/index.qmd) pages for this class
 - {{< fa book >}} Chapter 1 in *Running Randomized Evaluations* [@glennerster_running_2013]
 - {{< fa book >}} Chapter 1 in *Impact Evaluation in Practice* [@wb-eval]
 

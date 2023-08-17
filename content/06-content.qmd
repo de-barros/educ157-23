@@ -1,12 +1,20 @@
 ---
-title: "The fundamental problem of causality"
+title: "Review and extension of applied statistics"
 date: "2023-10-17"
 ---
 
 ## Readings
 
-- {{< fa book >}} Chapter 2 in *Running Randomized Evaluations* [@glennerster_running_2013]
-- {{< fa book >}} Chapter 3 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapters 4 and 13 in *The Effect* [@Huntington-Klein:2021]
+
+The following sections of Chapter 13 are optional---feel free to skip them.
+
+13.2.2 Polynomials  
+13.2.3 Variable transformations   
+13.2.5 Coding Up Polynomials and Interactions   
+13.2.6 Nonlinear Regression   
+13.3 Your Standard Errors are Probably Wrong   
+13.4 Additional Regression Concerns   
 
 ## Slides
 

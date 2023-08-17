@@ -5,6 +5,7 @@ date: "2023-11-30"
 
 ## Readings
 
+- {{< fa arrow-up-right-from-square >}} Randall Munroe. ["Significant,"](https://xkcd.com/882/) *xkcd*, no date.
 - {{< fa arrow-up-right-from-square >}} Daniel Stein. ["More Outcomes, More Problems: A Practical Guide to Multiple Hypothesis Testing in Impact Evaluations (Parts 1, 2, and 3),"](https://www.idinsight.org/article/more-outcomes-more-problems-a-practical-guide-to-multiple-hypothesis-testing-in-impact-evaluations-part-1/) *IDinsight*, November 12, 2019.
 
 ## Audio

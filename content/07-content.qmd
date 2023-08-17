@@ -3,6 +3,26 @@ title: "Experimental evaluations"
 date: "2023-10-19"
 ---
 
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- "PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8"
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "eGRd8jBdNYg", "Randomized Trials: The Ideal Weapon", "1", TRUE,
+  "s-_3s3OMeqs", "How to Read Economics Research Papers: Randomized Controlled Trials (RCTs)", "magic-randomization", FALSE
+)
+```
+
+## Videos
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id)
+```
+
 ## Readings
 
 - {{< fa book >}} Chapter 4 in *Running Randomized Evaluations* [@glennerster_running_2013]

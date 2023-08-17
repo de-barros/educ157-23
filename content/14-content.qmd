@@ -3,6 +3,24 @@ title: "Difference-in-difference"
 date: "2023-11-14"
 ---
 
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- "PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8"
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "eiffOVbYvNc", "Introduction to Differences-in-Differences", "1", TRUE
+)
+```
+
+## Videos
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id)
+```   
+
 ## Readings
 
 - {{< fa book >}} Chapter 8 in *Methods Matter* [@MurnaneWillett:2011]

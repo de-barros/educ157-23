@@ -3,10 +3,29 @@ title: "Instrumental variables"
 date: "2023-11-07"
 ---
 
+
+```{r slides-videos, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+source(here::here("R", "youtube-playlist.R"))
+
+playlist_id <- "PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8"
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "eoJUPd6104Q", "Introduction to Instrumental Variables (IV)", "1", TRUE
+)
+```
+
+## Videos
+
+```{r show-youtube-list, echo=FALSE, results="asis"}
+youtube_list(slide_details, playlist_id)
+```   
+
 ## Readings
 
 - {{< fa book >}} Chapter 10 in *Methods Matter* [@MurnaneWillett:2011]
-- {{< fa book >}} Chapter 12 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapter 5 in *Impact Evaluation in Practice* [@wb-eval]
 
 ## Slides
 

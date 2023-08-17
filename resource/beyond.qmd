@@ -1,0 +1,60 @@
+---
+title: "Going beyond"
+---
+
+The "causal inference revolution" means our course materials on program evaluation are now commonly taught not only at education schools but also in other social sciences. They are also highly sought after by employers. 
+
+Here are additional resources in case you would like to go beyond what we cover in class. You may also find it helpful to see someone else explain the same concept. 
+
+## Doing the work
+
+There is no better way of learning about evaluations than related internships or a related job once you graduate. 
+
+Of course, one way is to work with a professor at UCI or other university centers (such as the Annenberg Institute). I also highly recommend the [The Abdul Latif Jameel Poverty Action Lab (J-PAL)](https://www.povertyactionlab.org/), where I started out myself. Without endorsing them, here is a long (and incomplete) list of other potential employers: Abt, AIR, Brookings, the Center for Global Development, CEPR (including the Strategic Data Project), development finance institutions (such as the AfDB, IADB, or the World Bank), IDinsight, the Institute of Education Sciences, IPA, Mathematica, MDRC, RAND, the Urban Institute, USAID, and WestEd. Finally, even if you want to work outside of education, causal inference skills are in very high demand in the economy, where many employers “[are drowning in information but starving for wisdom](https://hbr.org/2022/04/how-to-use-correlation-to-make-predictions)."       
+
+## Other courses
+
+1. [Andrew Heiss](https://www.andrewheiss.com/) teaches a [phenomenal program evaluation class](https://evalf22.classes.andrewheiss.com/) at Georgia State University. In fact, much of our course builds on his materials. Go here if you would like to review some of the materials we covered in class.
+
+2. [Fiona Burlig](https://www.fionaburlig.com/) teaches a great [program evaluation class](https://www.fionaburlig.com/ppha-34600-2020) at the University of Chicago. During the pandemic, she put all of her lectures online. Go here if you are looking for a slightly more advanced class.
+
+3. [Matt Blackwell](https://mattblackwell.org/) provides a great introduction to [data science for the social sciences](https://gov50.mattblackwell.org/). Go here if you are looking for a broader introduction to data analysis with R. 
+
+## Other books
+
+To recap, here are the main books we used in class:
+
+- Rachel Glennerster and Kudzai Takavarasha, *Running Randomized Evaluations* (Princeton University Press, 2014), <https://press.princeton.edu/books/paperback/9780691159270/running-randomized-evaluations>.  
+
+- Richard J. Murnane and John B. Willett, *Methods Matter* (Oxford University Press, 2011), <https://global.oup.com/academic/product/methods-matter-9780199753864>.
+
+Then, we also covered a few chapters from the following books: 
+
+- Joshua Angrist and Jörn-Steffen Pischke, *Mastering 'Metrics: The Path from Cause to Effect* (Princeton University Press, 2014), <https://theeffectbook.net/>. [**This book has a companion site**](https://www.masteringmetrics.com/)
+
+- Nick Huntington-Klein, *The Effect: An Introduction to Research Design and Causality* (CRC Press, 2021), <https://theeffectbook.net/>. [**Free as a HTML version!**](https://theeffectbook.net/)
+
+We did not cover two additional books--both are great, but they are slightly more math heavy (esp. the latter one).
+
+- Scott Cunningham, *Causal Inference: The Mixtape* (Yale University Press, 2021), <https://mixtape.scunning.com/>. [**Free as a HTML version**](https://mixtape.scunning.com/)
+
+- Joshua Angrist and Jörn-Steffen Pischke, *Mostly Harmless Econometrics* (Princeton University Press, 2014), <https://theeffectbook.net/>. [**This book also has a companion site**](https://www.mostlyharmlesseconometrics.com/)
+
+If you are intrigued, there are *many* more excellent (more technical) books on causal inference and program evaluation, including [this one](https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB) by Imbens and Rubin, [this](https://mitpress.mit.edu/9780262232586/econometric-analysis-of-cross-section-and-panel-data/) "classic" by Jeff Wooldridge, and the [J-PAL Handbook of Field Experiments](https://www.povertyactionlab.org/page/handbook-field-experiments).[^PhD] But stop here for a moment and consider just how much we've learned this quarter I find it amazing how much we've already covered in our course!  
+
+[^PhD]: You can even win the [Nobel Prize] (https://www.nobelprize.org/uploads/2021/10/advanced-economicsciencesprize2021.pdf) for the ["experimental approach to alleviating global poverty"](https://www.nobelprize.org/prizes/economic-sciences/2019/press-release/). And yet another Nobel Prize for ["answering causal questions using observational data"](https://www.nobelprize.org/uploads/2021/10/advanced-economicsciencesprize2021.pdf).
+
+Going beyond program evaluations, I also recommend the following books on social science research and writing.
+
+- Marc Bellemare, *Doing Economics: What You Should Have Learned in Grad School―But Didn’t* (MIT Press, 2022), <https://marcfbellemare.com/wordpress/research/doing-economics>.
+- William Strunk Jr. and Elwyn Brooks White , *The Elements of Style* (Harcourt, Brace & Howe, 1920), <https://en.wikipedia.org/wiki/The_Elements_of_Style>.
+
+   
+## Other online resources
+
+I highly recommend the following online resources.
+
+- J-PAL's [research resources](https://www.povertyactionlab.org/research-resources?view=toc) 
+- The World Bank's [DIME Wiki](https://dimewiki.worldbank.org/Main_Page) and its [Development Impact blog](https://blogs.worldbank.org/impactevaluations)
+- MIT's ["MicroMasters" Program in Data, Economics, and Design of Policy](https://micromasters.mit.edu/dedp/)
+- The APA [Reporting Standards (JARS)](https://apastyle.apa.org/jars)
