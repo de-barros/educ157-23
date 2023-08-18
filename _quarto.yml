@@ -122,10 +122,9 @@ website:
         - section: "Evaluation plan"
           contents:
             - assignment/final-project.qmd
-            - assignment/01-eval-background-theory.qmd
-            - assignment/02-eval-measurement.qmd
-            - assignment/03-eval-dag.qmd
-            - assignment/04-eval-threats.qmd
+            - assignment/01-eval-milestone.qmd
+            - assignment/02-eval-milestone.qmd
+            - assignment/03-eval-milestone.qmd
 
     - title: "Resources"
       contents:

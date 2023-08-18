@@ -76,7 +76,8 @@ The pipeline does several major tasks:
   set of HTML slides into PDFs.
 
   So far, I use LaTeX for my slides, not xaringan, and I create these
-  slides outside the pipeline.
+  slides outside the pipeline. I consider transitioning to xaringan
+  soon.
 
 - **Build Quarto website**: This project is a [Quarto
   website](https://quarto.org/docs/websites/), which compiles and

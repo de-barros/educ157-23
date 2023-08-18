@@ -1,0 +1,6 @@
+---
+title: "Second milestone"
+date: "2023-10-15"
+---
+
+This page will provide additional information on the second milestone for your final evaluation project. 
