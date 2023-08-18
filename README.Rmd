@@ -50,28 +50,15 @@ The pipeline does several major tasks:
 
 - **Compress project folders**: To make it easier to distribute problem sets and in-class activities to students, I compress all the folders in the [`/projects/`](/projects/) folder so that students can download and unzip a self-contained RStudio Project as a `.zip` file. These targets are [dynamically generated](https://books.ropensci.org/targets/dynamic.html) so that any new folder that is added to `/projects/` will automatically be zipped up when running the pipeline.
 
-- **Render xaringan slides to HTML and PDF**: Quarto supports HTML-based slideshows through [reveal.js](https://quarto.org/docs/presentations/revealjs/). However, I created all my slides using [{xaringan}](https://github.com/yihui/xaringan), which is based on [remark.js](https://remarkjs.com/) and doesn't work with Quarto. Since (1) I recorded all the class videos using my {xaringan} slides with a fancy template I made, and (2) I don't want to recreate my fancy template in reveal.js yet, I want to keep using {xaringan}. 
-  
   The pipeline [dynamically generates targets](https://books.ropensci.org/targets/dynamic.html) for all the `.Rmd` files in [`/slides/`](/slides/) and renders them using R Markdown rather than Quarto.
   
   The pipeline then uses [{renderthis}](https://jhelvy.github.io/renderthis/) to convert each set of HTML slides into PDFs.
 
+  So far, I use LaTeX for my slides, not xaringan, and I create these slides outside the pipeline. I consider transitioning to xaringan soon.
+
 - **Build Quarto website**: This project is a [Quarto website](https://quarto.org/docs/websites/), which compiles and stitches together all the `.qmd` files in this project based on the settings in [`_quarto.yml`](_quarto.yml). See the [Quarto website documentation](https://quarto.org/docs/websites/) for more details.
 
-- **Upload resulting `_site/` folder to my remote server**: Quarto places the compiled website in a folder named `/_site/`. I push this folder to my website using GitHub and IONOS' DeployNow.
-
-
-The complete pipeline looks like this:
-
-<small>(This uses [`mermaid.js` syntax](https://mermaid-js.github.io/mermaid/) and should display as a graph on GitHub. You can also view it by pasting the code into <https://mermaid.live>.)</small>
-
-```{r echo=FALSE, results="asis"}
-# Make sure there are newlines between the code block boundaries and the output
-# from `workflow`, which also needs to be separated by newlines
-cat("``` mermaid\n")
-cat(workflow_graph, sep = "\n")
-cat("\n```")
-```
+- **Upload resulting `_site/` folder to my remote server**: Quarto places the compiled website in a folder named `/_site/`. I push this folder to my a Netlify site, using `quarto publish netlify` in my RStudio Terminal. Then, I have a subdomain on my website, whose settings point to this Netlify site.
 
 ## Acknowledgments
 

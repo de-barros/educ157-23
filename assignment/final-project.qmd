@@ -15,7 +15,7 @@ One increasingly popular method for (1) ensuring that your data and methods work
 
 Once you finalize your plan and know all the data you need to collect, and once you've written out the different analyses you'll conduct, all you have to do is collect the real data, plop it into your script (replacing the fake data you'd been using), and run the analysis script to generate the results. In the results section of your report, you get to either say "As predicted, we found…", or "Contrary to expectations, we found that…".
 
-For your final project in this class, you will write a pre-registered analysis of an educational program that you're interested in. 
+For your final project in this class, you will write a pre-registered analysis for a quasi-experimental evaluation of an educational program that you're interested in. 
 
 This project is due by **11:55 PM on Friday, December 15, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
 
@@ -25,27 +25,18 @@ You will submit **two things** via Canvas:
 
 2. To the extent that you run any data analysis, such as statistical power calculations, a copy of your R project as a .zip folder. You can either run the analysis in RStudio locally on your computer, since you won't have to worry about keeping all your work on RStudio's servers), or use an RStudio.cloud project. 
 
-You can make a copy of this RStudio.cloud project—it doesn't have anything in it, but I have preinstalled all the packages we've used over the course of the semester, so you don't have to.
-
-- [{{< fa arrow-up-right-from-square >}} Empty RStudio.cloud project](https://rstudio.cloud/spaces/269500/content/4357672)
-- [{{< fa file-archive >}} Empty RStudio project you can download and unzip on your computer](/projects/final-project.zip) (doesn't include any packages, since you're responsible for installing those)
-
-
 ## Resources
 
-Most importantly, **do not hesitate** to work with classmates. You all must choose different programs, but you can work in groups of up to 4 people on your own projects. Also, **absolutely do not hesitate** to ask me questions! I'm here to help!
+You will work in groups of two to three students (I will assign you to your group). At the same time, **do not hesitate** to reach out to other classmates via Slack. Also, **absolutely do not hesitate** to ask me questions. I'm here to help!
 
-You might find this evaluation (and its proposal) of a truancy program in the Provo School District in Utah helpful as an example for the first half of this assignment (program overview, theory, implementation, threats to validity, and outcomes). The PSD evaluation doesn't have DAGs or fancy econometrics models like RCTs, diff-in-diff, RDD, IVs, or anything like that, so you can't use it as an example of that part, but these should provide a good template for the program-specific sections. *This is longer than expected for this class*. I provide suggested word counts in the outline below.
+You might find this evaluation (and its proposal) of a truancy program in the Provo School District in Utah helpful as an example for the first half of this assignment (program overview, theory, implementation, threats to validity, and outcomes). The PSD evaluation doesn't use fancy econometrics models like RCTs, diff-in-diff, RDD, IVs, or anything like that, so you can't use it as an example of that part, but these should provide a good template for the program-specific sections. 
 
 - [{{< fa file-pdf >}} `psd-proposal-2011`](/files/psd-proposal-2011.pdf)
 - [{{< fa file-pdf >}} `psd-final-report-2012`](/files/psd-final-report-2012.pdf)
 
-
 ## Suggested outline
 
-Here's an outline of what you'll need to do. You did lots of this work in your evaluation assignments. Please don't just copy/paste those assignments as is into this final project—you'll want to polish it up for this final report. You can download this as an RMarkdown file and change the text if you want. I've also included this as an RMarkdown file in the empty RStudio.cloud project.
-
-- [{{< fa brands r-project >}} `final-project-template.Rmd`](/projects/final-project/final-project-template.Rmd)
+Here's an outline of what you'll need to do. You did lots of this work in your evaluation assignments and you have already completed three related milestones. Still, don't just copy/paste those assignments as is—you'll want to polish it up for this final project. 
 
 ---
 
@@ -53,62 +44,51 @@ Here's an outline of what you'll need to do. You did lots of this work in your e
 
 Describe the motivation for this evaluation, briefly describe the program to be evaluated, and explain why it matters for society. (**≈150 words**)
 
+### Context and intervention
 
-### Program overview
+#### Context
+
+Provide information on the program context. Focus on (a) why this is a good context to run the evaluation you are proposing and (b) the main needs the program seeks to address. 
+
+As you write this, take another look at our reading about the ["Generalizability Puzzle"](https://ssir.org/articles/entry/the_generalizability_puzzle). If I'm someone who will read the results of your study, what "local conditions" do I need to be aware of to judge whether its findings may (or may not) generalize to a different context? (**≈300 words**)
+
+#### Intervention
 
 Provide in-depth background about the program. Include details about (1) when it was started, (2) why it was started, (3) what it was designed to address in society. If the program hasn't started yet, explain why it's under consideration. (**≈300 words**)
 
-
-### Program theory and implementation
-
-#### Program theory and impact theory graph
+#### Program theory
 
 Explain and explore the program's underlying theory. Sometimes programs will explain why they exist in a mission statement, but often they don't and you have to infer the theory from what the program looks like when implemented. What did the program designers plan on occurring? Was this theory based on existing research? If so, cite it. (**≈300 words**)
 
-Include a simple impact theory graph showing the program's basic activities and outcomes. Recall from class and your reading that this is focused primarily on the theory and mechanisms, not on the implementation of the program.
-
-#### Logic model
+#### Theory of Change
 
 Describe the program's inputs, activities, outputs, and outcomes. Pay careful attention to how they are linked—remember that every input needs to flow into an activity and every output must flow out of an activity. (**≈150 words**)
 
-Use flowchart software to connect the inputs, activities, outputs, and outcomes and create a complete logic model. Include this as a figure. 
-
-
-### Outcome and causation
-
-#### Main outcome
-
-Select one of the program's outcomes to evaluate. Explain why you've chosen this (is it the most important? easiest to measure? has the greatest impact on society?) (**≈50 words**)
-
-#### Measurement
-
-Using the concept of the "ladder of abstraction" that we discussed in class (e.g. identifying a witch, measuring poverty, etc.), make a list of all the possible attributes of the outcome. Narrow this list down to 3-4 key attributes. Discuss how you decided to narrow the concepts and justify why you think these attributes capture the outcome. Then, for each of these attributes, answer these questions:
-
-- *Measurable definition*: How would you specifically define this attribute? (i.e. if the attribute is "reduced crime", define it as "The percent change in crime in a specific neighborhood during a certain time frame" or something similar)
-- *Ideal measurement*: How would you measure this attribute in an ideal world?
-- *Feasible measurement*: How would you measure this given reality and given limitations in budget, time, etc.?
-- *Measurement of program effect*: How would to connect this measure to people in the program? How would you check to see if the program itself had an effect?
-
-(**≈150 words** in this section)
-
-#### Causal theory
-
-Given your measurement approach, describe and draw a causal diagram (DAG) that shows how your program causes the outcome. Note that this is not the same thing as the logic model—you'll likely have nodes in the DAG that aren't related to the program at all (like socioeconomic status, gender, experience, or other factors). The logic model provides the framework for the actual implementation of your program and connects all the moving parts to the outcomes. The DAG is how you can prove causation with statistical approaches. (**≈150 words**)
+Use flowchart software to connect the inputs, activities, outputs, and outcomes and create a complete Theory of Change. Include this as a figure. 
 
 #### Hypotheses
 
-Make predictions of your program's effect. Declare what you think will happen. (**≈50 words**)
+Make predictions of your program's effects. Declare what you think will happen. (**≈50 words**)
 
+Provide a list and a hierarchy of hypotheses you want to test. Usually, you will prioritize overall program effects over potentially heterogeneous effects. Also, you will prioritize main outcomes over secondary outcomes.
 
-### Data and methods
+### Measurement and data
 
-#### Identification strategy
+#### Main and secondary outcomes 
 
-How will you measure the actual program effect? Will you rely on an RCT? Differences-in-differences? Regression discontinuity? Instrumental variables? How does your approach account for selection bias and endogeneity? How does your approach isolate the causal effect of the program on the outcome?
+Select one of the program's outcomes to evaluate. Explain why you've chosen this (is it the most important? easiest to measure? has the greatest impact on society?) (**≈50 words**)
 
-Also briefly describe what kinds of threats to internal and external validity you face in your study.
+What are secondary outcomes you consider along with the program's Theory of Change? This will be activities, outputs and intermediate outcomes.
 
-(**≈300 words**)
+#### Measurement
+
+Make a list of all the possible attributes of the main outcome. Narrow this list down to 3-4 key attributes. Discuss how you decided to narrow the concepts and justify why you think these attributes capture the outcome. Then, for each of these attributes, answer these questions:
+
+- *Measurable definition*: How would you specifically define this attribute? (i.e., if the attribute is "reduced crime", define it as "The percent change in crime in a specific neighborhood during a certain time frame" or something similar)
+- *Ideal measurement*: How would you measure this attribute in an ideal world?
+- *Feasible measurement*: How would you measure this given reality and given limitations in budget, time, etc.?
+
+(**≈150 words** in this section)
 
 #### Data
 
@@ -116,21 +96,38 @@ Given your measurement approach, limits on feasibility, and identification strat
 
 (**≈100 words**)
 
+### Analytical strategy
 
-### Synthetic analysis
+#### Identification strategy
 
-[Generate a synthetic (fake) dataset in R with all the variables you'll need for the real life analysis.](/example/synthetic-data.qmd) Analyze the data using your identification strategy. For instance:
+How will you measure the actual program effect? Will you rely on Differences-in-differences? Regression discontinuity? Instrumental variables? How does your approach account for selection bias and endogeneity? How does your approach isolate the causal effect of the program on the outcome?
 
-- If you're relying on observational data, close all the backdoors with matching or inverse probability weighting, don't adjust for colliders, and make a strong argument for isolation of the causal effect in the absence of treatment/control groups
-- If you're doing an RCT, test the differences in means in the treatment and control groups (and follow all other best practices listed in the World Bank book, checking for balance across groups, etc.)
-- If you're doing diff-in-diff, run a regression model with an interaction term to show the diff-in-diff
-- If you're doing regression discontinuity, check for a jump in the outcome variable at the cutoff in the running variable
-- If you're using instrumental variables, check the validity of your instrument and run a 2SLS model
+Describe how you will analyze the data using your identification strategy. For instance:
 
-Include robustness checks to ensure the validity of your effect (i.e. if you're doing regression discontinuity, test different bandwidths and kernel types; etc.)
+- If you're doing diff-in-diff, specify a regression model with an interaction term to show the diff-in-diff.
+- If you're doing regression discontinuity, specify a model to check for a jump in the outcome variable at the cutoff in the running variable.
+- If you're using instrumental variables, specify how you will check the validity of your instrument and run a 2SLS model.
 
-(**As many words as you need to fully describe your analysis and results**)
+Remember: Your plan should propose a quasi-experimental evaluation. You must not propose a (simple) regression-adjusted model, matching, or a purely qualitative evaluation strategy. Also, you must not propose an RCT (unless you have received my written approval).
+
+Provide at least one additional specification to plan for a (secondary) analysis of potentially heterogeneous effects among a subgroup of program beneficiaries (e.g., effects among girls).
+
+(**≈300 words**)
+
+#### Threats
+
+Briefly describe what kinds of threats to internal and external validity you face in your study.
+
+(**≈150 words**)
+
+### Ethical considerations
+
+How will your study satisfy ethical considerations? 
+
+(**≈150 words**)
 
 ### Conclusion
 
-What would the findings from this analysis mean for your selected program? What would it mean if you found an effect? What would it mean if you didn't find an effect? Why does any of this matter? (**≈75 words**)
+What would the findings from this analysis mean for your selected program? What would it mean if you found an effect? What would it mean if you didn't find an effect? Why does any of this matter?
+
+(**≈75 words**)
