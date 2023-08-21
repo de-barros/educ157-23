@@ -3,46 +3,55 @@ title: "Final project"
 date: "2023-12-15"
 ---
 
-Evaluation research is tricky and costly. If you begin an intervention or launch a study prematurely, you can waste time and money—and potentially come to conclusions that affect students' lives. 
+## Background
 
-Even if you have a well designed program with an impeccable Theory of Change, you might discover (too late!) that you forgot to collect some critical variables or realize that your identification strategy will not work. 
+Evaluation research is tricky and costly. If you begin an intervention or launch a study prematurely, you can waste time and money—and potentially come to conclusions that negatively affect students' lives. 
+
+Even if you have a well-designed program with an impeccable Theory of Change, you might discover (too late!) that you forgot to collect some critical variables or realize that your identification strategy will not work. 
 
 From a more cynical perspective, you might (unethically) engage in the practice of [p-hacking](https://theconversation.com/one-reason-so-many-scientific-studies-may-be-wrong-66384)—running all sorts of different model specifications until you find the results you want, and then claim in your report that you had intended to run that model all along. 
 
-One increasingly popular method for (1) ensuring that your data and methods work before launching a study or intervention, and (2) declaring and committing to your hypotheses and methods and models before analyzing your data is to [*pre-register* your research or evaluation](https://blogs.plos.org/plos/2019/11/preregistration-can-bring-science-back-to-its-roots/). A [pre-registered study](https://www.sciencemag.org/news/2018/09/more-and-more-scientists-are-preregistering-their-studies-should-you) contains all the background work—an introduction, literature review, theory, hypotheses, and proposed analysis—but without the actual data. Authors post their expectations and hypotheses publicly so they can be held publicly accountable for any deviations from their proposed design.[^prereg]
+One increasingly popular method for (1) ensuring that your data and methods work before launching a study or intervention, and (2) declaring and committing to your hypotheses and methods, and models before analyzing your data is to [*pre-register* your research or evaluation](https://blogs.plos.org/plos/2019/11/preregistration-can-bring-science-back-to-its-roots/). A [pre-registered study](https://www.sciencemag.org/news/2018/09/more-and-more-scientists-are-preregistering-their-studies-should-you) contains all the background work—an introduction, literature review, theory, hypotheses, and proposed analysis—but without the actual data. Authors post their expectations and hypotheses publicly so they can be held publicly accountable for any deviations from their proposed design.[^prereg]
 
 [^prereg]: See the [Center for Open Science's directory of preregistrations](https://cos.io/prereg/), [AsPredicted list](https://aspredicted.org/), and the [AEA RCT Registry](https://www.socialscienceregistry.org/) for examples of this in real life. [Here's one by me!](https://www.socialscienceregistry.org/trials/10129)
 
-Once you finalize your plan and know all the data you need to collect, and once you've written out the different analyses you'll conduct, all you have to do is collect the real data, plop it into your script (replacing the fake data you'd been using), and run the analysis script to generate the results. In the results section of your report, you get to either say "As predicted, we found…", or "Contrary to expectations, we found that…".
+Once you finalize your plan and know all the data you need to collect, and once you've written out the different analyses you'll conduct, all you have to do is collect the real data and run the analysis to generate the results. In the results section of your report, you get to either say "As predicted, we found…", or "Contrary to expectations, we found that…".
 
-For your final project in this class, you will write a pre-registered analysis for a quasi-experimental evaluation of an educational program that you're interested in. 
+## Your assignment
 
-This project is due by **11:55 PM on Friday, December 15, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
-
-You will submit **two things** via Canvas:
-
-1. A PDF of your preregistered report (see the outline below for details of what this needs to contain). You may compile this with R Markdown if you like, but you can use any system of your choice. You might want to write the prose-heavy sections in a word processor like Word or Google Docs and copy/paste the text into your R Markdown document, since RStudio doesn't have a nice spell checker or grammar checker. Either way, your document should have *no visible R code, warnings, or messages in it* (set `echo = FALSE` at the beginning of your document before you knit).
-
-2. To the extent that you run any data analysis, such as statistical power calculations, a copy of your R project as a .zip folder. You can either run the analysis in RStudio locally on your computer, since you won't have to worry about keeping all your work on RStudio's servers), or use an RStudio.cloud project. 
-
-## Resources
+For your final project in this class, you will write a plan for a quasi-experimental evaluation of an educational program that you're interested in. Depending on your program, you may choose one of the following quasi-experimental methods you learned about: instrumental variables, regression discontinuity, difference-in-difference, or a strategy that exploits panel data. 
 
 You will work in groups of two to three students (I will assign you to your group). At the same time, **do not hesitate** to reach out to other classmates via Slack. Also, **absolutely do not hesitate** to ask me questions. I'm here to help!
 
-You might find this evaluation (and its proposal) of a truancy program in the Provo School District in Utah helpful as an example for the first half of this assignment (program overview, theory, implementation, threats to validity, and outcomes). The PSD evaluation doesn't use fancy econometrics models like RCTs, diff-in-diff, RDD, IVs, or anything like that, so you can't use it as an example of that part, but these should provide a good template for the program-specific sections. 
+The program you would like to evaluate must have a start date after September 2021. The program must be educational in nature, but you may define "educational" broadly. Also, the program should target at least 1,000 beneficiaries per year (e.g., 1,000 children). Finally, you must not copy a program’s existing evaluation plan or research grant proposal.
 
-- [{{< fa file-pdf >}} `psd-proposal-2011`](/files/psd-proposal-2011.pdf)
-- [{{< fa file-pdf >}} `psd-final-report-2012`](/files/psd-final-report-2012.pdf)
+Throughout the quarter, you will submit **three milestones** via Canvas. Each milestone has its own due date. Then, for your final assignment, you will submit **two things** via Canvas:
+
+1. A PDF of your evaluation plan (see the outline below for details of what this should contain). You may compile this with R Markdown if you like, but you can use any system you choose. You might want to write the prose-heavy sections in a word processor like Word or Google Docs and copy/paste the text into your R Markdown document since RStudio doesn't have a nice spell checker or grammar checker. Either way, your document should have *no visible R code, warnings, or messages in it* (set `echo = FALSE` at the beginning of your document before you knit).
+
+2. To the extent that you conduct any data analysis, such as statistical power calculations, a copy of your R project as a .zip folder. You can either run the analysis in RStudio locally on your computer or use an RStudio.cloud project. 
+
+Please do not pre-register your evaluation (e.g., on OSF) unless you have the opportunity, funding, and ethical clearance to actually conduct the study.
+
+Your project is due by **11:55 PM on Friday, December 15, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
+
+## Resources
+
+You might find the following registered report helpful. This is an example of an experimental evaluation, and it does not fully respect the outline I recommend below. Still, I hope you find this document helpful. 
+
+- [{{< fa file-pdf >}} `registered-report-2023`](/files/registered-report-2023.pdf)
 
 ## Suggested outline
 
-Here's an outline of what you'll need to do. You did lots of this work in your evaluation assignments and you have already completed three related milestones. Still, don't just copy/paste those assignments as is—you'll want to polish it up for this final project. 
+Here's an outline of what you'll need to do. You have already completed three related milestones. Still, don't just copy/paste these assignments as is—you'll want to polish them up for this final project. All word counts are suggestions, only.
 
 ---
 
 ### Introduction
 
-Describe the motivation for this evaluation, briefly describe the program to be evaluated, and explain why it matters for society. (**≈150 words**)
+Describe the motivation for this evaluation, briefly describe the program to be evaluated, and explain why it matters for society. 
+
+(**≈150 words**). 
 
 ### Context and intervention
 
@@ -50,35 +59,45 @@ Describe the motivation for this evaluation, briefly describe the program to be 
 
 Provide information on the program context. Focus on (a) why this is a good context to run the evaluation you are proposing and (b) the main needs the program seeks to address. 
 
-As you write this, take another look at our reading about the ["Generalizability Puzzle"](https://ssir.org/articles/entry/the_generalizability_puzzle). If I'm someone who will read the results of your study, what "local conditions" do I need to be aware of to judge whether its findings may (or may not) generalize to a different context? (**≈300 words**)
+As you write this, take another look at our reading about the ["Generalizability Puzzle"](https://ssir.org/articles/entry/the_generalizability_puzzle). If I'm someone who will read the results of your study, what "local conditions" do I need to be aware of to judge whether its findings may (or may not) generalize to a different context? 
+
+(**≈300 words**)
 
 #### Intervention
 
-Provide in-depth background about the program. Include details about (1) when it was started, (2) why it was started, (3) what it was designed to address in society. If the program hasn't started yet, explain why it's under consideration. (**≈300 words**)
+Provide in-depth background about the program. Include details about (1) when it was started, (2) why it was started, and (3) what it was designed to address in society. If the program has yet to start, explain why it's under consideration. 
+
+Try to provide a cost estimate per program beneficiary. Also, make sure to cover how program beneficiaries are "assigned" or "invited" to participate in the program. For example, is program eligibility assigned in groups (e.g., entire schools, or all the students taught by a given teacher), vs. is it individual?
+
+(**≈300 words**)
 
 #### Program theory
 
-Explain and explore the program's underlying theory. Sometimes programs will explain why they exist in a mission statement, but often they don't and you have to infer the theory from what the program looks like when implemented. What did the program designers plan on occurring? Was this theory based on existing research? If so, cite it. (**≈300 words**)
+Explain and explore the program's underlying theory. Sometimes programs will explain why they exist in a mission statement, but often they don't, and you have to infer the theory from what the program looks like when implemented. What did the program designers plan on occurring? Was this theory based on existing research? If so, cite it. 
+
+(**≈300 words**)
 
 #### Theory of Change
 
-Describe the program's inputs, activities, outputs, and outcomes. Pay careful attention to how they are linked—remember that every input needs to flow into an activity and every output must flow out of an activity. (**≈150 words**)
+Describe the program's inputs, activities, outputs, and outcomes. Pay careful attention to how they are linked—remember that every input needs to flow into an activity and every output must flow out of an activity. 
+
+(**≈150 words**)
 
 Use flowchart software to connect the inputs, activities, outputs, and outcomes and create a complete Theory of Change. Include this as a figure. 
 
 #### Hypotheses
 
-Make predictions of your program's effects. Declare what you think will happen. (**≈50 words**)
+Make predictions of your program's effects. Declare what you think will happen. (**≈100 words**)
 
-Provide a list and a hierarchy of hypotheses you want to test. Usually, you will prioritize overall program effects over potentially heterogeneous effects. Also, you will prioritize main outcomes over secondary outcomes.
+Provide a list and a hierarchy of hypotheses you want to test. Usually, you will prioritize overall program effects over potentially heterogeneous effects. Also, you will prioritize main outcomes over secondary outcomes. A table of hypotheses may be handy (but if you include one, make sure you discuss and explain the table in your text).
 
 ### Measurement and data
 
 #### Main and secondary outcomes 
 
-Select one of the program's outcomes to evaluate. Explain why you've chosen this (is it the most important? easiest to measure? has the greatest impact on society?) (**≈50 words**)
+Select one of the program's outcomes to evaluate. Explain why you've chosen this (is it the most important? easiest to measure? has the greatest impact on society?) (**≈100 words**)
 
-What are secondary outcomes you consider along with the program's Theory of Change? This will be activities, outputs and intermediate outcomes.
+What are secondary outcomes you consider along with the program's Theory of Change? This will be activities, outputs, and intermediate outcomes. (**≈100 words**)
 
 #### Measurement
 
@@ -88,11 +107,27 @@ Make a list of all the possible attributes of the main outcome. Narrow this list
 - *Ideal measurement*: How would you measure this attribute in an ideal world?
 - *Feasible measurement*: How would you measure this given reality and given limitations in budget, time, etc.?
 
-(**≈150 words** in this section)
+(**≈150 words**)
 
 #### Data
 
 Given your measurement approach, limits on feasibility, and identification strategy, describe the data you will use. Will you rely on administrative data collected by a government agency or nonprofit? Will you collect your own data? If so, what variables will you measure, and how? Will you conduct a survey or rely on outside observers or do something else? What does this data look like? What variables does it (or should it) include?
+
+(**≈100 words**)
+
+### Sample
+
+#### Sampling and sample
+
+What will be the study sample? How large will this sample be and how will you select it? 
+
+(**≈100 words**)
+
+#### Power calculations
+
+Ideally, conduct power calculations and report on your evaluation's minimal detectable effect (MDE) given the sample size. Comment on whether this MDE is reasonable to expect. State additional assumptions you used for your calculations. 
+
+Independent of the analytical strategy you describe just below, here, you can simplify your analysis and conduct power calculations for a randomized experiment.  
 
 (**≈100 words**)
 
@@ -108,21 +143,21 @@ Describe how you will analyze the data using your identification strategy. For i
 - If you're doing regression discontinuity, specify a model to check for a jump in the outcome variable at the cutoff in the running variable.
 - If you're using instrumental variables, specify how you will check the validity of your instrument and run a 2SLS model.
 
-Remember: Your plan should propose a quasi-experimental evaluation. You must not propose a (simple) regression-adjusted model, matching, or a purely qualitative evaluation strategy. Also, you must not propose an RCT (unless you have received my written approval).
+Remember: Your plan should propose a quasi-experimental evaluation. You must not propose a (simple) regression-adjusted model, matching, or a purely qualitative evaluation strategy. Also, you must not propose a randomized controlled trial (unless you have received my written approval).
 
-Provide at least one additional specification to plan for a (secondary) analysis of potentially heterogeneous effects among a subgroup of program beneficiaries (e.g., effects among girls).
+Provide at least one additional specification to plan for a (secondary) analysis of effects among a subgroup of program beneficiaries (e.g., effects among girls, if the program targets both girls and boys).
 
 (**≈300 words**)
 
-#### Threats
+#### Threats to internal validity
 
-Briefly describe what kinds of threats to internal and external validity you face in your study.
+Briefly describe what kinds of threats to internal validity you face in your study. How will your evaluation mitigate these threats?
 
 (**≈150 words**)
 
 ### Ethical considerations
 
-How will your study satisfy ethical considerations? 
+How will your evaluation satisfy ethical considerations? Assume you are an academic researcher who needs to comply with university regulations (as you would have to if you conducted the evaluation as a UCI student).
 
 (**≈150 words**)
 
@@ -131,3 +166,4 @@ How will your study satisfy ethical considerations?
 What would the findings from this analysis mean for your selected program? What would it mean if you found an effect? What would it mean if you didn't find an effect? Why does any of this matter?
 
 (**≈75 words**)
+

@@ -7,7 +7,9 @@ date: "2023-10-17"
 
 - {{< fa book >}} Chapters 4 and 13 in *The Effect* [@Huntington-Klein:2021]
 
-The following sections of Chapter 13 are optional---feel free to skip them.
+## Optional material
+
+- The following sections of Chapter 13 in *The Effect* are optional---feel free to skip them.
 
 13.2.2 Polynomials  
 13.2.3 Variable transformations   
@@ -15,6 +17,8 @@ The following sections of Chapter 13 are optional---feel free to skip them.
 13.2.6 Nonlinear Regression   
 13.3 Your Standard Errors are Probably Wrong   
 13.4 Additional Regression Concerns   
+
+- {{< fa arrow-up-right-from-square >}} Abby Long. ["10 Things to Know About Reading a Regression Table,"](https://egap.org/resource/10-things-to-know-about-reading-a-regression-table/) *egap*, 21 July 2016.
 
 ## Slides
 

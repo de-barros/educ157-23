@@ -109,9 +109,10 @@ Dayal](https://steinhardt.nyu.edu/arja-dayal), [Pierre de
 Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro
 Ganimian](https://www.alejandroganimian.com/), [Andrew
 Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine
-Knebelmann](https://sites.google.com/view/justine-knebelmann/home), and
+Knebelmann](https://sites.google.com/view/justine-knebelmann/home),
 [Fernanda
-Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/).
+Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/),
+and [Carly Robinson](https://www.carlydrobinson.com/).
 
 ## Licenses
 

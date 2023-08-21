@@ -150,9 +150,9 @@ You will use [RStudio](https://www.rstudio.com/) as the main program to access R
 
 R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [RStudio.cloud](http://rstudio.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! *RStudio.cloud is all you need for our course.*
 
-RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis. Over the course of the semester, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of RStudio.cloud. This isn't necessary, but it's helpful. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install.html)
+RStudio.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis. Over the course of the quarter, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of RStudio.cloud. This isn't necessary, but it's helpful. You can [find instructions for installing R, RStudio, and all the tidyverse packages here.](/resource/install.html)
 
-There are tons of online resources to help you with R and RStudio. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/). Also, ChatGPT will sometimes fool you but, as it was trained on StackOverflow (among other websites), it is quite good at writing R code.
+There are tons of online resources to help you with R and RStudio. Two of the most important are [StackOverflow](https://stackoverflow.com/) (a Q&A site with hundreds of thousands of answers to all sorts of programming questions) and [RStudio Community](https://community.rstudio.com/). Also, ChatGPT will sometimes fool you but, as it was likely [trained on and (is quickly replacing) StackOverflow](https://www.linkedin.com/posts/tom-alder_the-irony-is-crushing-stack-overflows-activity-7099208596369903616-EQH6), it is quite good at writing R code.
 
 An the [resources page](/resource/index.html), you will find a long list of additional resources. All of this is *way too much information*, but certainly good to have as a backup for any of your future work after our course. And, if all of this sounds overwhelming, don't worry. **Once we get to it, I will point you to all the materials you do need.**
 
@@ -184,7 +184,7 @@ You will also take one in-class exam, which serves as an important mid-quarter c
 
 ### Your evaluation project
 
-For the final course project, you will develop an evalution plan for a new education program that excites you. That could be any new educational program a school district, state, charter organization, or NGO has established recently. No matter the topic, you will formulate a key research question and design a state-of-the-art evaluation plan to measure the program's effects. 
+For the final course project, you will develop an evalution plan for a new education program that excites you. That could be any new educational program a school district, state, charter organization, or NGO has established recently (or plans to establish shortly). No matter the topic, you will formulate a key research question and design a state-of-the-art evaluation plan to measure the program's effects. 
 
 Throughout the quarter, there will be three milestones related to the evaluation plan. During the final exam period you will finalize the plan and submit your document to me. You are not asked to execute the evaluation (but you may after the course).[^IRB]
 
@@ -222,7 +222,7 @@ Your assignments will involve a fair amount of writing. You should not take this
 
 ### Grading
 
-You (the student) and I (the instructor) should care the most about what you *learn*, not what numerical/letter summary of that learning you get at the end of the semester. So I would love to not have grades at all, but unfortunately we humans are very good at procrastinating on our good intentions when there is no incentive not to. Thus, we have grades to help solve this commitment problem and to encourage you to put effort into learning the course material. 
+You (the student) and I (the instructor) should care the most about what you *learn*, not what numerical/letter summary of that learning you get at the end of the quarter. So I would love to not have grades at all, but unfortunately we humans are very good at procrastinating on our good intentions when there is no incentive not to. Thus, we have grades to help solve this commitment problem and to encourage you to put effort into learning the course material. 
 
 Here is how each of your various course contributions and assignments contribute to your overall grade. For group assignments, all group members will receive the same grade. All other contributions are graded individually.
 
@@ -243,7 +243,7 @@ When calculating the final DAM portion of the overall grade, I will drop the low
 
 All grades will be posted through Canvas. 
 
-**Bump-up policy**: I reserve the right to "bump up" the grades of students who have made valuable contributions to the course in the in-person course and discussions/Slack. This also applies to students who show tremendous progress and growth over the semester. 
+**Bump-up policy**: I reserve the right to "bump up" the grades of students who have made valuable contributions to the course in the in-person course and discussions/Slack. This also applies to students who show tremendous progress and growth over the quarter. 
 
 
 ## Course policies

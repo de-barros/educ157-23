@@ -7,7 +7,9 @@ date: "2023-10-26"
 
 - {{< fa book >}} Chapter 6 in *Running Randomized Evaluations* [@glennerster_running_2013]
 
-The following two chapters are (highly recommended but) optional.
+## Optional material
+
+The following two chapters are (highly recommended but) optional. You may include them in your reading reactions.
 
 - {{< fa book >}} Chapters 6 and 7 in *Methods Matter* [@MurnaneWillett:2011]
 

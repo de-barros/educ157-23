@@ -8,7 +8,7 @@ Hi everyone!
 
 Tomorrow’s the first day of class! Exciting!
 
-Beyond hoping that everyone is wearing a mask, I've structured the class in way that limits our exposure to each other as much as possible. As noted in the syllabus ([https://evalf22.classes.andrewheiss.com/syllabus.html#course-structure](https://evalf22.classes.andrewheiss.com/syllabus.html#course-structure)), we're using a flipped classroom this semester. What this means in practice is that you'll do all the readings *and* watch asynchronous lecture videos before class meets on Mondays. 
+Beyond hoping that everyone is wearing a mask, I've structured the class in way that limits our exposure to each other as much as possible. As noted in the syllabus ([https://evalf22.classes.andrewheiss.com/syllabus.html#course-structure](https://evalf22.classes.andrewheiss.com/syllabus.html#course-structure)), we're using a flipped classroom this quarter. What this means in practice is that you'll do all the readings *and* watch asynchronous lecture videos before class meets on Mondays. 
 
 Our in-person time will **not** involve lectures. Instead, it'll be a more hands-on lab for working with R and answering the questions that come up from doing the readings and watching the lectures. That's the point of the weekly check-in assignment ([https://evalf22.classes.andrewheiss.com/assignment/weekly-check-in.html](https://evalf22.classes.andrewheiss.com/assignment/weekly-check-in.html))—the only way this in-person time will be effective is if you do the readings + videos and ask questions in the weekly check-in.
 

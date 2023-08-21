@@ -9,6 +9,13 @@ This class includes a live interview with one of the organizations with which I 
 
 I will point you to materials describing the organization. I will also provide you with background information on my evaluation.
 
+## Optional material
+
+The following reading is optional. 
+
+- {{< fa arrow-up-right-from-square >}} Jake Bowers and Rebecca Wolfe. ["10 Conversations that Implementers and Evaluators Need to Have,"](https://egap.org/resource/10-implementer-evaluator-conversations/) *egap*, no date.
+
+
 ## Slides
 
 On the day of class, you will find my slides on Canvas. 

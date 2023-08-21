@@ -55,7 +55,7 @@ Going beyond program evaluations, I also recommend the following books on social
 I highly recommend the following online resources.
 
 - J-PAL's [research resources](https://www.povertyactionlab.org/research-resources?view=toc) 
-- The World Bank's [DIME Wiki](https://dimewiki.worldbank.org/Main_Page) and its [Development Impact blog](https://blogs.worldbank.org/impactevaluations)
+- The World Bank's [DIME Wiki](https://dimewiki.worldbank.org/Main_Page), its [Development Impact blog](https://blogs.worldbank.org/impactevaluations), and its curated [list of posts on technical topics](https://blogs.worldbank.org/impactevaluations/curated-list-our-postings-technical-topics-your-one-stop-shop-methodology-0).
 - EGAP's [Methods Guides](https://egap.org/methods-guides/)
 - MIT's ["MicroMasters" Program in Data, Economics, and Design of Policy](https://micromasters.mit.edu/dedp/)
 - The APA [Reporting Standards (JARS)](https://apastyle.apa.org/jars)
