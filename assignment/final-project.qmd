@@ -43,7 +43,12 @@ You might find the following registered report helpful. This is an example of an
 
 ## Suggested outline
 
-Here's an outline of what you'll need to do. You have already completed three related milestones. Still, don't just copy/paste these assignments as is—you'll want to polish them up for this final project. All word counts are suggestions, only.
+Here's an outline of what you'll need to do. All word counts are suggestions, only. By the time you work on your final document, you will have already completed three related milestones. Still, don't just copy/paste these assignments as is—you'll want to polish them up for this final project. Also, consider addressing the following points your milestones did not cover.
+
+1. How your evaluation relates to concerns of generalizability
+2. Information on program costs
+3. Multiple hypothesis testing
+4. A conclusion
 
 ---
 

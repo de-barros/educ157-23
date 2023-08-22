@@ -13,6 +13,11 @@ The following two chapters are (highly recommended but) optional. You may includ
 
 - {{< fa book >}} Chapters 6 and 7 in *Methods Matter* [@MurnaneWillett:2011]
 
+Also, feel free to play with the following interactive visualizations.
+
+- {{< fa arrow-up-right-from-square >}} Kristoffer Magnusson. ["Interpreting Cohen's d Effect Size,"](https://rpsychologist.com/cohend/) no date.
+- {{< fa arrow-up-right-from-square >}} Kristoffer Magnusson. ["Understanding Statistical Power and Significance Testing,"](https://rpsychologist.com/d3/nhst/) no date.
+
 ## Slides
 
 On the day of class, you will find my slides on Canvas. 
