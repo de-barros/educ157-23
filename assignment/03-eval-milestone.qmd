@@ -3,4 +3,48 @@ title: "Third milestone"
 date: "2023-12-03"
 ---
 
-This page will provide additional information on the third milestone for your final evaluation project. 
+Here's an outline of what you'll need to write about for your third milestone. All word counts are suggestions, only.
+
+Your third milestone is due by **11:55 PM on Sunday, December 03, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
+
+---
+
+### Sample
+
+#### Sampling and sample
+
+What will be the study sample? How large will this sample be and how will you select it? 
+
+(**≈100 words**)
+
+#### Power calculations
+
+Ideally, conduct power calculations and report on your evaluation's minimal detectable effect (MDE) given the sample size. Comment on whether this MDE is reasonable to expect. State additional assumptions you used for your calculations. 
+
+Independent of the analytical strategy you describe just below, here, you can simplify your analysis and conduct power calculations for a randomized experiment.  
+
+(**≈100 words**)
+
+### Analytical strategy
+
+#### Identification strategy
+
+How will you measure the actual program effect? Will you rely on Differences-in-differences? Regression discontinuity? Instrumental variables? How does your approach account for selection bias and endogeneity? How does your approach isolate the causal effect of the program on the outcome?
+
+Describe how you will analyze the data using your identification strategy. For instance:
+
+- If you're doing diff-in-diff, specify a regression model with an interaction term to show the diff-in-diff.
+- If you're doing regression discontinuity, specify a model to check for a jump in the outcome variable at the cutoff in the running variable.
+- If you're using instrumental variables, specify how you will check the validity of your instrument and run a 2SLS model.
+
+Remember: Your plan should propose a quasi-experimental evaluation. You must not propose a (simple) regression-adjusted model, matching, or a purely qualitative evaluation strategy. Also, you must not propose a randomized controlled trial (unless you have received my written approval).
+
+Provide at least one additional specification to plan for a (secondary) analysis of effects among a subgroup of program beneficiaries (e.g., effects among girls, if the program targets both girls and boys).
+
+(**≈300 words**)
+
+#### Threats to internal validity
+
+Briefly describe what kinds of threats to internal validity you face in your study. How will your evaluation mitigate these threats?
+
+(**≈150 words**)

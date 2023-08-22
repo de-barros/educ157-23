@@ -3,4 +3,38 @@ title: "Second milestone"
 date: "2023-10-15"
 ---
 
-This page will provide additional information on the second milestone for your final evaluation project. 
+Here's an outline of what you'll need to write about for your second milestone. All word counts are suggestions, only.
+
+Your second milestone is due by **11:55 PM on Sunday, October 15, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
+
+---
+
+### Measurement and data
+
+#### Main and secondary outcomes 
+
+Select one of the program's outcomes to evaluate. Explain why you've chosen this (is it the most important? easiest to measure? has the greatest impact on society?) (**≈100 words**)
+
+What are secondary outcomes you consider along with the program's Theory of Change? This will be activities, outputs, and intermediate outcomes. (**≈100 words**)
+
+#### Measurement
+
+Make a list of all the possible attributes of the main outcome. Narrow this list down to 3-4 key attributes. Discuss how you decided to narrow the concepts and justify why you think these attributes capture the outcome. Then, for each of these attributes, answer these questions:
+
+- *Measurable definition*: How would you specifically define this attribute? (i.e., if the attribute is "reduced crime", define it as "The percent change in crime in a specific neighborhood during a certain time frame" or something similar)
+- *Ideal measurement*: How would you measure this attribute in an ideal world?
+- *Feasible measurement*: How would you measure this given reality and given limitations in budget, time, etc.?
+
+(**≈150 words**)
+
+#### Data
+
+Given your measurement approach, limits on feasibility, and identification strategy, describe the data you will use. Will you rely on administrative data collected by a government agency or nonprofit? Will you collect your own data? If so, what variables will you measure, and how? Will you conduct a survey or rely on outside observers or do something else? What does this data look like? What variables does it (or should it) include?
+
+(**≈100 words**)
+
+### Ethical considerations
+
+How will your evaluation satisfy ethical considerations? Assume you are an academic researcher who needs to comply with university regulations (as you would have to if you conducted the evaluation as a UCI student).
+
+(**≈150 words**)

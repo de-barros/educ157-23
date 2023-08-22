@@ -3,4 +3,56 @@ title: "First milestone"
 date: "2023-10-08"
 ---
 
-This page will provide additional information on the first milestone for your final evaluation project. 
+For your final project in this class, you will write a plan for a quasi-experimental evaluation of an educational program that you're interested in.
+
+You will work in groups of two to three students (I will assign you to your group). At the same time, **do not hesitate** to reach out to other classmates via Slack. Also, **absolutely do not hesitate** to ask me questions. I'm here to help!
+
+The program you would like to evaluate must have a start date after September 2021. The program must be educational in nature, but you may define "educational" broadly. Also, the program should target at least 1,000 beneficiaries per year (e.g., 1,000 children). Finally, you must not copy a program’s existing evaluation plan or research grant proposal.
+
+Your first milestone is due by **11:55 PM on Sunday, October 08, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
+
+## Suggested outline
+
+Here's an outline of what you'll need to write about for your first milestone. All word counts are suggestions, only.
+
+
+---
+
+### Context and intervention
+
+#### Context
+
+Provide information on the program context. Focus on (a) why this is a good context to run the evaluation you are proposing and (b) the main needs the program seeks to address. 
+
+(**≈150 words**)
+
+#### Intervention
+
+Provide in-depth background about the program. Include details about (1) when it was started, (2) why it was started, and (3) what it was designed to address in society. If the program has yet to start, explain why it's under consideration. 
+
+Also, make sure to cover how program beneficiaries are "assigned" or "invited" to participate in the program. For example, is program eligibility assigned in groups (e.g., entire schools, or all the students taught by a given teacher), vs. is it individual?
+
+(**≈300 words**)
+
+### Program theory
+
+Explain and explore the program's underlying theory. Sometimes programs will explain why they exist in a mission statement, but often they don't, and you have to infer the theory from what the program looks like when implemented. What did the program designers plan on occurring? Was this theory based on existing research? If so, cite it. 
+
+(**≈300 words**)
+
+#### Theory of Change
+
+Describe the program's inputs, activities, outputs, and outcomes. Pay careful attention to how they are linked—remember that every input needs to flow into an activity and every output must flow out of an activity. 
+
+(**≈150 words**)
+
+Use flowchart software to connect the inputs, activities, outputs, and outcomes and create a complete Theory of Change. Include this as a figure. 
+
+#### Hypotheses
+
+Make predictions of your program's effects. Declare what you think will happen. 
+
+Provide a list and a hierarchy of hypotheses you want to test. Usually, you will prioritize overall program effects over potentially heterogeneous effects. Also, you will prioritize main outcomes over secondary outcomes. A table of hypotheses may be handy (but if you include one, make sure you discuss and explain the table in your text).
+
+(**≈100 words**)
+

@@ -59,7 +59,7 @@ Describe the motivation for this evaluation, briefly describe the program to be 
 
 Provide information on the program context. Focus on (a) why this is a good context to run the evaluation you are proposing and (b) the main needs the program seeks to address. 
 
-As you write this, take another look at our reading about the ["Generalizability Puzzle"](https://ssir.org/articles/entry/the_generalizability_puzzle). If I'm someone who will read the results of your study, what "local conditions" do I need to be aware of to judge whether its findings may (or may not) generalize to a different context? 
+As you review what you wrote for Milestone 1, take another look at our reading about the ["Generalizability Puzzle"](https://ssir.org/articles/entry/the_generalizability_puzzle). If I'm someone who will read the results of your study, what "local conditions" do I need to be aware of to judge whether its findings may (or may not) generalize to a different context? 
 
 (**≈300 words**)
 
@@ -67,7 +67,9 @@ As you write this, take another look at our reading about the ["Generalizability
 
 Provide in-depth background about the program. Include details about (1) when it was started, (2) why it was started, and (3) what it was designed to address in society. If the program has yet to start, explain why it's under consideration. 
 
-Try to provide a cost estimate per program beneficiary. Also, make sure to cover how program beneficiaries are "assigned" or "invited" to participate in the program. For example, is program eligibility assigned in groups (e.g., entire schools, or all the students taught by a given teacher), vs. is it individual?
+Also, make sure to cover how program beneficiaries are "assigned" or "invited" to participate in the program. For example, is program eligibility assigned in groups (e.g., entire schools, or all the students taught by a given teacher), vs. is it individual?
+
+As you review your work from Milestone 1, try to also add a cost estimate per program beneficiary. 
 
 (**≈300 words**)
 
