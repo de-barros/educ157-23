@@ -28,8 +28,8 @@ build_schedule_for_page <- function(schedule_file) {
                                 glue('<a href="{content}.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>'),
                                 glue('<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>'))) %>%
     mutate(var_resource = ifelse(!is.na(resource),
-                                glue('<a href="{resource}.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>'),
-                                glue('<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>'))) %>%
+                                glue('<a href="{resource}"><i class="fa-solid fa-person-chalkboard fa-lg"></i></a>'),
+                                glue('<font color="#e9ecef"><i class="fa-solid fa-person-chalkboard fa-lg"></i></font>'))) %>%
     mutate(var_assignment = ifelse(!is.na(assignment),
                                    glue('<a href="{assignment}.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>'),
                                    glue('<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>'))) %>%
@@ -44,7 +44,7 @@ build_schedule_for_page <- function(schedule_file) {
   schedule_nested <- schedule %>%
     select(group, subgroup,
            ` ` = col_date, Title = col_title, Content = col_content,
-           Resource = col_resource, Assignment = col_assignment) %>%
+           Slides = col_resource, Assignment = col_assignment) %>%
     group_by(group) %>%
     nest() %>%
     mutate(subgroup_count = map(data, ~count(.x, subgroup)),

@@ -16,18 +16,19 @@ withr::with_dir(here::here(), {
 })
 
 base_url <- yaml::read_yaml(here::here("_quarto.yml"))$website$`site-url`
-ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
+#ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
+ical_url_absolute <- paste0(base_url, schedule_ical_file)
 ```
 
 ::: {.schedule-page}
 
 Here's your roadmap for the quarter!
 
-- [**Content**](/content/index.html) ({{< fa book-open-reader >}}): This page contains the readings and slides for the week. 
+- [**Content**](/content/index.html) ({{< fa book-open-reader >}}): This page contains the readings and other materials for the class. 
+
+- **Slides** ({{< fa person-chalkboard >}}): Each of these icons will link to my slides, once I post them on Canvas.
 
 - [**Assignments**](/assignment/index.html) ({{< fa pen-ruler >}}): This page contains the instructions for each assignment. Reading reactions are due by *11:55 PM* before the day of class. Other assignments are due by *11:55 PM* on the day they're listed.
-
-- [**Resources**](/resource/index.html) ({{< fa laptop-code >}}): This page contains supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don't have to necessarily do anything here. Still, this page should be *very* helpful as you work on your assignments.
 
 ::: {.callout-tip}
 
