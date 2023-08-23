@@ -42,7 +42,7 @@ class: center middle main-title section-title-3
 
 .class-info[
 
-**October 3, 2022**
+**February 23, 2023**
 
 .light[PMAP 8521: Program evaluation<br>
 Andrew Young School of Policy Studies
@@ -59,7 +59,7 @@ class: title title-inv-8
 
 --
 
-.box-3.medium.sp-after-half[FAQs]
+.box-3.medium.sp-after-half[Super quick FAQs]
 
 --
 
@@ -75,12 +75,26 @@ layout: false
 name: faqs
 class: center middle section-title section-title-3 animated fadeIn
 
-# FAQs
+# Super quick FAQs
 
 ---
 
 layout: true
 class: middle
+
+---
+
+.box-3.large[Commenting stuff]
+
+???
+
+> I've had this question for a bit but remembered it during the section on building out the Matching and IPW project in R Studio. I'm trying to understand the commenting syntax in order to keep things in the code that do not get run. In Stata if you use /* to open and */ to close a comment block, everything between the two gets 'commented out' like this:
+>
+>     /*
+>     Comments etc here
+>     */
+>
+> Is there a way to do this in R with pound signs?
 
 ---
 
@@ -212,7 +226,7 @@ class: middle
 
 ---
 
-.box-4.large[Can you walk through an example of<br>IPW and matching in class?]
+.box-4.large[Can you talk more about<br>propensity scores and<br>"weirdness" weights?]
 
 ---
 
@@ -221,3 +235,7 @@ class: middle
 ---
 
 .box-4.large[Which should we use?<br>Matching or IPW?]
+
+---
+
+.box-4.large[Can you walk through an example of<br>IPW and matching in class?]
