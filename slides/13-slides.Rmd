@@ -1,6 +1,6 @@
 ---
-title: "Choosing and planning ethical evaluations"
-author: "Andrew Heiss"
+title: "Regression discontinuity"
+author: "Andreas de Barros"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -15,7 +15,9 @@ output:
       countIncrementalSlides: false
       ratio: "16:9"
       navigation:
-        scroll: false
+        scroll: true # Changed this to true to enable scrolling
+      incremental: true  # Added this line to stay on the same slide when knitting  
+      self_contained: false  # Added this line to prevent HTML caching
 editor_options: 
   chunk_output_type: console
 ---
@@ -27,23 +29,53 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
-library(modelsummary)
+library(broom)
+library(ggdag)
+library(kableExtra)
+library(scales)
+library(estimatr)
+library(patchwork)
+library(latex2exp)
+library(rdrobust)
+library(rddensity)
+
+# Fake program data
+set.seed(1234)
+num_students <- 1000
+tutoring <- tibble(
+  id = 1:num_students,
+  entrance_exam = rbeta(num_students, shape1 = 7, shape2 = 2),
+  exit_exam = rbeta(num_students, shape1 = 5, shape2 = 3)
+) %>% 
+  mutate(entrance_exam = entrance_exam * 100,
+         tutoring = entrance_exam <= 70) %>% 
+  mutate(exit_exam = exit_exam * 40 + 10 * tutoring + entrance_exam / 2) %>% 
+  mutate(tutoring_fuzzy = ifelse(entrance_exam > 60 & entrance_exam < 80,
+                                 sample(c(TRUE, FALSE), n(), replace = TRUE),
+                                 tutoring)) %>% 
+  mutate(tutoring_text = factor(tutoring, levels = c(FALSE, TRUE),
+                                labels = c("No tutor", "Tutor")),
+         tutoring_fuzzy_text = factor(tutoring_fuzzy, levels = c(FALSE, TRUE),
+                                      labels = c("No tutor", "Tutor"))) %>% 
+  mutate(entrance_centered = entrance_exam - 70)
 ```
 
 ```{r xaringanExtra, echo=FALSE}
 xaringanExtra::use_xaringan_extra(c("tile_view"))
 ```
 
-class: center middle main-title section-title-7
+class: center middle main-title section-title-4
 
-# Choosing and planning<br>ethical evaluations
+# Regression discontinuity
 
 .class-info[
 
-**Session 13**
+**Class 13**
 
-.light[PMAP 8521: Program evaluation<br>
-Andrew Young School of Policy Studies
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
+]
+
 ]
 
 ]
@@ -51,218 +83,33 @@ Andrew Young School of Policy Studies
 ---
 
 name: outline
-class: title title-inv-8
+class: title title-8
 
 # Plan for today
 
 --
 
-.box-4.medium.sp-after-half[Types of evaluations]
+.box-1.medium.sp-after-half[Arbitrary cutoffs and causal inference]
 
 --
 
-.box-1.medium.sp-after-half[Model- and design-based inference]
+.box-3.medium.sp-after-half[Drawing lines and measuring gaps]
 
 --
 
-.box-6.medium.sp-after-half[Ethics and open science]
+.box-6.medium.sp-after-half[Main concerns]
+
+--
+
+.box-7.medium.sp-after-half[Non-compliance or "fuzziness"]
+
 
 ---
 
-layout: false
-name: types-evaluations
-class: center middle section-title section-title-4 animated fadeIn
-
-# Types of evaluations
-
----
-
-class: title title-4
-
-# Types of evaluation
-
-.box-inv-4.sp-after[In this class we've focused on one type of evaluation]
-
---
-
-.box-4.medium[Impact evaluation]
-
-.box-4.small.sp-after[Checking to see if the program causes outcomes]
-
---
-
-.box-inv-4[There are lots of others!]
-
---
-
-.box-inv-4[Each type focuses on a specific part of a logic model]
-
----
-
-.center[
-<figure>
-  <img src="img/01/psd-logic-model.png" alt="Provo school district logic model" title="Provo school district logic model" width="70%">
-</figure>
-]
-
----
-
-layout: true
-class: title title-4
-
----
-
-# Needs assessment
-
-.box-inv-4.medium[Formative evaluation / needs assessment]
-
---
-
-.box-inv-4.sp-after[Is the program needed?<br>What inputs and activities does it need?<br>What outcomes does it need to cause?]
-
---
-
-.box-4[Use interviews, surveys, focus groups with target population]
-
---
-
-.box-4[Do *before* starting the program or when considering changes]
-
----
-
-# Process evaluation and monitoring
-
-.box-inv-4.medium[Process evaluation / program monitoring]
-
---
-
-.box-inv-4.sp-after[Are inputs going to the right places?<br>Are the activities working correctly?<br>Are activities producing right levels of outputs?]
-
---
-
-.box-4[Use monitoring systems, benchmarks,<br>regular reports from within the program itself]
-
---
-
-.box-4[Do *during* the program]
-
----
-
-# Process evaluation and monitoring
-
-.center[
-<figure>
-  <img src="img/13/monitoring-dashboard.png" alt="Loddon Region Children and Youth Area Partnership Dashboard" title="Loddon Region Children and Youth Area Partnership Dashboard" width="80%">
-</figure>
-]
-
-???
-
-Loddon Region Children and Youth Area Dashboard Partnership
-
-<https://www.betterevaluation.org/en/evaluation-options/data_dashboard>
-
----
-
-# Outcome evaluation
-
-.box-inv-4.medium[Outcome evaluation]
-
---
-
-.box-inv-4.sp-after[Are activities and outputs leading to *initial* outcomes?<br>(basically a short-term impact evaluation)]
-
---
-
-.box-4[Use surveys, interviews, etc. with target population]
-
---
-
-.box-4[Do *during* the program]
-
----
-
-# Cost-benefit analysis
-
-.box-inv-4.medium[Economic evaluation / cost-benefit analysis]
-
---
-
-.box-inv-4.sp-after[Is the program worth it?<br>Do the benefits of helping the target population<br>outweigh the costs of running the program?]
-
---
-
-.box-4.SMALL[Monetize all program costs and benefits, apply a discount factor, convert all costs to net present value, subtract NPV of costs from NPV of benefits]
-
---
-
-.box-4[Do *during* or at the end of the program]
-
----
-
-# Cost-benefit analysis
-
-.center[
-<figure>
-  <img src="img/13/cba-backup-cameras.png" alt="Car backup camera CBA" title="Car backup camera CBA" width="60%">
-</figure>
-]
-
-???
-
-<https://www.nhtsa.gov/sites/nhtsa.dot.gov/files/nhtsa-2006-25579-0002.pdf>
-
----
-
-# Impact evaluation
-
-.box-inv-4.medium[Impact evaluation]
-
---
-
-.box-inv-4.sp-after[Does the program cause lasting change?<br>(What we did this semester)]
-
---
-
-.box-4[Use causal inference tools]
-
---
-
-.box-4[Do *during* or at the end of the program]
-
----
-
-# Impact evaluation
-
-<figure>
-  <img src="img/04/program-effect.png" alt="Program effect" title="Program effect" width="100%">
-</figure>
-
----
-
-# Types of evaluation
-
-.box-inv-4[Needs assessment]
-
-.box-inv-4[Process evaluation and monitoring]
-
-.box-inv-4[Outcome evaluation]
-
-.box-inv-4[Cost-benefit analysis]
-
-.box-inv-4.sp-after[Impact evaluation]
-
---
-
-.box-4.medium[You can take entire classes for just one type!]
-
----
-
-layout: false
-name: model-design-inference
+name: arbitrary-cutoffs
 class: center middle section-title section-title-1 animated fadeIn
 
-# Model- and<br>design-based<br>inference
+# Arbitrary cutoffs<br>and causal inference
 
 ---
 
@@ -271,271 +118,1147 @@ class: title title-1
 
 ---
 
-# Choosing a method
+# Quasi-experiments again
 
 --
 
-.box-inv-1[We just learned a *ton* of different methods for causal inference!]
+.box-inv-1.sp-after[Instead of using carefully adjusted DAGs,<br>we can use *context* to isolate/identify the pathway between<br>treatment and outcome in observational data]
 
 --
 
-.float-left.center[.box-1[DAGs] .box-1[Matching] .box-1[Inverse probability weighting]]
+.box-1[Regression discontinuity designs (RDD) are one type of such "quasi-experiments"]
 
---
+.box-inv-1[Quantifiable rules determine access to programs]
 
-.float-left.center[.box-1[Randomized controlled trials] .box-1[Difference-in-differences]]
-
---
-
-.float-left.center[.box-1[Regression discontinuity] .box-1[Instrumental variables]]
-
---
-
-.box-inv-1.medium.sp-before[How do you know<br>which one to use and when?]
+.box-inv-1[Main idea: Randomness of who<br>*just qualifies* for a program vs. *just doesn't qualify*]
 
 ---
 
-# Identification strategies
+# Rules to access programs
 
-.box-inv-1.small.sp-after[The goal of *all* these methods is to isolate<br>(or **identify**) the arrow between treatment → outcome]
-
---
-
-.box-inv-1.less-medium[Model-based identification]
-
-.float-left.center[.box-1[DAGs] .box-1[Matching] .box-1[Inverse probability weighting]]
+.box-inv-1.medium[Lots of policies and programs are<br>based on arbitrary rules and thresholds]
 
 --
 
-.box-inv-1.less-medium.sp-before[Design-based identification]
-
-.float-left.center[.box-1[Randomized controlled trials] .box-1[Difference-in-differences]]
-
-.float-left.center[.box-1[Regression discontinuity] .box-1[Instrumental variables]]
+.box-1[If you're above the threshold, you're in the program;<br>if you're below, you're not (or vice versa)]
 
 ---
 
-# Model-based identification
-
-.box-inv-1[Use a DAG and *do*-calculus to isolate arrow]
-
-.pull-left[
-<figure>
-  <img src="04-slides_files/figure-html/edu-earn-adjust-1.png" alt="Education earnings DAG" title="Education earnings DAG" width="100%">
-</figure>
-]
-
-.pull-right[
-.box-1[Core assumption:<br>selection on observables]
-
-.box-inv-1.small[Everything that needs to<br>be adjusted is measurable;<br>no unobserved confounding]
-
-.box-inv-1.small[**Big assumption!**]
-
-.box-inv-1.tiny[This is why lots of people don't like DAG-based adjustment]
-]
-
----
-
-# Design-based identification
-
-.box-inv-1[Use a special situation to isolate arrow]
-
-.pull-left[
-.box-1[RCTs]
-
-.box-inv-1.small[Use randomization<br>to remove confounding]
-
-.center[
-<figure>
-  <img src="05-slides_files/figure-html/experimental-dag-1.png" alt="RCT DAG" title="RCT DAG" width="60%">
-</figure>
-]
-]
+# Key terms
 
 --
 
-.pull-right[
-.box-1[Difference-in-differences]
+.box-inv-1.medium[Running / forcing variable]
 
-.box-inv-1.small[Use before/after & treatment/control<br>differences to remove confounding]
-
-.center[
-<figure>
-  <img src="08-slides_files/figure-html/min-wage-dag-1.png" alt="Diff-in-diff DAG" title="Diff-in-diff DAG" width="90%">
-</figure>
-]
-]
-
----
-
-# Design-based identification
-
-.box-inv-1[Use a special situation to isolate arrow]
-
-.pull-left[
-.box-1[Regression discontinuity]
-
-.box-inv-1.small[Use cutoff<br>to remove confounding]
-
-.center[
-<figure>
-  <img src="10-slides_files/figure-html/rd-dag-1.png" alt="RDD DAG" title="RDD DAG" width="90%">
-</figure>
-]
-]
+.box-1.sp-after[Index or measure that determines eligibility]
 
 --
 
-.pull-right[
-.box-1[Instrumental variables]
+.box-inv-1.medium[Cutoff / cutpoint / threshold]
 
-.box-inv-1.small[Use instrument<br>to remove confounding]
-
-.center[
-<figure>
-  <img src="11-slides_files/figure-html/iv-dag-general-1.png" alt="IV DAG" title="IV DAG" width="90%">
-</figure>
-]
-]
-
----
-
-# Which kind is better?
-
-.pull-left[
-.box-inv-1.SMALL[Model-based advantages]
-
-.box-1.small[You don't need to wait for<br>a special circumstance to emerge!]
-
-.box-1.small[Use existing datasets]
-
-<hr>
-
-.box-inv-1.SMALL[Model-based disadvantages]
-
-.box-1.small[The DAG has to be super correct]
-
-.box-1.small[You can't adjust your way<br>out of unobserved confounding]
-]
-
---
-
-.pull-right[
-.box-inv-1.SMALL[Design-based advantages]
-
-.box-1.small[Unobserved confounding<br>is less of a problem!]
-
-<hr>
-
-.box-inv-1.SMALL[Design-based disadvantages]
-
-.box-1.small[You need a specific situation]
-
-.box-1.small[You need randomization,<br>treatment/control+before/after,<br>some arbitrary cutoff,<br>or some obscure instrument]
-]
-
----
-
-# Controlling for stuff
-
-.pull-left[
-.box-inv-1.SMALL[It's *super* tempting to<br>throw a bunch of control<br>variables in a model]
-
-.box-1.smaller.sp-after[This is likely what you did in past stats classes!]
-
-.box-inv-1.SMALL.sp-after[It's *super* tempting to interpret<br>each of those coefficients]
-
-.box-1.medium[Don't!]
-]
-
-.pull-right.center[
-
-<figure>
-  <img src="img/13/coef-table.png" alt="Standard coefficient table" title="Standard coefficient table" width="100%">
-</figure>
-
-]
-
----
-
-# Controlling for stuff
-
---
-
-.box-inv-1[When focusing on isolating the treatment → outcome arrow,<br>arrows between/from other nodes are less meaningful]
-
---
-
-.box-inv-1.sp-after[You also don't pick up their full effects!]
-
---
-
-.box-1["[E]ven valid controls are often correlated with<br>other unobserved factors, which renders their marginal<br>effects uninterpretable from a causal inference perspective"<br>.small[(Hünermund and Louw 2020, p. 2)]]
-
----
-
-# Controlling for stuff
-
-<table>
-  <tr>
-    <th class="cell-left">Method</th>
-    <th>Controls</th>
-    <th>Minimum model</th>
-  </tr>
-  <tr>
-    <td class="cell-left">Matching/IPW</td>
-    <td class="cell-center" style="font-size: 0.7em;">Use for matching,<br>propensity scores</td>
-    <td class="cell-left"><code style="font-size: 0.5em;">outcome ~ treatment, matched_data<br>outcome ~ treatment, weights</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">RCTs</td>
-    <td class="cell-center" style="font-size: 0.7em;">Not really necessary</td>
-    <td class="cell-left"><code style="font-size: 0.5em;">outcome ~ treatment</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">Diff-in-diff</td>
-    <td class="cell-center" style="font-size: 0.7em;">Not really necessary,<br>use if DAG says to</td>
-    <td class="cell-left"><code style="font-size: 0.5em;">outcome ~ treatment + after + treatment*after</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">RDD</td>
-    <td class="cell-center" style="font-size: 0.7em;">Not really necessary</td>
-    <td class="cell-left"><code style="font-size: 0.5em;">outcome ~ running_var + cutoff</code></td>
-  </tr>
-  <tr>
-    <td class="cell-left">IV</td>
-    <td class="cell-center" style="font-size: 0.7em;">Not really necessary,<br>use if DAG says to</td>
-    <td class="cell-left"><code style="font-size: 0.5em;">treatment_hat ~ instrument<br>outcome ~ treatment_hat</code></td>
-  </tr>
-</table>
-
----
-
-# Guidelines
-
-.box-inv-1.SMALL[Your choice of method depends on the situation + the available data]
-
-.center[
-<figure>
-  <img src="img/13/method-selection.png" alt="Evaluation method selection" title="Evaluation method selection" width="43%">
-  <figcaption>Table 11.1 from <em>Impact Evaluation in Practice</em>, p. 191</figcaption>
-</figure>
-]
-
-???
-
-Table 11.1 on p. 191
-
-Focus on recipients/beneficiaries - depends on resources. If everyone can use it (fully resourced), let people access it. Randomize in phases, use a cutoff, randomly promote, diff-in-diff. If not everyone can use it, use a lottery, or randomly promote, or use a cutoff
+.box-1[Number that formally assigns access to program]
 
 ---
 
 layout: false
-name: ethics-open-science
+
+```{r rd-dag, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+node_details <- tribble(
+  ~name, ~label, ~x, ~y,
+  "treatment", "Program", 1, 1,
+  "outcome", "Outcome", 4, 1,
+  "cutoff", "Above cutoff", 2, 1.75,
+  "running", "Running variable", 3, 2
+)
+
+node_labels <- node_details$label
+names(node_labels) <- node_details$name
+
+rdd_dag <- dagify(outcome ~ treatment + running,
+                  treatment ~ cutoff,
+                  cutoff ~ running,
+                  exposure = c("treatment", "cutoff"),
+                  outcome = "outcome",
+                  coords = node_details,
+                  labels = node_labels) %>% 
+  tidy_dagitty() %>%
+  node_status()
+
+status_colors <- c(exposure = "#0074D9", outcome = "#FF851B", latent = "grey50")
+
+set.seed(1234)
+ggplot(rdd_dag, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
+                 end_cap = ggraph::circle(3, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 30) +
+  geom_dag_label_repel(aes(label = label, fill = status), seed = 1234,
+                       color = "white", fontface = "bold", size = 10,
+                       label.padding = grid::unit(0.75, "lines"),
+                       box.padding = grid::unit(2.5, "lines"),
+                       direction = "y") +
+  scale_color_manual(values = status_colors, na.value = "grey20") +
+  scale_fill_manual(values = status_colors, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE) + 
+  theme_dag(base_size = 20, base_family = "Fira Sans Condensed")
+```
+
+---
+
+layout: true
+class: title title-1
+
+---
+
+# Discontinuities everywhere!
+
+.pull-left-wide.small[
+```{r poverty-table, echo=FALSE}
+poverty_line <- tibble::tribble(
+  ~Size, ~Annual, ~Monthly, ~`138%`, ~`150%`, ~`200%`,
+  1,     12760,   1063,     17609,   19140,   25520,  
+  2,     17240,   1437,     23791,   25860,   34480,  
+  3,     21720,   1810,     29974,   32580,   43440,  
+  4,     26200,   2183,     36156,   39300,   52400,  
+  5,     30680,   2557,     42338,   46020,   61360,  
+  6,     35160,   2930,     48521,   52740,   70320,  
+  7,     39640,   3303,     54703,   59460,   79280,  
+  8,     44120,   3677,     60886,   66180,   88240
+)
+
+poverty_line %>% 
+  mutate(across(-Size, dollar)) %>% 
+  kbl(align = "c")
+```
+]
+
+.pull-right-narrow[
+.box-inv-1.smaller[**Medicaid**<br>138%*]
+
+.box-inv-1.smaller[**ACA subsidies**<br>138–400%*]
+
+.box-inv-1.smaller[**CHIP**<br>200%]
+
+.box-inv-1.smaller[**SNAP/Free lunch**<br>130%]
+
+.box-inv-1.smaller[**Reduced lunch**<br>130–185%]
+]
+
+
+---
+
+# Hypothetical tutoring program
+
+--
+
+.box-inv-1.medium[Students take an entrance exam]
+
+--
+
+.box-inv-1.medium[Those who score 70 or lower<br>get a free tutor for the year]
+
+--
+
+.box-inv-1.medium[Students then take an exit exam<br>at the end of the year]
+
+---
+
+layout: false
+
+```{r tutoring-running, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = tutoring_text)) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL) + 
+  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+class: title title-1
+
+# Causal inference intuition
+
+.box-inv-1.medium[The people right around the threshold are essentially the same]
+
+---
+
+```{r tutoring-running-threshold, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = tutoring_text)) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 5,  xmax = 70 + 5) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.5, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 2,  xmax = 70 + 2) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL) + 
+  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r tutoring-running-threshold-zoomed, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = tutoring_text)) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 5,  xmax = 70 + 5) +
+  annotate(geom = "rect", fill = "grey50", alpha = 0.5, ymin = -Inf, ymax = Inf,
+           xmin = 70 - 2,  xmax = 70 + 2) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL) + 
+  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  coord_cartesian(xlim = c(70 - 6, 70 + 6)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+class: title title-1
+
+# Causal inference intuition
+
+--
+
+.box-inv-1.medium[The people right around the threshold are essentially the same]
+
+--
+
+.box-1.medium[Pseudo treatment and control groups!]
+
+--
+
+.box-inv-1.medium[Compare outcomes for those<br>right above/below, calculate difference]
+
+---
+
+```{r tutoring-outcome, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 1) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r tutoring-outcome-lines, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r tutoring-outcome-delta, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+rdd_tutoring <- lm(exit_exam ~ entrance_centered + tutoring, data = tutoring) %>% 
+  tidy()
+
+effect_control <- filter(rdd_tutoring, term == "(Intercept)")$estimate
+late <- filter(rdd_tutoring, term == "tutoringTRUE")$estimate
+effect_treatment <- effect_control + late
+
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  annotate(geom = "segment", x = 70, xend = 70, 
+           y = effect_control, yend = effect_treatment,
+           size = 4, color = "#FF4136") +
+  annotate(geom = "label", x = 82, y = effect_treatment - (late / 2),
+           label = "δ\n(causal effect)", family = "Fira Sans Condensed", fontface = "bold",
+           color = "white", fill = "#FF4136", size = 7, label.padding = unit(0.75, "lines")) +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r tutoring-outcome-delta-zoomed, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "lm", size = 2, show.legend = FALSE) +
+  annotate(geom = "segment", x = 70, xend = 70, 
+           y = effect_control, yend = effect_treatment,
+           size = 4, color = "#FF4136") +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  coord_cartesian(xlim = c(70 - 6, 70 + 6)) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+
+---
+
+layout: true
+class: title title-1
+
+---
+
+# Geographic discontinuities
+
+.center[
+<figure>
+  <img src="img/10/timezones-1.png" alt="Holbein time zones" title="Holbein time zones" width="100%">
+</figure>
+]
+
+---
+
+# Geographic discontinuities
+
+.pull-left-wide.center[
+<figure>
+  <img src="img/10/timezones-1.png" alt="Holbein time zones" title="Holbein time zones" width="100%">
+</figure>
+]
+
+.pull-right-narrow[
+.box-inv-1[Lower turnout in counties on the eastern side of the boundary]
+
+.box-inv-1[Election schedules cause fluctuations in turnout]
+]
+
+---
+
+# Time discontinuities
+
+.pull-left-wide.center[
+<figure>
+  <img src="img/10/hospitals-1.png" alt="Hospital stays title" title="Hospital stays title" width="90%">
+</figure>
+]
+
+.pull-right-narrow[
+.box-inv-1[California requires that insurance cover two days of post-partum hospitalization]
+
+.box-inv-1[Does extra time in the hospital improve health outcomes?]
+]
+
+---
+
+# Time discontinuities
+
+.center[
+<figure>
+  <img src="img/10/hospitals-1.png" alt="Hospital stays duration" title="Hospital stays duration" width="100%">
+</figure>
+]
+
+.box-inv-1[Delivering at 12:01 AM makes you stay longer in the hospital…]
+
+---
+
+
+# Time discontinuities
+
+.pull-left-wide.center[
+<figure>
+  <img src="img/10/hospitals-3.png" alt="Hospital stays outcomes" title="Hospital stays outcomes" width="65%">
+</figure>
+]
+
+.pull-right-narrow[
+&nbsp;
+
+.box-inv-1[…but delivering at 12:01 AM has no effect on readmission rates or mortality rates]
+]
+
+---
+
+# Test score discontinuities
+
+.pull-left-wide.center[
+<figure>
+  <img src="img/10/flagship-1.png" alt="Flagship universities" title="Flagship universities" width="100%">
+</figure>
+]
+
+.pull-right-narrow[
+.box-inv-1[Does going to the main state university (e.g. UGA) make you earn more money?]
+
+.box-inv-1[SAT scores are an arbitrary cutoff for accessing the university]
+]
+
+---
+
+# Test score discontinuities
+
+.pull-left.center[
+<figure>
+  <img src="img/10/flagship-1.png" alt="Flagship cutoff" title="Flagship cutoff" width="100%">
+</figure>
+
+.box-inv-1[Cutoff seems rule-based]
+]
+
+--
+
+.pull-right.center[
+<figure>
+  <img src="img/10/flagship-3.png" alt="Flagship outcome" title="Flagship outcome" width="100%">
+</figure>
+
+.box-inv-1[Earnings are slightly higher]
+]
+
+---
+
+# RDDs are all the rage
+
+.box-inv-1.medium[People love these things!]
+
+--
+
+.box-1[They're intuitive, compelling, and highly graphical]
+
+--
+
+.pull-left.center[
+<figure>
+  <img src="img/10/rdd-p-hacking.png" alt="RDD p-hacking" title="RDD p-hacking" width="80%">
+</figure>
+]
+
+.pull-right[
+.box-1[RDD less susceptible to p-hacking and selective publication than DID or IV]
+]
+
+---
+
+layout: false
+name: lines-gaps
+class: center middle section-title section-title-3 animated fadeIn
+
+# Drawing lines<br>and measuring gaps
+
+---
+
+class: title title-3
+
+# Main goal of RD
+
+--
+
+.box-inv-3.medium[Measure the gap in outcome for<br>people on both sides of the cutpoint]
+
+--
+
+.box-inv-3.medium[Gap = **δ** =<br>local average treatment effect (LATE)]
+
+---
+
+![](`r knitr::fig_chunk("tutoring-outcome-delta", "png")`)
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Drawing lines
+
+--
+
+.box-inv-3.medium[The size of the gap depends on how<br>you draw the lines on each side of the cutoff]
+
+--
+
+.box-inv-3.medium.sp-after[The type of lines you choose can<br>change the estimate of δ—sometimes by a lot!]
+
+--
+
+.box-3.medium[There's no one right way to draw lines!]
+
+---
+
+# Line-drawing considerations
+
+--
+
+.box-inv-3.medium[Parametric vs. non-parametric lines]
+
+--
+
+.box-inv-3.medium[Measuring the gap]
+
+--
+
+.box-inv-3.medium[Bandwidths]
+
+--
+
+.box-inv-3.medium[Kernels]
+
+---
+
+# Parametric lines
+
+.box-inv-3.medium[Formulas with *parameters*]
+
+--
+
+.medium[
+$$y = mx + b$$
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2$$
+]
+
+---
+
+layout: false
+
+```{r parameters-stuff, echo=FALSE}
+line_colors_df <- tribble(
+  ~name, ~color, ~formula,
+  "Linear", "#0074D9", "y = β_1 x",
+  "Squared", "#FF851B", "y = β_1 x + β_2 x^2",
+  "Cubed", "#FF4136", "y = β_1 x + β_2 x^2 + β_3 x^3",
+  "Trigonometric", "#2ECC40", "y = β_1 x + β_2 sin(x)",
+  "Loess", "#B10DC9", "Loess"
+)
+
+line_colors <- line_colors_df$color %>% 
+  set_names(line_colors_df$name)
+
+fun_linear <- function(x) 10 + 4 * x
+fun_squared <- function(x) 120 - 3 * x + 0.07 * x^2
+fun_cubic <- function(x) 300 - 25 * x + 0.65 * x^2 - 0.004 * x^3
+fun_trig <- function(x) 10 + 4 * x + 50 * sin(0.25 * x)
+fun_trig_effect <- function(x) ifelse(x >= 75, fun_trig(x) + 200, fun_trig(x))
+fun_loess <- function(x) 100 + 30 * sin(5 * x) + 0.2 * x^2 - 0.002 * x^3
+
+set.seed(1234)
+df_params <- tibble(id = 1:400) %>% 
+  mutate(x_uniform = runif(n(), min = 0, max = 100)) %>% 
+  mutate(y_linear = fun_linear(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_squared = fun_squared(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_cubed = fun_cubic(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_trig = fun_trig(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate(y_loess = fun_loess(x_uniform) + rnorm(n(), 0, 50)) %>% 
+  mutate_at(vars(starts_with("y_")),
+            list(effect = ~ifelse(x_uniform >= 75, . + 200, .)))
+```
+
+.small[
+$$y = 10 + 4x$$
+]
+
+```{r params-plot-linear, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_linear)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+class: title title-3
+
+# Parametric lines
+
+.box-inv-3.medium[Not just for straight lines!<br>Make curvy with exponents or trigonometry]
+
+--
+
+.medium[
+$$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^7$$
+
+$$y = \beta_0 + \beta_1 x + \beta_2 \sin(x)$$
+]
+
+---
+
+.small[
+$$y = 120 - 3x + 0.07x^2$$
+]
+
+```{r params-plot-square, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_squared)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL)  +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+.small[
+$$y = 300 - 25x + 0.65x^2 - 0.004x^3$$
+]
+
+```{r params-plot-poly, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_cubed)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 3),
+              se = FALSE, size = 3, aes(color = "Cubed")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+.small[
+$$y = 10 + 4x + 50 \times \sin (\frac{x}{4})$$
+]
+
+```{r params-plot-trig, echo=FALSE, fig.width=12, fig.height=5.25, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_trig)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  stat_function(fun = fun_trig, size = 3, aes(color = "Trigonometric")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+class: title title-3
+
+# Parametric lines
+
+&nbsp;
+
+--
+
+.box-inv-3.medium.sp-after[It's important to get the parameters right!]
+
+--
+
+.box-inv-3.medium[Line should fit the data pretty well]
+
+---
+
+```{r params-plot-linear-squared, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_squared)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL)  +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+```{r params-plot-linear-poly, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_cubed)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 3),
+              se = FALSE, size = 3, aes(color = "Cubed")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL)  +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+class: title title-3
+
+# Nonparametric lines
+
+--
+
+.box-inv-3.medium[Lines without parameters]
+
+--
+
+.box-3[Use the data to find the best line,<br>often with windows and moving averages]
+
+--
+
+.box-3[<span style="color: #F6D645;">Lo</span>cally <span style="color: #F6D645;">e</span>stimated/<span style="color: #F6D645;">we</span>ighted <span style="color: #F6D645;">s</span>catterplot <span style="color: #F6D645;">s</span>moothing (LOESS/LOWESS)<br>is a common method (but not the only one!)]
+
+---
+
+.small[
+$$y = \text{who knows?}$$
+]
+
+```{r params-plot-loess, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_loess)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "loess", formula = y ~ x, aes(color = "Loess"), 
+              se = FALSE, size = 3) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+.center[
+<video controls>
+  <source src="img/10/loess_window.mp4" type="video/mp4">
+</video>
+]
+
+---
+
+```{r params-plot-loess-lines, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_loess)) +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(method = "loess", formula = y ~ x, aes(color = "Loess"), 
+              se = FALSE, size = 3) +
+  geom_smooth(method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Measuring gap with parametric lines
+
+.center[
+<figure>
+  <img src="`r knitr::fig_chunk("tutoring-outcome-lines", "png")`" alt="Parametric gap" title="Parametric gap" width="85%">
+</figure>
+]
+
+---
+
+# Measuring gap with parametric lines
+
+.box-inv-3[Easiest way: center the running variable around the threshold]
+
+.small[
+```{r center-running-var, echo=FALSE}
+tutoring %>% 
+  select(id, exit_exam, entrance_exam, entrance_centered, tutoring) %>% 
+  mutate(across(c(exit_exam, entrance_exam, entrance_centered), ~round(., 0))) %>% 
+  head(5) %>% 
+  kbl(align = "c")
+```
+]
+
+.small[
+$$y = \beta_0 + \beta_1 \text{Running variable (centered)} + \beta_2 \text{Indicator for treatment}$$
+]
+
+---
+
+# Measuring gap with parametric lines
+
+.center[
+<figure>
+  <img src="`r knitr::fig_chunk("tutoring-outcome-lines", "png")`" alt="Parametric gap" title="Parametric gap" width="35%">
+</figure>
+]
+
+.left-code[
+```{r simple-model}
+program_data <- tutoring %>% 
+  mutate(entrance_centered = 
+           entrance_exam - 70)
+
+model1 <- lm(exit_exam ~ 
+               entrance_centered + tutoring,
+             data = program_data)
+```
+]
+
+.right-code[
+```{r show-simple-model-fake, eval=FALSE}
+tidy(model1)
+```
+
+```{r show-simple-model-real, echo=FALSE}
+tidy(model1) %>% select(term, estimate, std.error)
+```
+]
+
+---
+
+# Measuring gap with nonparametric lines
+
+.center[
+```{r tutoring-outcome-loess, echo=FALSE, fig.width=12, fig.height=5.5, out.width="80%"}
+ggplot(tutoring, aes(x = entrance_exam, y = exit_exam, fill = tutoring_text, color = tutoring_text)) +
+  geom_point(size = 4, pch = 21, color = "white", alpha = 0.25) + 
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_smooth(data = filter(tutoring, entrance_exam <= 70),
+              method = "loess", size = 2, show.legend = FALSE) +
+  geom_smooth(data = filter(tutoring, entrance_exam > 70),
+              method = "loess", size = 2, show.legend = FALSE) +
+  labs(x = "Entrance exam score", y = "Exit exam score") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9"), name = NULL) +
+  scale_color_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE, override.aes = list(alpha = 1)), color = FALSE) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed")
+```
+]
+
+.box-inv-3[Can't use regression; use `rdrobust` R package]
+
+---
+
+# Measuring gap with nonparametric lines
+
+.center[
+<figure>
+  <img src="`r knitr::fig_chunk("tutoring-outcome-loess", "png")`" alt="Nonparametric gap" title="Nonparametric gap" width="40%">
+</figure>
+]
+
+.small-code[
+```{r rdrobust, eval=FALSE}
+rdrobust(y = tutoring$exit_exam, x = tutoring$entrance_exam, c = 70)
+```
+]
+
+.small-code[
+```{r calculate-rdrobust, echo=FALSE, results="hide"}
+rd_out <- rdrobust(y = tutoring$exit_exam,
+                   x = tutoring$entrance_exam,
+                   c = 70)
+
+x <- capture.output(summary(rd_out))
+```
+
+```{r show-rdrobust, echo=FALSE}
+cat(x[17:22], sep = "\n")
+```
+]
+
+---
+
+# Bandwidths
+
+--
+
+.box-inv-3.medium[All you really care about is the<br>area right around the cutoff]
+
+.box-3.sp-after[Observations far away don't matter<br>because they're not comparable]
+
+--
+
+.box-inv-3.medium[Bandwidth = window around cutoff]
+
+---
+
+layout: false
+
+```{r bandwidth-plot-data, echo=FALSE}
+bw_line_colors_df <- tribble(
+  ~name, ~color,
+  "Linear", "#0074D9",
+  "Linear (bw = 5)", colorspace::darken("#0074D9", 0.5),
+  "Linear (bw = 2.5)", colorspace::darken("#0074D9", 1), 
+  "Loess", "#B10DC9"
+)
+
+bw_line_colors <- bw_line_colors_df$color %>% 
+  set_names(bw_line_colors_df$name)
+
+set.seed(1234)
+df_bandwidths <- tibble(x = seq(0, 20, by = 0.01),
+                        y_squiggly = 500 + 0.4 * (x - 10)^3) %>%
+  mutate(y_squiggly = y_squiggly + rnorm(n(), 10, 80)) %>% 
+  mutate(y_shifted = ifelse(x >= 10, y_squiggly + 300, y_squiggly)) %>% 
+  mutate(bw5 = x < 10 + 5 & x > 10 - 5,
+         bw2_5 = x < 10 + 2.5 & x > 10 - 2.5)
+```
+
+```{r bandwidth-plots, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+plot_bw5 <- ggplot(df_bandwidths, aes(x = x, y = y_shifted)) + 
+  annotate(geom = "rect", fill = "grey70", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 10 - 5,  xmax = 10 + 5) +
+  geom_point(aes(fill = bw5), size = 3, pch = 21, alpha = 0.5, color = "white") + 
+  geom_vline(xintercept = 10) +
+  scale_fill_manual(values = c("grey40", "#FF851B"), guide = FALSE) +
+  labs(x = NULL, y = NULL, title = "Bandwidth = 5") + 
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(plot.title = element_text(face = "bold"))
+
+plot_bw25 <- ggplot(df_bandwidths, aes(x = x, y = y_shifted)) + 
+  annotate(geom = "rect", fill = "grey70", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 10 - 2.5,  xmax = 10 + 2.5) +
+  geom_point(aes(fill = bw2_5), size = 3, pch = 21, alpha = 0.5, color = "white") + 
+  geom_vline(xintercept = 10) +
+  scale_fill_manual(values = c("grey40", "#FF851B"), guide = FALSE) +
+  labs(x = NULL, y = NULL, title = "Bandwidth = 2.5") + 
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(plot.title = element_text(face = "bold"))
+
+plot_bw5 + plot_bw25
+```
+
+
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Bandwidths
+
+--
+
+.box-inv-3.medium.sp-after[Algorithms exist to choose optimal width]
+
+--
+
+.box-inv-3.medium[Also use common sense]
+
+.box-3.sp-after[Maybe ±5 for the entrance exam?]
+
+--
+
+.box-inv-3.medium[For robustness, check what happens<br>if you double and halve the bandwidth]
+
+---
+
+# Kernels
+
+--
+
+.box-inv-3.medium[Because we care the most about<br>observations right by the cutoff,<br>give more distant ones less weight]
+
+--
+
+.box-inv-3.medium[Kernel = method for assigning importance to<br>observations based on distance to the cutoff]
+
+---
+
+layout: false
+
+```{r kernel-examples, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+# Formulas from https://en.wikipedia.org/wiki/Kernel_(statistics)
+rec <- function(x) (abs(x) <= 1) * 0.5
+tri <- function(x) (abs(x) < 1) * (1 - abs(x))
+epan <- function(x) (abs(x) < 1) * 0.75 * (1 - x^2)
+
+ggplot(data = tibble(x = seq(-1.25, 1.25, 0.1)), aes(x = x)) + 
+  geom_vline(xintercept = 0, size = 1, color = "grey40") +
+  stat_function(fun = rec, aes(color = "Uniform"), size = 3) + 
+  stat_function(fun = tri, aes(color = "Triangular"), size = 3) +
+  stat_function(fun = epan, aes(color = "Epanechnikov"), size = 3) +
+  scale_color_manual(values = c("Uniform" = "#FF851B", 
+                                "Triangular" = "#0074D9", 
+                                "Epanechnikov" = "#85144b"), 
+                     breaks = c("Uniform", "Triangular", "Epanechnikov")) + 
+  labs(x = "Distance from cutoff", y = "Weight", color = NULL) + 
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom",
+        panel.grid = element_blank()) +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 1, b = 0, unit = "lines"))
+```
+
+---
+
+```{r kernel-weighted-points, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+set.seed(1234)
+df_kernels <- tibble(x = runif(100, -1, 1),
+                     y = runif(100, 0, 100)) %>% 
+  mutate(y = ifelse(x > 0, y + 50, y)) %>% 
+  mutate(wt_rec = rec(x),
+         wt_tri = tri(x),
+         wt_epan = epan(x))
+
+df_kernels_long <- df_kernels %>% 
+  pivot_longer(cols = starts_with("wt_"), values_to = "weight") %>% 
+  mutate(name = recode(name, wt_epan = "Epanechnikov", 
+                       wt_tri = "Triangular", 
+                       wt_rec = "Rectangular")) %>% 
+  mutate(name = fct_inorder(name))
+
+ggplot(df_kernels_long, aes(x = x, y = y)) + 
+  geom_point(aes(size = weight, fill = weight), pch = 21, color = "white", alpha = 0.8) +
+  geom_vline(xintercept = 0) +
+  scale_size_continuous(range = c(2, 10)) +
+  scale_fill_viridis_c(option = "plasma", name = "Weight   ", limits = c(0, 1)) +
+  guides(size = FALSE, fill = guide_colorbar(barwidth = 20)) +
+  facet_wrap(vars(name)) +
+  labs(x = NULL, y = NULL) + 
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom",
+        panel.grid = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0.5, b = 0, unit = "lines"))
+```
+
+
+---
+
+class: title title-3
+
+# Try everything!
+
+--
+
+.box-inv-3.medium[Your estimate of δ depends on all these:]
+
+--
+
+.box-inv-3[Line type (parametric vs. nonparametric)]
+
+.center[
+.float-left[.box-inv-3[Bandwidth (wide vs. narrow)]&ensp;.box-inv-3[Kernel weighting]]
+]
+
+--
+
+&nbsp;
+
+.box-3.medium[Try lots of different combinations!]
+
+---
+
+```{r params-plot-parametric-effects, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_params, aes(x = x_uniform, y = y_cubed_effect)) +
+  geom_vline(xintercept = 75, size = 1, linetype = "21") +
+  geom_point(size = 5, pch = 21, color = "white", fill = "black", alpha = 0.5) +
+  geom_smooth(data = filter(df_params, x_uniform < 75),
+              method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(data = filter(df_params, x_uniform >= 75),
+              method = "lm", formula = y ~ x,
+              se = FALSE, size = 3, aes(color = "Linear")) +
+  geom_smooth(data = filter(df_params, x_uniform < 75),
+              method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  geom_smooth(data = filter(df_params, x_uniform >= 75),
+              method = "lm", formula = y ~ poly(x, 2),
+              se = FALSE, size = 3, aes(color = "Squared")) +
+  geom_smooth(data = filter(df_params, x_uniform < 75),
+              method = "lm", formula = y ~ poly(x, 3),
+              se = FALSE, size = 3, aes(color = "Cubed")) +
+  geom_smooth(data = filter(df_params, x_uniform >= 75),
+              method = "lm", formula = y ~ poly(x, 3),
+              se = FALSE, size = 3, aes(color = "Cubed")) +
+  scale_color_manual(values = line_colors, breaks = names(line_colors), 
+                     labels = map(line_colors_df$formula, TeX), name = NULL)  +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+```{r params-plot-bw-effects, echo=FALSE, fig.width=12, fig.height=6.5, out.width="100%"}
+ggplot(df_bandwidths, aes(x = x, y = y_shifted)) + 
+  annotate(geom = "rect", fill = "grey70", alpha = 0.25, ymin = -Inf, ymax = Inf,
+           xmin = 10 - 5,  xmax = 10 + 5) +
+  geom_point(size = 3, pch = 21, alpha = 0.25, color = "white", fill = "black") + 
+  geom_vline(xintercept = 10) +
+  geom_smooth(data = filter(df_bandwidths, x < 10), 
+              method = "lm", formula = y ~ x,
+              size = 3, se = FALSE, aes(color = "Linear")) +
+  geom_smooth(data = filter(df_bandwidths, x >= 10), 
+              method = "lm", formula = y ~ x,
+              size = 3, se = FALSE, aes(color = "Linear")) +
+  geom_smooth(data = filter(df_bandwidths, x < 10 & x > 5),
+              method = "lm", formula = y ~ x,
+              size = 3, se = FALSE, aes(color = "Linear (bw = 5)")) +
+  geom_smooth(data = filter(df_bandwidths, x >= 10 & x < 15), 
+              method = "lm", formula = y ~ x,
+              size = 3, se = FALSE, aes(color = "Linear (bw = 5)")) +
+  scale_color_manual(values = bw_line_colors, breaks = names(bw_line_colors), name = NULL) +
+  labs(x = NULL, y = NULL) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 0, b = 0))
+```
+
+---
+
+layout: false
+name: main-concerns
 class: center middle section-title section-title-6 animated fadeIn
 
-# Ethics and open science
+# Main concerns
 
 ---
 
@@ -544,110 +1267,428 @@ class: title title-6
 
 ---
 
-# Ethics of evaluating programs
+# It's greedy!
 
-.box-inv-6[Social programs are designed to help people]
-
---
-
-.box-inv-6[In order to evaluate them, you need<br>some people to **not use the program**]
-
---
-
-.box-inv-6.sp-after[Control groups are essential for causal inference!]
-
---
-
-.box-6["Groups should not be excluded from an intervention that<br>is known to be beneficial solely for the purpose of an evaluation"<br>.small[(*Impact Evaluation in Practice*, p. 233)]]
-
----
-
-# Ethical control groups
+.box-inv-6.medium[You need *lots* of data,<br>since you're throwing most of it away]
 
 .center[
 <figure>
-  <img src="img/13/method-selection.png" alt="Evaluation method selection" title="Evaluation method selection" width="50%">
-  <figcaption>Table 11.1 from <em>Impact Evaluation in Practice</em>, p. 191</figcaption>
+  <img src="`r knitr::fig_chunk("bandwidth-plots", "png")`" alt="Different bandwidths" title="Different bandwidths" width="60%">
 </figure>
 ]
 
 ---
 
-# Ethical evaluation practices
+# It's limited in scope!
 
-.box-inv-6.medium[Follow IRB guidelines]
-
-.center.float-left.small.sp-after[.box-6[Respect for persons] .box-6[Beneficence] .box-6[Justice]]
+.box-inv-6.medium[You're only measuring the ATE<br>for people in the bandwidth]
 
 --
 
-.box-inv-6.medium.sp-after[Make sure participants give informed consent]
-
---
-
-.box-inv-6.medium[Maintain privacy]
-
-.box-6.small[Any published data needs to be be de-identified]
-
-???
-
-- Respect = informed consent, autonomy
-- Beneficence = no harm; maximize potential benefits, minimize potential harm
-- Justice = benefits and burdens of research are fairly and equitably shared
+.box-6.medium[Local Average Treatment Effect (LATE)]
 
 ---
 
-# Ethical open science practices
+# It's limited in scope!
 
-.pull-left[
-.box-inv-6.less-medium[Preregistration]
-
-.box-6.small.sp-after[Prevents file drawer problem +<br>p-hacking]
-
-.box-inv-6.less-medium[Preanalysis plan]
-
-.box-6.small[Prevents p-hacking, data mining,<br>multiple hypothesis testing]
-]
+.box-inv-6.medium[You can't make population-level<br>claims with a LATE]
 
 --
 
-.pull-right[
-.box-inv-6.less-medium[Replication]
+.box-inv-6.smaller[*(But can you really do that with RCTs?)*]
 
-.box-6.small.sp-after[Ensures that others can find<br>same results with your data]
+--
 
-.box-inv-6.less-medium[Documentation]
+.box-6.medium["The realistic conclusion to draw is that<br>all quantitative empirical results<br>that we encounter are 'local'"]
 
-.box-6.small[Ensures that others know<br>what you're measuring]
+.box-6.small[Angrist and Pischke, *Mostly Harmless Econometrics*, pp. 23–24]
+
+---
+
+# Graphics are neat!
+
+```{r too-graphical-data, echo=FALSE, include=FALSE, cache=TRUE}
+set.seed(1234)
+too_graphical <- tibble(id = 1:2000) %>% 
+  mutate(score = runif(n(), -100, 100)) %>% 
+  mutate(treatment_big = ifelse(score < 0, 0, 0.6)) %>% 
+  mutate(outcome_big = treatment_big + rnorm(n())) %>% 
+  mutate(treatment_medium = ifelse(score < 0, 0, 0.3)) %>% 
+  mutate(outcome_medium = treatment_medium + rnorm(n())) %>% 
+  mutate(treatment_small = ifelse(score < 0, 0, 0.155)) %>% 
+  mutate(outcome_small = treatment_small + rnorm(n())) %>% 
+  mutate(above = score >= 0) %>% 
+  mutate_at(vars(starts_with("outcome_")), list(~. * 100))
+
+model_big <- lm(outcome_big ~ above, data = too_graphical)
+model_medium <- lm(outcome_medium ~ above, data = too_graphical)
+model_small <- lm(outcome_small ~ above, data = too_graphical)
+
+extract_t_p <- function(x) {
+  tidied <- tidy(x) %>% 
+    filter(term == "aboveTRUE")
+
+  paste0("δ = ", round(tidied$estimate, 2), 
+         "; t = ", round(tidied$statistic, 3),
+         "; p = ", pvalue(tidied$p.value))
+}
+
+rd_binned_big <- rdplot(y = too_graphical$outcome_big, x = too_graphical$score, 
+                        c = 0, p = 1, hide = TRUE)
+rd_binned_medium <- rdplot(y = too_graphical$outcome_medium, x = too_graphical$score, 
+                           c = 0, p = 1, hide = TRUE)
+rd_binned_small <- rdplot(y = too_graphical$outcome_small, x = too_graphical$score, 
+                          c = 0, p = 1, hide = TRUE)
+
+rd_binned_all <- tribble(
+  ~size, ~binned_data, ~poly_data, ~model,
+  "Big", rd_binned_big$vars_bins, rd_binned_big$vars_poly, model_big,
+  "Medium", rd_binned_medium$vars_bins, rd_binned_medium$vars_poly, model_medium,
+  "Small", rd_binned_small$vars_bins, rd_binned_small$vars_poly, model_small
+) %>% 
+  mutate(letter = LETTERS[1:n()]) %>% 
+  mutate(stats = map_chr(model, extract_t_p)) %>% 
+  mutate_at(vars(size, stats, letter), list(fct_inorder))
+
+plot_binned <- rd_binned_all %>% 
+  unnest(binned_data)
+
+plot_poly <- rd_binned_all %>% 
+  unnest(poly_data)
+```
+
+```{r too-graphical-plot-1, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(plot_binned, aes(x = rdplot_mean_bin, y = rdplot_mean_y)) +
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             aes(fill = rdplot_mean_bin <= 0)) +
+  geom_vline(xintercept = 0, size = 1, linetype = "21") +
+  scale_fill_manual(values = c("#0074D9", "#FF4136"), guide = FALSE) +
+  labs(x = NULL, y = NULL) +
+  facet_wrap(vars(letter), nrow = 1) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+```
+
+---
+
+# Which gaps are significant?
+
+```{r too-graphical-plot-2, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(plot_binned, aes(x = rdplot_mean_bin, y = rdplot_mean_y)) +
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             aes(fill = rdplot_mean_bin <= 0)) +
+  geom_line(data = filter(plot_poly, rdplot_x < 0), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 3) +
+  geom_line(data = filter(plot_poly, rdplot_x > 0), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 3) +
+  geom_vline(xintercept = 0, size = 1, linetype = "21") +
+  scale_fill_manual(values = c("#0074D9", "#FF4136"), guide = FALSE) +
+  labs(x = NULL, y = NULL) +
+  facet_wrap(vars(letter), nrow = 1) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+```
+
+---
+
+# All of them!
+
+```{r too-graphical-plot-3, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(plot_binned, aes(x = rdplot_mean_bin, y = rdplot_mean_y)) +
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             aes(fill = rdplot_mean_bin <= 0)) +
+  geom_line(data = filter(plot_poly, rdplot_x < 0), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 3) +
+  geom_line(data = filter(plot_poly, rdplot_x > 0), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 3) +
+  geom_vline(xintercept = 0, size = 1, linetype = "21") +
+  scale_fill_manual(values = c("#0074D9", "#FF4136"), guide = FALSE) +
+  labs(x = NULL, y = NULL) +
+  facet_wrap(vars(stats), nrow = 1) +
+  theme_bw(base_size = 28, base_family = "Fira Sans Condensed") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        strip.text = element_text(size = 20),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+```
+
+---
+
+# Don't rely *only* on graphics
+
+.pull-left[
+.box-inv-6.medium[Super clear breaks are uncommon]
+
+.box-inv-6.medium[Make graphs,<br>but also find the<br>actual δ value]
 ]
+
+.pull-right[
+```{r too-graphical-plot-3-single, echo=FALSE, fig.width=4, fig.height=3.6, out.width="100%"}
+ggplot(filter(plot_binned, letter == "C"), 
+       aes(x = rdplot_mean_bin, y = rdplot_mean_y)) +
+  geom_point(size = 3, pch = 21, color = "white", alpha = 0.7,
+             aes(fill = rdplot_mean_bin <= 0)) +
+  geom_line(data = filter(plot_poly, rdplot_x < 0, letter == "C"), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 1.5) +
+  geom_line(data = filter(plot_poly, rdplot_x > 0, letter == "C"), 
+            aes(x = rdplot_x, y = rdplot_y),
+            color = "black", size = 1.5) +
+  geom_vline(xintercept = 0, size = 1, linetype = "21") +
+  scale_fill_manual(values = c("#0074D9", "#FF4136"), guide = FALSE) +
+  labs(x = NULL, y = NULL) +
+  facet_wrap(vars(stats), nrow = 1) +
+  theme_bw(base_size = 16, base_family = "Fira Sans Condensed") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        strip.text = element_text(size = 14),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank())
+```
+]
+
+---
+
+# Manipulation!
+
+--
+
+.box-inv-6.medium[People might know about the cutoff<br>and change their behavior]
+
+--
+
+.box-6[People might fudge numbers or work to<br>cross the threshold to get in/out of program]
+
+--
+
+.box-6[If so, those right next to the cutoff are<br>no longer comparable treatment/control groups]
 
 ---
 
 layout: false
+class: bg-full
+background-image: url("img/10/marathons.png")
 
-.center[
-<figure>
-  <img src="img/13/eval-open-science-practices.png" alt="Evaluation and open sicence practices" title="Evaluation and open sicence practices" width="50%">
-  <figcaption>Table 13.1 from <em>Impact Evaluation in Practice</em>, p. 238</figcaption>
-</figure>
-]
+???
+
+Data from <https://faculty.chicagobooth.edu/george.wu/research/marathon/data.htm> and <https://doi.org/10.1287/mnsc.2015.2417>
 
 ---
 
+.center[
+<figure>
+  <img src="img/10/basketball.png" alt="NBA shot locations, 2014-15" title="NBA shot locations, 2014-15" width="60%">
+</figure>
+]
+
+???
+
+<https://fivethirtyeight.com/features/how-mapping-shots-in-the-nba-changed-it-forever/>
+
+---
+
+layout: true
 class: title title-6
 
-# Synthetic data
+---
 
-.box-inv-6[It feels weird to say that making fake data<br>helps with good open science practices!]
+# Manipulation!
+
+.box-inv-6.medium[Check with a McCrary density test]
+
+.box-6.small[`rddensity::rdplotdensity()` in R]
+
+```{r build-manipulation, echo=FALSE, include=FALSE, cache=TRUE}
+set.seed(1234)
+x <- rnorm(2000, mean = -0.5); x[x > 0] <- x[x > 0] * 2
+x_good <- rnorm(2000, mean = -0.5)
+
+plot1 <- rdplotdensity(rddensity(X = x), x, plotRange = c(-2, 2), plotN = 25)
+plot2 <- rdplotdensity(rddensity(X = x_good), x_good, plotRange = c(-2, 2), plotN = 25)
+```
+
+```{r manipulation, echo=FALSE, fig.width=8, fig.height=2.6, out.width="100%"}
+thing1 <- plot1$Estplot + 
+  geom_vline(xintercept = 0) +
+  labs(x = "Running variable", y = "Density",
+       title = "Manipulation") + 
+  guides(color = FALSE, linetype = FALSE) +
+  theme_bw(base_size = 13, base_family = "Fira Sans Condensed") +
+  theme(plot.title = element_text(face = "bold"),
+        panel.grid = element_blank())
+
+thing2 <- plot2$Estplot +
+  geom_vline(xintercept = 0) +
+  labs(x = "Running variable", y = "Density",
+       title = "No manipulation") + 
+  guides(color = FALSE, linetype = FALSE) +
+  theme_bw(base_size = 13, base_family = "Fira Sans Condensed") + 
+  theme(plot.title = element_text(face = "bold"),
+        panel.grid = element_blank())
+
+thing1 + thing2
+```
+
+
+---
+
+layout: false
+name: non-compliance
+class: center middle section-title section-title-7 animated fadeIn
+
+# Non-compliance
+
+---
+
+layout: true
+class: title title-7
+
+---
+
+# Non-compliance
 
 --
 
-.box-6.sp-after[But it does!]
+.box-inv-7.medium[People on the margin of the cutoff<br>might end up in/out of the program]
 
 --
 
-.box-inv-6[Make your pre-analysis plan based on simulated data]
+.box-7.sp-after[The ACA, subsidies, Medicaid, and 138% of the poverty line]
 
 --
 
-.box-inv-6[Do whatever statistical shenanigans<br>you want with the fake data]
+.box-inv-7.medium[Sharp vs. fuzzy discontinuities]
+
+---
+
+# Sharp discontinuity
+
+.box-inv-7[Perfect compliance]
+
+```{r tutoring-sharp, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_text, fill = entrance_exam <= 70)) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL, fill = "Entrance exam ≥ 70") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_bw(base_size = 22, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 1, b = 0, unit = "lines"))
+```
+
+---
+
+# Fuzzy discontinuity
+
+.box-inv-7[Imperfect compliance]
+
+```{r tutoring-fuzzy, echo=FALSE, fig.width=12, fig.height=5.5, out.width="100%"}
+ggplot(tutoring, aes(x = entrance_exam, y = tutoring_fuzzy_text, fill = entrance_exam <= 70)) +
+  geom_vline(xintercept = 70, size = 2, color = "#FFDC00") + 
+  geom_point(size = 5, pch = 21, color = "white", alpha = 0.7,
+             position = position_jitter(width = 0, height = 0.2, seed = 1234)) + 
+  labs(x = "Entrance exam score", y = NULL, fill = "Entrance exam ≥ 70") + 
+  scale_fill_manual(values = c("#85144b", "#0074D9")) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme_bw(base_size = 22, base_family = "Fira Sans Condensed") +
+  theme(legend.position = "bottom") +
+  theme(legend.box.spacing = unit(0.5, "lines"),
+        legend.margin = margin(t = 1, b = 0, unit = "lines"))
+```
+
+---
+
+# Fuzzy discontinuities
+
+.box-inv-7.medium[Address noncompliance with<br>instrumental variables<br>]
+
+--
+
+.box-7.sp-after[Use an instrument for which side<br>of the cutoff people should be on]
+
+--
+
+.box-inv-7[Effect is only for compliers near the cutoff<br>(complier LATE; doubly local effect)]
+
+---
+
+# Fuzzy discontinuities
+
+.box-inv-7.medium.sp-after[Fuzzy discontinuities imply noncompliance]
+
+--
+
+.box-inv-7.medium[Address noncompliance with<br>instrumental variables]
+
+---
+
+# What do we use as instrument?
+
+
+.box-inv-7.medium[Instrument = above/below cutoff]
+
+.box-7.small.sp-after[i.e. what they were supposed to do]
+
+&nbsp;
+
+--
+
+.box-7.medium.sp-before[(This is just like the CACE we did last week!)]
+
+---
+
+# Not something weird? Does that work!?
+
+--
+
+.pull-left[
+.box-inv-7.less-medium[Relevant?]
+
+.box-inv-7.tiny.sp-after[Z → X &emsp; Cor(Z, X) ≠ 0]
+
+.box-7.small[Cutoff causes program? Yep.]
+]
+
+--
+
+.pull-right.sp-after-half[
+.box-inv-7.less-medium[Exclusive?]
+
+.box-inv-7.tiny.sp-after[Z → X → Y &emsp; Z &nrarr; Y &emsp; Cor(Z, Y | X) = 0]
+
+.box-7.small[Cutoff causes outcome<br>*only through* program? Yep.]
+]
+
+--
+
+.box-inv-7.less-medium[Exogenous?]
+
+.box-inv-7.tiny.sp-after[U &nrarr; Z &emsp; Cor(Z, U) = 0]
+
+.box-7.small[Unobserved things that influence outcome don't also influence cutoff?<br>It's an arbitrary cutoff, so sure.]
+
+---
+
+# Doubly local LATE
+
+.box-inv-7.medium[Effect is only for<br>(1) compliers (2) near the cutoff]
+
+.box-7[Be specific when talking about effects;<br>definitely don't make population-level claims]

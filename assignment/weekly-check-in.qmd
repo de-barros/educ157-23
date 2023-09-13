@@ -2,20 +2,20 @@
 title: "Reading reactions"
 ---
 
-You should actively participate in class, do all the readings, and discuss them outside of class. To that end, you should post reactions to at least 14 of our readings on Slack. You may (and should) engage with the other reactions you see posted on Slack. However, it'll be up to me to decide whether a comment engages with the assigned reading and adds to the discussion, meaningfully.
+You should actively participate in class, do all the readings, and discuss them outside of class. To that end, you should send me reactions to at least 14 of our readings over Canvas. You may (and should) also engage with questions you see posted on Slack. However, it'll be up to me to decide whether a comment engages with the assigned reading and adds to the discussion, meaningfully.
 
-After you finish working through the content, I want to hear about what you learned and what questions you still have. These questions are **crucial** for our weekly in-class discussions.
+After you finish working through the content, I want to hear about what you learned and what questions you still have. These questions are **crucial** for our in-class discussions.
 
-To encourage engagement with the course content—and to allow me to collect the class's questions each week—you'll need to fill out a short response on Slack. This should be ≈150 words. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced). 
+To encourage engagement with the course content—and to allow me to collect the class's questions each week—you'll need to fill out a short response on Canvas. This should be ≈150 words. That's fairly short: there are ≈250 words on a typical double-spaced page in Microsoft Word (500 when single-spaced). 
 
 These check-ins are **due by 11:55 PM on the day before class**. This is so I can look through the responses and start structuring the discussion for our class.
 
-You should answer these two questions each week:
+Each of your reading reactions should answer these two questions:
 
-1. What were the **three (3)** most interesting or exciting things you learned from the session? Why?
-2. What were the **three (3)** muddiest or unclear things from the session this week? What are you still wondering about?    
+1. What were the **two (2)** most interesting or exciting things you learned? Why?
+2. What were the **two (2)** muddiest or unclear things? What are you still wondering about?    
 
-You can include more than three interesting or muddiest things, but you must include at least three. There should be six easily identifiable things in each check-in: three exciting things and three questions.
+You can include more than two interesting or muddiest things, but you must include at least two. There should be four easily identifiable things in each reaction: two exciting things and two questions.
 
 I will grade your reaction using a check system:
 
@@ -25,4 +25,4 @@ I will grade your reaction using a check system:
 
 Notice that is essentially a pass/fail or completion-based system. I'm not grading your writing ability, I'm not counting the exact number of words you're writing, and I'm not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I'm looking for thoughtful engagement, three interesting things, and three questions. That's all. Do good work and you'll get a ✓.
 
-You will submit these check-ins via Slack.
+You will submit these check-ins via Canvas, not Slack. We will use Slack as a separate class chatroom, and so everyone can see my answers to any questions you may have for me. I'm sure you won't be the only one with your question!

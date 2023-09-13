@@ -29,7 +29,7 @@ withr::with_dir(here::here(), {
 ## How to build the site
 
 1. Install [RStudio](https://www.rstudio.com/products/rstudio/download/#download) version 2022.07.1 or later since it has a [Quarto](https://quarto.org/) installation embedded in it. Otherwise, download and install [Quarto](https://quarto.org/) separately.
-2. Open `evalf22.Rproj` to open an [RStudio Project](https://r4ds.had.co.nz/workflow-projects.html).
+2. Open `educ157-23.Rproj` to open an [RStudio Project](https://r4ds.hadley.nz/workflow-scripts.html#projects).
 3. If it's not installed already, R *should* try to install the [{renv} package](https://rstudio.github.io/renv/) when you open the RStudio Project for the first time. If you don't see a message about package installation, install it yourself by running `install.packages("renv")` in the R console.
 4. Run `renv::restore()` in the R console to install all the required packages for this project.
 5. Run `targets::tar_make()` in the R console to build everything.
@@ -64,7 +64,7 @@ The pipeline does several major tasks:
 
 This page is largely inspired by [Andrew Heiss's](https://www.andrewheiss.com/) site for his class [Program Evaluation for Public Service](https://github.com/andrewheiss/evalf22.classes.andrewheiss.com) as well as [Matt Blackwell's](https://www.mattblackwell.org/) site for his class [Gov 50](https://github.com/mattblackwell/gov50-f23-site/). If you re-use any of the materials, please respect the licences (see below) and give credit to original authors. 
 
-I am grateful for additional help and materials from [David Blazar](https://education.umd.edu/directory/david-blazar), [Fiona Burlig](https://www.fionaburlig.com/), [Arja Dayal](https://steinhardt.nyu.edu/arja-dayal), [Pierre de Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro Ganimian](https://www.alejandroganimian.com/), [Andrew Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine Knebelmann](https://sites.google.com/view/justine-knebelmann/home), [Fernanda Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/), and [Carly Robinson](https://www.carlydrobinson.com/).
+I am grateful for additional help and materials from [David Blazar](https://education.umd.edu/directory/david-blazar), [Fiona Burlig](https://www.fionaburlig.com/), [Arja Dayal](https://steinhardt.nyu.edu/arja-dayal), [Pierre de Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro Ganimian](https://www.alejandroganimian.com/), [Andrew Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine Knebelmann](https://sites.google.com/view/justine-knebelmann/home), [Francisco Lagos](https://education.umd.edu/student-directory/francisco-lagos), [Fernanda Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/), and [Carly Robinson](https://www.carlydrobinson.com/).
 
 ## Licenses
 

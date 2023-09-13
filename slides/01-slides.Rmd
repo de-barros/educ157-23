@@ -1,6 +1,6 @@
 ---
 title: "Evaluation and the causal revolution"
-author: "Andrew Heiss"
+author: "Andreas de Barros"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -15,7 +15,9 @@ output:
       countIncrementalSlides: false
       ratio: "16:9"
       navigation:
-        scroll: false
+        scroll: true # Changed this to true to enable scrolling
+      incremental: true  # Added this line to stay on the same slide when knitting  
+      self_contained: false  # Added this line to prevent HTML caching
 editor_options: 
   chunk_output_type: console
 ---
@@ -34,16 +36,16 @@ library(ggdag)
 xaringanExtra::use_xaringan_extra(c("tile_view"))
 ```
 
-class: center middle main-title section-title-7
+class: center middle main-title section-title-4
 
 # Evaluation and the<br>causal revolution
 
 .class-info[
 
-**Session 1**
+**Class 1**
 
-.light[PMAP 8521: Program evaluation<br>
-Andrew Young School of Policy Studies
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
 ]
 
 ]
@@ -51,17 +53,17 @@ Andrew Young School of Policy Studies
 ---
 
 name: outline
-class: title title-inv-8
+class: title title-8
 
 # Plan for today
 
 --
 
-.box-5.medium.sp-after-half[Data science and public service]
+.box-1.medium.sp-after-half[Why evaluate?]
 
 --
 
-.box-3.medium.sp-after-half[Evidence, evaluation, and causation]
+.box-3.medium.sp-after-half[Hello, it's me]
 
 --
 
@@ -70,188 +72,141 @@ class: title title-inv-8
 ---
 
 layout: false
-name: ds-ps
-class: center middle section-title section-title-5 animated fadeIn
+name: why-evaluate
+class: center middle section-title section-title-1 animated fadeIn
 
-# Data science and<br>public service
-
----
-
-class: title title-5
-
-# Data and government
-
-.pull-left-3.center[
-<figure>
-  <img src="img/01/usds.png" alt="US Digital Service" title="US Digital Service" width="90%">
-</figure>
-]
-
---
-
-.pull-middle-3.center[
-<figure>
-  <img src="img/01/dj-patil.jpg" alt="DJ Patil" title="DJ Patil" width="100%">
-  <figcaption>DJ Patil</figcaption>
-</figure>
-]
-
---
-
-.pull-right-3[
-&nbsp;
-
-.box-inv-5["To responsibly unleash the power of data to benefit all Americans"]
-]
-
-???
-
-DJ Patil, ["What Makes a Radical and Revolutionary Technology?](https://www.youtube.com/watch?v=UOoMzaWOQJA)
-
----
-
-.center[
-<figure>
-  <img src="img/01/ddji.png" alt="Obama's Data-Driven Justice Initiative" title="Obama's Data-Driven Justice Initiative" width="70%">
-</figure>
-]
-
-???
-
-11.4 million people + 23 days
-
-Data shared between agencies - arresting officer checks database, sees if person has been cycling, sees if they need mental health services
-
-Two jails in Florida closed after this
-
-https://obamawhitehouse.archives.gov/the-press-office/2016/06/30/fact-sheet-launching-data-driven-justice-initiative-disrupting-cycle
-
----
-
-.center[
-<figure>
-  <img src="img/01/nola.jpg" alt="New Orleans hackathon" title="New Orleans hackathon" width="70%">
-</figure>
-]
-
----
-
-class: bg-full
-background-image: url("img/01/open-city-all.png")
-
-???
-
-http://us-cities.survey.okfn.org/
-
----
-
-class: bg-full
-background-image: url("img/01/open-city-atl.png")
-
-???
-
-http://us-cities.survey.okfn.org/place/atlanta
-
----
-
-class: bg-full
-background-image: url("img/01/dataset-search.png")
-
-???
-
-https://datasetsearch.research.google.com/
-
----
-
-class: middle
-
-.box-5.large[How do you use all this data<br>to make the world better?]
-
----
-
-class: middle
-
-.box-5.large[Analyze it and<br>uncover insights!]
-
-.box-inv-5[(and take this class!)]
+# Why evaluate?
 
 ---
 
 layout: true
-class: title title-5
+class: title title-1
+
 
 ---
 
-# What is "statistics"?
+# Community contests in Karnataka
 
-&nbsp;
-
-.box-inv-5.medium[Collecting and analyzing data from a representative sample in order to make inferences about a whole population]
-
----
-
-# What is "data science"?
-
-.box-inv-5.medium.sp-after[Turning raw data into<br>understanding, insight,<br>and knowledge]
-
---
-
-.pull-left-3[
-.box-5.medium[&emsp;Collect&emsp;]
-]
-
-.pull-middle-3[
-.box-5.medium[&emsp;Analyze&emsp;]
-]
-
-.pull-right-3[
-.box-5.medium[Communicate]
-]
-
----
-
-# What's the difference?
-
-.pull-left.center[
+.center[
 <figure>
-  <img src="img/01/ds-venn.png" alt="Data science Venn diagram" title="Data science Venn diagram" width="90%">
+  <img src="img/01/math-contests.png" alt="Community contests in Karnataka, India" title="Gram Panchayat Contests" width="45%">
 </figure>
 ]
 
-.pull-right[
-.box-inv-5.medium[Collect]
+???
 
-.box-inv-5.medium[Analyze]
+Gram Panchayat (GP) Level Mathematics Contests are organised by the community for government school children in all GKA (Ganitha Kalika Andolana) districts of Karnataka. It’s a strategy to empower the community to take up quality to take up quality issues in the public school system within the framework of participatory democracy. Akshara Foundation acts as a facilitator to conduct these contests. The child’s numeracy levels data gathered through this contest is the most accurate and census level data available as the contests are conducted in the community with the presence of all stakeholders (Gram Panchayat members, parents, SDMC members, donors and the village community) in a transparent way
 
-.box-5.medium[Communicate]
-]
+https://klp.org.in/gp-contest/
 
----
-
-# What is "program evaluation"?
-
-.box-inv-5.medium[Measuring the effect of<br>social programs on society]
-
-.pull-left[
-.box-5[.medium[**Data science**]<br>(data + statistics +<br>communication)]
-]
-
-.pull-right[
-.box-5[.medium[**Causal inference**]<br>(DAGs + econometrics)]
-]
+https://www.youtube.com/watch?v=ySyOsbWJGOI
 
 ---
 
-layout: false
-name: evidence-evaluation-causation
-class: center middle section-title section-title-3 animated fadeIn
+# Blended instruction in Haryana
 
-# Evidence, evaluation,<br>and causation
+.center[
+<figure>
+  <img src="img/01/blended-instruction.png" alt="A teacher uses video materials in the classroom" title="Blended instruction" width="60%">
+</figure>
+]
+
+???
+
+In the Avanti "Sankalp" program, government school teachers used video-based classroom resources to teach math and science in grades 9-12.
+
+https://sankalp.avantifellows.org/
 
 ---
 
-layout: true
-class: title title-3
+# Deworming in Kenya
+
+.center[
+<figure>
+  <img src="img/01/deworming.png" alt="A child in Kenya receives a deworming pill" title="Deworming in Kenya" width="60%">
+</figure>
+]
+
+???
+
+Intestinal helminths—including hookworm, roundworm, whipworm, and schistosomiasis—infect more than one-quarter of the world’s population. Researchers evaluated a mass school-based deworming program in Western Kenya.
+
+https://www.povertyactionlab.org/evaluation/primary-school-deworming-kenya
+
+---
+
+# Merit-based scholarships in Cambodia
+
+.center[
+<figure>
+  <img src="img/01/cambodia.png" alt="A small primary school in Cambodia" title="Primary school in Cambodia" width="40%">
+</figure>
+]
+
+???
+
+We set out to discover whether scholarships could help third- and fourth-grade students in rural, impoverished areas of Cambodia attend and stay in primary school. More than that, we wanted to know which type of scholarship worked better — a merit scholarship, awarded based on academic achievement, or poverty scholarships, awarded according to highest financial need. Our research followed-up on these children 9 later, when they had reached young adulthood.
+
+https://www.gse.harvard.edu/news/uk/19/02/scholarships-balance-equity-and-efficacy
+
+https://blogs.worldbank.org/developmenttalk/power-label-merit-scholarships-vs-needs-based-scholarships
+
+---
+
+# Formative teacher evaluations in Chile
+
+.center[
+<figure>
+  <img src="img/01/evaluacion-docente.png" alt="The title page from a publication on Chile's teacher evaluation system" title="La evaluación docente en Chile" width="40%">
+</figure>
+]
+
+???
+
+In Chile, every four years, all public-school teachers participate in the country's formative teacher evaluation system. The system has four components: Teachers submit a portfolio (which includes a video-recording of a class) and a self-evaluation. They are also evaluated by a peer and through their superiors (e.g., their principal). The system is mainly formative, and seeks to improve the quality of teaching in public schools. 
+
+https://bibliotecadigital.mineduc.cl/handle/20.500.12365/17377
+
+https://www.cpeip.cl/evaluacion-docente/
+
+https://www.docentemas.cl/
+
+https://es.wikipedia.org/wiki/Evaluaci%C3%B3n_Docente
+
+---
+
+# Class-size reductions in Tennessee
+
+.center[
+<figure>
+  <img src="img/01/Tennessee.jpg" alt="A primary-school teacher instructs a small group of children on geography" title="Class-size reductions in Tennessee" width="55%">
+</figure>
+]
+
+???
+
+Aware of both the preliminary results of a CSR program in Indiana called Project Prime Time and the potential large scale costs of additional classrooms and teachers, in 1985, under then Governor Lamar Alexander, Tennessee began a three-phase project to determine the effects of reduced class sizes on short and long term pupil performance in the earliest grades.
+
+The first phase, termed Project STAR (Student-Teacher Achievement Ratio), randomly assigned teachers and students to three groups, “small” (13 to 17), “regular” (22 to 25) classes with a paid aide, and “regular” (22 to 25) classes with no aide. In total some 6,500 students in about 330 classrooms at approximately 80 schools participated.
+
+https://en.wikipedia.org/wiki/Class-size_reduction
+
+---
+
+# Doubling teacher pay in Indonesia
+
+.center[
+<figure>
+  <img src="img/01/indonesia-currency.jpg" alt="A picture of Indonesian currency" title="Indonesian currency" width="55%">
+</figure>
+]
+
+???
+
+How does a large unconditional increase in salary affect the performance of incumbent employees in the public sector? A policy change in Indonesia led to a permanent doubling of teacher base salaries.
+
+https://academic.oup.com/qje/article/133/2/993/4622956
+
 
 ---
 
@@ -277,65 +232,85 @@ https://www.npr.org/sections/health-shots/2020/05/22/860789014/the-race-for-a-po
 
 # Modern evidence-based medicine
 
-.box-inv-3.medium[Apply evidence to clinical<br>treatment decisions]
+.box-inv-1.medium[Apply evidence to clinical<br>treatment decisions]
 
 --
 
-.box-inv-3.medium.sp-after[Move away from clinical judgment<br>and "craft knowledge"]
+.box-inv-1.medium.sp-after[Move away from clinical judgment<br>and "craft knowledge"]
 
 --
 
-.box-3.medium[Is this good?]
+.box-1.medium[Is this good?]
 
 ???
 
 No, this isn’t the greatest. Push for evidence-based practice can crowd out clinical judgment, which is valuable – we can’t ignore it or dismiss it
 
-Doctors have seen things in the past. Lady Sybil in Downton Abbey and preeclampsia - family doctor knew more about the condition and Sybil—he had intuition and experience—but he was ignored
-
 ---
 
-# Evidence-based policy
+# Evidence-based education policy
 
 --
 
-.box-inv-3.medium[RAND health insurance study]
+.box-inv-1.less-medium[To reduce poverty by ensuring that<br>policy is informed by scientific evidence]
 
 --
 
-.box-inv-3.medium[Oregon Medicaid expansion]
+.box-inv-1.less-medium[Focus on high-quality research to answer the question “what works in education?”]
 
 --
 
-.box-inv-3.medium[HUD's Moving to Opportunity]
+.box-inv-1.less-medium[[The Department of Education] shall give grant priority to (...) evidence-based activities.]
 
---
-
-.box-inv-3.medium[Tennessee STAR]
 
 ???
 
-- RAND: In a large-scale, multiyear experiment, participants who paid for a share of their health care used fewer health services than a comparison group given free care. It concluded that cost sharing reduced "inappropriate or unnecessary" medical care (overutilization), but also reduced "appropriate or needed" medical care.
-- Oregon: ongoing
-- MTO: Researchers found that voucher recipients lived in lower-crime neighborhoods and generally had better units than the control group families, but the experiment had no impact on earnings or educational attainment. It did, however, have unexpected results in health and happiness. Parents in families who moved to low-poverty areas had lower rates of obesity and depression, and positive impacts on behavior and outlook among young women (but not young men)
-- STAR: smaller class sizes lead to better outcomes
+- The first statement is from J-PAL's mission statement.
+- The second statement is from the "About" page from the IES What Works Clearinghouse.
+- The third statement is copied from the Every Student Succeeds Act (ESSA)
 
 ---
 
-# Policy evidence industry
+# Drivers of evidence-based policy
 
 --
 
-.box-inv-3.medium[Jameel Poverty Action Lab (J-PAL)]
+.box-inv-1.medium[Abdul Latif Jameel Poverty Action Lab (J-PAL)]
 
 --
 
-.box-inv-3.medium[Campbell Collaboration]
+.box-inv-1.medium[Campbell Collaboration]
+
+--
+
+.box-inv-1.medium[IES What Works Clearinghouse]
+
+--
+
+.box-inv-1.medium[Every Student Succeeds Act]
 
 ???
 
 - https://www.povertyactionlab.org/
 - https://campbellcollaboration.org/
+- https://ies.ed.gov/ncee/wwc/
+- https://www.congress.gov/bill/114th-congress/senate-bill/1177
+
+---
+
+# Evidence and you
+
+--
+
+.box-inv-1.medium[Producer]
+
+--
+
+.box-inv-1.medium[Consumer]
+
+--
+
+.box-inv-1.medium[User]
 
 ---
 
@@ -343,118 +318,37 @@ layout: false
 
 &nbsp;
 
-.box-3.large[Should we have evidence for<br>every policy or program?]
+.box-1.large[Should we have evidence for<br>every policy or program?]
 
 --
 
-.box-inv-3.medium[**No!**]
+.box-inv-1.medium[**No!**]
 
 --
 
-.box-inv-3[Science vs. art/craft/intuition]
-
----
-
-.pull-left.center[
-<figure>
-  <img src="img/01/ellie-smoking.png" alt="No RCTs for smoking" title="No RCTs for smoking" width="100%">
-</figure>
-]
+.box-inv-1[Science vs. art/craft/intuition]
 
 --
 
-.pull-right.center[
-<figure>
-  <img src="img/01/drink-id.jpg" alt="Drink ID sign" title="Drink ID sign" width="70%">
-</figure>
-]
+.box-inv-1[Science vs. normative decisions/politics]
 
-???
+--
 
-https://twitter.com/epiellie/status/1017622949799571456?s=12
-
-In the 1970s, experts were saying that reducing the drinking age would be fine - 26 states did - created a natural quasi-experiment for researchers - Cook then found that highway fatalities increase by 10% for 18–20-year-olds. That wouldn't have been possible without legislators inadvertently performing the experiment, paving the way for better science 
-
-So knowledge flows between the two sides - use innovation from administrators as the basis for better science 
-
+.box-inv-1[Research > program evaluation; not all evaluations are research]
 
 ---
 
 &nbsp;
 
-.box-3.large[Where does program evaluation<br>fit with all this?]
+.box-1.large[Where does evaluation<br>fit with all this?]
 
 --
 
-.box-inv-3[It's a method for collecting evidence<br>for policies and programs]
+.box-inv-1[It's a method for collecting evidence<br>for policies and programs]
 
 ---
 
-layout: true
-class: title title-3
-
----
-
-# Types of evaluation
-
-.pull-left.center[
-<figure>
-  <img src="img/01/rossi.jpg" alt="Rossi, Evaluation" title="Rossi, Evaluation" width="75%">
-</figure>
-]
-
-.pull-right[
-.box-inv-3[Needs assessment]
-
-.box-inv-3[Design and<br>theory assessment]
-
-.box-inv-3[Process evaluation<br>and monitoring]
-
-.box-inv-3[Impact evaluation]
-
-.box-inv-3[Efficiency evaluation (CBA)]
-]
-
----
-
-layout: false
-
-.center[
-<figure>
-  <img src="img/01/psd-logic-model.png" alt="PSD logic model" title="PSD logic model" width="70%">
-</figure>
-]
-
----
-
-layout: true
-class: title title-3
-
----
-
-# Theories of change
-
-.center[
-<figure>
-  <img src="img/01/psd-impact-theory.png" alt="PSD impact theory" title="PSD impact theory" width="100%">
-</figure>
-]
-
-.box-inv-3[Impact evaluation!]
-
----
-
-layout: false
-
-.center[
-<figure>
-  <img src="img/01/wb-eval.jpg" alt="Impact Evaluation in Practice" title="Impact Evaluation in Practice" width="40%">
-</figure>
-]
-
----
-
-class: title title-3
+class: title title-1
 
 # Theory → impact
 
@@ -464,14 +358,67 @@ class: title title-3
 
 ---
 
-class: middle
+layout: true
+class: title title-1
+
+---
+
+# Types of evaluation
+
+.pull-left.center[
+<figure>
+  <img src="img/01/wb-eval.jpg" alt="Gertler et al., Impact evaluation in practice" title="Gertler et al., Impact evaluation in practice" width="75%">
+</figure>
+]
+
+.pull-right[
+.box-inv-1[Needs assessment]
+
+.box-inv-1[Design and<br>theory assessment]
+
+.box-inv-1[Process evaluation<br>and monitoring]
+
+.box-inv-1[Impact evaluation]
+
+.box-inv-1[Efficiency evaluation (CBA)]
+
+]
+
+---
+
+# Types of impact evaluation
+
+.pull-left.center[
+<figure>
+  <img src="img/01/wb-eval.jpg" alt="Gertler et al., Impact evaluation in practice" title="Gertler et al., Impact evaluation in practice" width="75%">
+</figure>
+]
+
+.pull-right[
+.box-inv-1[Prospective vs. retrospective]
+
+.box-inv-1[Efficacy vs.<br>effectiveness studies]
+
+.box-inv-1[Standalone program vs.<br>design innovations vs.<br>implementation focused]
+
+.box-inv-1[Overall effects vs.<br>subgroup analyses]
+
+]
+
+---
+
+class: title title-1
+
+# Theory → impact
 
 <figure>
-  <img src="img/01/psd-results.png" alt="PSD program effect" title="PSD program effect" width="100%">
+  <img src="img/01/psd-program-effect.png" alt="Program effect" title="Program effect" width="100%">
 </figure>
 
 ---
 
+layout: false
+class: bg-full
 name: evidence-evaluation-causation1
 
 .center[
@@ -486,21 +433,21 @@ https://en.wikipedia.org/wiki/Godwin%27s_law
 
 ---
 
-class: title title-3
+class: title title-1
 
-# Godwin's Law for statistics
-
---
-
-.box-inv-3.medium[Correlation does not<br>imply causation]
+# Godwin's law for statistics
 
 --
 
-.box-3[Except when it does]
+.box-inv-1.medium[Correlation does not<br>imply causation]
 
 --
 
-.box-3[Even if it doesn't,<br>this phrase is useless<br>and kills discussion]
+.box-1[Except when it does]
+
+--
+
+.box-1[Even if it doesn't,<br>this phrase is useless<br>and kills discussion]
 
 ---
 
@@ -523,32 +470,18 @@ https://slate.com/technology/2012/10/correlation-does-not-imply-causation-how-th
 ---
 
 layout: true
-class: title title-3
+class: title title-1
 
 ---
 
 # Correlation vs. causation
 
 .pull-left[
-.box-inv-3.medium[How do we figure out correlation?]
+.box-inv-1.medium[How do we figure out correlation?]
 ]
 
 .pull-right[
-.box-inv-3.medium[How do we figure out causation?]
-]
-
----
-
-# Correlation vs. causation
-
-.pull-left[
-.box-inv-3.medium[How do we figure out correlation?]
-
-.box-3[Math and statistics]
-]
-
-.pull-right[
-.box-inv-3.medium[How do we figure out causation?]
+.box-inv-1.medium[How do we figure out causation?]
 ]
 
 ---
@@ -556,102 +489,30 @@ class: title title-3
 # Correlation vs. causation
 
 .pull-left[
-.box-inv-3.medium[How do we figure out correlation?]
+.box-inv-1.medium[How do we figure out correlation?]
 
-.box-3[Math and statistics]
+.box-1[Math and statistics]
 ]
 
 .pull-right[
-.box-inv-3.medium[How do we figure out causation?]
-
-.box-3[Philosophy. No math.]
+.box-inv-1.medium[How do we figure out causation?]
 ]
 
 ---
 
-layout: false
-class: middle
+# Correlation vs. causation
 
-.center[
-<figure>
-  <img src="img/01/john-tweets.png" alt="John Holbein on causality" title="John Holbein on causality" width="70%">
-</figure>
+.pull-left[
+.box-inv-1.medium[How do we figure out correlation?]
+
+.box-1[Math and statistics]
 ]
 
----
+.pull-right[
+.box-inv-1.medium[How do we figure out causation?]
 
-layout: true
-class: title title-3
-
----
-
-# How does we know if **X** causes **Y**?
-
---
-
-.box-inv-3.medium[**X** causes **Y** if…]
-
---
-
-.box-inv-3.medium[…we intervene and change **X**<br>without changing anything else…]
-
---
-
-.box-inv-3.medium[…and **Y** changes]
-
----
-
-# **Y** "listens to" **X**
-
---
-
-.box-inv-3["A variable **X** is a cause of a variable **Y** if **Y** in any way relies on **X** for its value.… **X** is a cause of **Y** if **Y** listens to **X** and decides its value in response to what it hears"<br>(Pearl, Glymour, and Jewell 2016, 5–6)]
-
---
-
-.box-inv-3[**Y** doesn't necessarily listen only to **X**]
-
---
-
-.box-inv-3[A light switch causes a light to go on, but not<br>if the bulb is burned out (no **Y** despite **X**), or if<br>the light was already on (**Y** without **X**)]
-
----
-
-# Causal relationships?
-
---
-
-.box-inv-3.medium[Lighting fireworks causes noise]
-
---
-
-.box-inv-3.medium[Rooster crows cause the sunrise]
-
---
-
-.box-inv-3.medium[Getting an MPA/MPP increases your earnings]
-
---
-
-.box-inv-3.medium[Colds go away a few days<br>after you take vitamin C]
-
----
-
-# Causation
-
-.box-inv-3.medium[Causation =<br>Correlation + time order +<br>nonspuriousness]
-
---
-
-.box-3[How do you know if you have it right?]
-
---
-
-.box-3[You need a philosophical model]
-
---
-
-.box-3[That's what this class is for!]
+.box-1[Take this class!]
+]
 
 ---
 
@@ -671,149 +532,72 @@ class: title title-3
 
 ---
 
-# Causal diagrams
+# The causal revolution
 
-.box-inv-3.medium[Directed acyclic graphs (DAGs)]
+.center[.image-container[
+  .pull-left-wide[
+    <figure>
+      <img src="img/01/rct-nobel.jpg" alt="Winners of the Nobel Prize in Economics 2019" title="Nobel Prize in Economics 2019" width="100%">
+    </figure>
+  ]
+  
+  .pull-right-wide[
+    <figure>
+      <img src="img/01/quasi-nobel.png" alt="Winners of the Nobel Prize in Economics 2021" title="Nobel Prize in Economics 2021" width="100%">
+    </figure>
+  ]
+]]
 
-.pull-left[
-
-.box-3.SMALL[Graphical model of the process that generates the data]
-
-.box-3.SMALL[Maps your philosophical model]
-
-.box-3.SMALL[Fancy math ("*do*-calculus") tells you what to control for to isolate and identify causation]
-
-]
-
-.pull-right[
-
-```{r simple-dag, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
-dagify(
-  Y ~ X + Z,
-  X ~ Z,
-  coords = list(x = c(X = 1, Y = 3, Z = 2),
-                y = c(X = 1, Y = 1, Z = 2))
-) %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(color = "grey80", size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  theme_dag()
-```
-
-]
+<style>
+.image-container {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+}
+</style>
 
 ---
 
 layout: false
-
-```{r edu-earn-simple, echo=FALSE, fig.width=9, fig.height=4.5, out.width="100%"}
-edu_earn_coords <- list(x = c(Edu = 2, Earn = 4, Year = 2, Bkgd = 4, 
-                              Loc = 3, JobCx = 3, Req = 1, U1 = 3),
-                        y = c(Edu = 2, Earn = 2, Year = 3, Bkgd = 3, 
-                              Loc = 3, JobCx = 1, Req = 2, U1 = 4))
-
-dagify(
-  Earn ~ Edu,
-  exposure = "Edu",
-  outcome = "Earn",
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
-                 end_cap = ggraph::circle(3, "lines"),
-                 edge_width = 1.5, 
-                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
-  geom_dag_point(aes(color = status), size = 30) +
-  geom_dag_text(color = "black", size = 7) +
-  scale_color_manual(values = c("#FF4136", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
----
-
-```{r edu-earn-full, echo=FALSE, fig.width=9, fig.height=4.5, out.width="100%"}
-dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  Bkgd ~ U1,
-  Loc ~ U1,
-  exposure = "Edu",
-  outcome = "Earn",
-  latent = "U1",
-  labels = c("Earn" = "Earnings", "Edu" = "Education",
-             "Year" = "Year", "Bkgd" = "Background",
-             "Loc" = "Location", "JobCx" = "Job connections",
-             "U1" = "Unobserved stuff"),
-  coords = edu_earn_coords) %>% 
-  tidy_dagitty() %>% 
-  node_status() %>% 
-  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_edges() +
-  geom_dag_point(aes(color = status), size = 14) +
-  geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
-                     na.value = "#7FDBFF") +
-  guides(color = "none") +
-  theme_dag()
-```
-
----
-
-```{r smoking-dag, echo=FALSE, fig.width=9, fig.height=4.5, out.width="100%"}
-set.seed(123)
-dagify(cardiacarrest ~ cholesterol,
-       cholesterol ~ smoking + weight,
-       smoking ~ unhealthy,
-       weight ~ unhealthy,
-       labels = c("cardiacarrest" = "Cardiac\n Arrest", 
-                  "smoking" = "Smoking",
-                  "cholesterol" = "Cholesterol",
-                  "unhealthy" = "Unhealthy\n Lifestyle",
-                  "weight" = "Weight"),
-       latent = "unhealthy",
-       exposure = "smoking",
-       outcome = "cardiacarrest") %>% 
-  ggdag(text = FALSE, use_labels = "label") +
-  theme_dag()
-```
-
-
----
-
-.center[
-<figure>
-  <img src="img/01/dagitty-model.png" alt="FASD DAG" title="FASD DAG" width="60%">
-  <figcaption>Effect of smoking on fetal alcohol syndrome</figcaption>
-</figure>
-]
-
-???
-
-https://link.springer.com/article/10.1007/s00787-018-1264-3
-
-
----
-
 class: bg-full
-background-image: url("img/01/nyt-dag1.png")
-
-???
-
-https://twitter.com/andrewheiss/status/1208836534285340673
+background-image: url("img/01/eval-flowchart.png")
 
 ---
 
+layout: false
+name: hello
+class: center middle section-title section-title-3 animated fadeIn
+
+# Hello, <br>it's me
+
+---
+
+layout: false
 class: bg-full
-background-image: url("img/01/nyt-dag2.png")
+background-image: url("img/01/hello1.png")
 
-???
+---
 
-https://twitter.com/andrewheiss/status/1208836534285340673
+layout: false
+class: bg-full
+background-image: url("img/01/hello2.png")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/01/hello3.png")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/01/hello4.png")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/01/hello5.png")
 
 ---
 
@@ -830,27 +614,62 @@ class: title title-6
 
 ---
 
-# Plan for the class
+# Setting norms
 
-.center[
-<figure>
-  <img src="img/01/eval-flowchart.png" alt="Class flowchart" title="Class flowchart" width="100%">
-</figure>
-]
+--
+
+.box-inv-6.medium[~~Laptops, tablets, phones~~]
+
+--
+
+.box-inv-6.medium[~~Food~~]
+
+--
+
+.box-inv-6.medium[Let's stay focused]
+
+--
+
+.box-inv-6.medium[Come prepared]
+
+--
+
+.box-6.medium[Let's help each other]
+
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/01/syllabus.jpg")
+
+???
+https://phdcomics.com/comics.php?f=1583
+
+---
+
+layout: true
+class: title title-6
 
 ---
 
 # Textbooks
 
-.pull-left.center[
+.pull-left-3.center[
 <figure>
-  <img src="img/01/wb-eval.jpg" alt="Impact Evaluation in Practice" title="Impact Evaluation in Practice" width="75%">
+  <img src="img/01/wb-eval.jpg" alt="Impact Evaluation in Practice" title="Impact Evaluation in Practice" width="90%">
 </figure>
 ]
 
-.pull-right.center[
+.pull-middle-3.center[
 <figure>
-  <img src="img/01/the-effect.png" alt="The Effect" title="The Effect" width="66%" style="border: 1px solid #EE6A24">
+  <img src="img/01/running-res.jpg" alt="Running Randomized Evaluations" title="Running Randomized Evaluations" width="80%" style="border: 1px solid #EE6A24">
+</figure>
+]
+
+.pull-right-3.center[
+<figure>
+  <img src="img/01/methods-matter.jpg" alt="Methods Matter" title="Methods Matter" width="80%" style="border: 1px solid #EE6A24">
 </figure>
 ]
 
@@ -872,92 +691,11 @@ class: title title-6
 
 .center[
 <figure>
-  <img src="img/01/Rlogo.png" alt="R logo" title="R logo" width="30%">
+  <img src="img/01/Rlogo.png" alt="R logo" title="R logo" width="20%">
 </figure>
 
 <figure>
   <img src="img/01/rstudio-logo.png" alt="RStudio logo" title="RStudio logo" width="50%">
-</figure>
-]
-
----
-
-# The tidyverse
-
-.center[
-<figure>
-  <img src="img/01/tidyverse.png" alt="The tidyverse" title="The tidyverse" width="50%">
-</figure>
-] 
-
----
-
-# The tidyverse
-
-<figure>
-  <img src="img/01/tidyverse-language.png" alt="tidyverse and language" title="tidyverse and language" width="100%">
-</figure>
-
-???
-
-From "Master the Tidyverse" by RStudio
-
----
-
-# R code, but reads like English!
-
-.small-code[
-```{r example-code, eval=FALSE}
-strike_damages_month <- bird_strikes %>% 
-  group_by(Month) %>% 
-  summarize(total_damages = sum(Cost, na.rm = TRUE),
-            average_damages = mean(Cost, na.rm = TRUE))
-
-ggplot(data = strike_damages_month, 
-       mapping = aes(x = Month, y = total_damages)) + 
-  geom_col() + 
-  scale_y_continuous(labels = dollar) +
-  labs(x = "Month",
-       y = "Total damages",
-       title = "Really expensive collisions happen in the fall?",
-       subtitle = "Don't fly in August or October?",
-       caption = "Source: FAA Wildlife Strike Database")
-```
-]
----
-
-# Sucking
-
-.center[
-.box-inv-6.medium[“There is no way of knowing nothing about a subject to knowing something about a subject without going through a period of much frustration and suckiness.”]
-
-.box-inv-6.medium[**“Push through. You’ll suck less.”**]
-
-.box-inv-6.tiny[Hadley Wickham, author of **ggplot2**]
-]
-
-???
-
-[Source for quote](https://twitter.com/Akbaritabar/status/1022057084802748416)
-
----
-
-# Sucking
-
-&nbsp;
-
-.pull-left[
-<figure>
-  <img src="img/01/sucking-first-step.jpg" alt="Sucking at something is the first step towards being sort of good at something" title="Sucking at something is the first step towards being sort of good at something" width="100%">
-</figure>
-]
-
---
-
-.pull-right[
-<figure>
-  <img src="img/01/sucking-nyt.png" alt="It's great to suck at something" title="It's great to suck at something" width="100%">
-  <figcaption><a href="https://www.nytimes.com/2017/04/28/opinion/its-great-to-suck-at-surfing.html" target="_blank">Karen Rinaldi, "(It's Great to) Suck at Something"</a></figcaption>
 </figure>
 ]
 
@@ -979,27 +717,13 @@ ggplot(data = strike_damages_month,
 
 ???
 
-Words of wisdom from @allison_horst to her data analysis class this quarter: You don't need to be a mechanic to drive a car safely, and you don't need to be a computer scientist or developer to use R safely. #rstats #tidytuesday
+Words of wisdom from @allison_horst: You don't need to be a mechanic to drive a car safely, and you don't need to be a computer scientist or developer to use R safely. #rstats #tidytuesday
 
 https://twitter.com/ameliaritger/status/1214682596182904832?s=12
 
-I always teach my students: there’s three levels of skill: driver, mechanic, engineer. You’re here to get your drivers license. But being able to change a tire can be helpful. Don’t worry not every one has to be an engineer. (I talk about R in social sciences)
+There’s three levels of skill: driver, mechanic, engineer. You’re here to get your drivers license. But being able to change a tire can be helpful. Don’t worry not every one has to be an engineer. (I talk about R in social sciences)
 
 https://twitter.com/Sumidu/status/1214695065387438083
-
----
-
-# Learning R
-
-.center[
-<figure>
-  <img src="img/01/learning-r.png" alt="Learning R through googling" title="Learning R through googling" width="70%" style="border: 1px solid #EE6A24">
-</figure>
-]
-
-???
-
-https://twitter.com/kierisi/status/898534740051062785
 
 ---
 
@@ -1020,6 +744,10 @@ class: title title-6
 --
 
 .box-inv-6.medium[~~Become an expert with R~~]
+
+--
+
+.box-inv-6.medium[~~Become a statistician~~]
 
 --
 
@@ -1054,3 +782,66 @@ class: title title-6
 .box-inv-6.medium[**Statistical skills**]
 
 .box-inv-6.small[Regression, differences in means, and statistical significance]
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+# Work products
+
+--
+
+.box-inv-6.medium[Participation, reading reactions]
+
+--
+
+.box-inv-6.medium[Data-analytic memos (DAMs)]
+
+--
+
+.box-inv-6.medium[Exam]
+
+--
+
+.box-inv-6.medium[Milestones 1-3]
+
+--
+
+.box-6.medium[Your evaluation plan]
+
+
+???
+
+Participation, reading reactions	14%
+Data-analytic memos (DAMs)	30%
+Exam	25%
+Milestones 1-3	2% each
+Your evaluation plan	25%
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Survey**]
+
+.box-inv-8.small.sp-after[Link from me]
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+--
+
+.box-8.medium[**Choose a program to evaluate**]
+
+.box-inv-8.small[Meet with your team]

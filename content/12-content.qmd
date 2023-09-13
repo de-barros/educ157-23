@@ -24,8 +24,8 @@ youtube_list(slide_details, playlist_id)
 
 ## Readings
 
-- {{< fa book >}} Chapter 10 in *Methods Matter* [@MurnaneWillett:2011]
 - {{< fa book >}} Chapter 5 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapter 10 in *Methods Matter* [@MurnaneWillett:2011]
 
 ## Slides
 

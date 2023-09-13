@@ -7,7 +7,7 @@ For your final project in this class, you will write a plan for a quasi-experime
 
 You will work in groups of two to three students (I will assign you to your group). At the same time, **do not hesitate** to reach out to other classmates via Slack. Also, **absolutely do not hesitate** to ask me questions. I'm here to help!
 
-The program you would like to evaluate must have a start date after September 2021. The program must be educational in nature, but you may define "educational" broadly. Also, the program should target at least 1,000 beneficiaries per year (e.g., 1,000 children). Finally, you must not copy a program’s existing evaluation plan or research grant proposal.
+Make sure everyone on your team is convinced the program warrants an evaluation. The program you would like to evaluate must be educational in nature, but you may define "educational" broadly. It must have a start date after September 2021. Also, the program should target at least 1,000 beneficiaries per year (e.g., 1,000 children), and you should be able to describe rules that determine how beneficiaries become eligible for the program. Finally, you must not copy a program’s existing evaluation plan or research grant proposal. 
 
 Your first milestone is due by **11:55 PM on Sunday, October 08, 2023.** <span style="color: #981E32; font-weight: bold"> No late work will be accepted.</span>
 

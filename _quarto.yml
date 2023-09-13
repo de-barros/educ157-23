@@ -70,7 +70,7 @@ website:
             - content/index.qmd
         - section: "Course content"
           contents:
-            - text: "1: Setting goals and norms for the class"
+            - text: "1: Evaluation and the causal revolution"
               file: content/01-content.qmd
             - text: "2: Theory of Change"
               file: content/02-content.qmd
@@ -90,7 +90,7 @@ website:
               file: content/09-content.qmd
             - text: "10: Qualitative and mixed methods"
               file: content/10-content.qmd
-            - text: "11: Linear regression, matching, and 'big data'"
+            - text: "11: Regression, matching, and 'big data'"
               file: content/11-content.qmd
             - text: "12: Instrumental variables"
               file: content/12-content.qmd
@@ -153,7 +153,7 @@ website:
 
   page-footer:
     left: |
-      Original content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var attribution.name_no_title >}}]({{< var instructor.url >}}) <br>
+      Original content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var attribution.name_no_title >}}]({{< var attribution.url >}}) <br>
       Additional content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
       All content licensed under a {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}

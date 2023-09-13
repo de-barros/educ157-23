@@ -36,7 +36,7 @@ library(pander)
 
 ## Please read the syllabus!
 
-This page has important information about the course, including structure, assignments, grading, and office hours, [among many others](https://twitter.com/PHDcomics/status/333007240502063106).
+This page has important information about the course, including structure, assignments, grading, and student hours, [among many others](https://twitter.com/PHDcomics/status/333007240502063106).
 
 <b><a href="https://www.cameo.com/v/5f2b392a0299b100202e624a?utm_campaign=video_share_to_copy" style="color: #981e32">Even Snoop Dogg wants you to read the syllabus!</a></b>
 
@@ -123,7 +123,7 @@ It is very important you update the Canvas settings and notifications to ensure 
 
 ### Slack
 
-Our dedicated Slack channel is [here](https://educ157-23.slack.com/). Watch out for an email invitation from me. You will post your reading reactions on Slack, not on Canvas.
+Our dedicated Slack channel is [here](https://educ157-23.slack.com/). Watch out for an email invitation from me. You will submit your reading reactions on Canvas, not on Slack. However, feel free to ask additional questions over Slack.
 
 ## Course materials
 
@@ -133,7 +133,7 @@ There are three official textbooks for the class. All three are available digita
 
 - Paul J. Gertler et al., *Impact Evaluation in Practice*, 2nd ed. (Inter-American Development Bank; World Bank, 2016), <https://openknowledge.worldbank.org/handle/10986/25030>. ([**Free and also available in Portuguese and Spanish!**](https://openknowledge.worldbank.org/handle/10986/25030))
 
-- Rachel Glennerster and Kudzai Takavarasha, *Running Randomized Evaluations* (Princeton University Press, 2014), <https://press.princeton.edu/books/paperback/9780691159270/running-randomized-evaluations> ([**This book has a great companion website**](http://runningres.com/)). 
+- Rachel Glennerster and Kudzai Takavarasha, *Running Randomized Evaluations* (Princeton University Press, 2014), <https://press.princeton.edu/books/paperback/9780691159270/running-randomized-evaluations> ([**Free UCI library access to the ebook**](https://ebookcentral.proquest.com/lib/uci/detail.action?pq-origsite=primo&docID=1458376). Also, [**this book has a great companion website**](http://runningres.com/)). 
 
 - Richard J. Murnane and John B. Willett, *Methods Matter* (Oxford University Press, 2011), <https://global.oup.com/academic/product/methods-matter-9780199753864>. 
 
@@ -162,7 +162,7 @@ An the [resources page](/resource/index.html), you will find a long list of addi
 
 ### Participation
 
-You should actively participate in class, do all the readings, and discuss them outside of class. To that end, you should post reactions to at least 14 of our readings on Slack. You may (and should) engage with the other reactions you see posted on Slack. However, it'll be up to me to decide whether a comment engages with the assigned reading and adds to the discussion, meaningfully.[^Yey] 
+You should actively participate in class, do all the readings, and discuss them outside of class. To that end, you should submit reactions to at least 14 of our readings on Canvas. Also, you may (and should) engage with questions you see posted on Slack. However, it'll be up to me to decide whether a Slack comment engages with the assigned reading and adds to the discussion, meaningfully.[^Yey] 
 
 [^Yey]: "Yey" won't do.
 
@@ -220,7 +220,7 @@ All reading reactions are due by 11:55PM on the day before class. All times are 
 
 ### Writing 
 
-Your assignments will involve a fair amount of writing. You should not take this writing lightly; an important part of your undergraduate training is to convey arguments clearly. You are expected to review your assignments for typos and grammatical errors before submitting them. As you do, feel free to use related online services (such as [Grammarly](https://app.grammarly.com/) or the [Hemingway App](https://hemingwayapp.com/)). You may also take full advantage of the various on-campus resources to help improve your writing, including the [Writing Center](http://www.writingcenter.uci.edu).
+Your assignments will involve a fair amount of writing. You should not take this writing lightly; an important part of your undergraduate training is to convey arguments clearly. You are expected to review your assignments for typos and grammatical errors before submitting them. Aim for simple and precise language [in active voice](https://phdcomics.com/comics/archive/phd102221s.gif). As you do, feel free to use related online services (such as [Grammarly](https://app.grammarly.com/) or the [Hemingway App](https://hemingwayapp.com/)). You may also take full advantage of the various on-campus resources to help improve your writing, including the [Writing Center](http://www.writingcenter.uci.edu).
 
 ### Grading
 

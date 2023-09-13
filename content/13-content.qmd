@@ -5,8 +5,12 @@ date: "2023-11-09"
 
 ## Readings
 
-- {{< fa book >}} Chapters 9 and 11 in *Methods Matter* [@MurnaneWillett:2011]
 - {{< fa book >}} Chapter 6 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapters 9 and 11 in *Methods Matter* [@MurnaneWillett:2011]
+
+## Optional material
+
+- The first four sections of Chapter 11 in *Methods Matter* are optional---focus on "Using IVE to Resolve “Fuzziness” in a Regression-Discontinuity Design."
 
 ## Slides
 

@@ -1,5 +1,5 @@
 ---
-title: "Linear regression, matching, and 'big data'"
+title: "Regression, matching, and 'big data'"
 date: "2023-11-02"
 ---
 

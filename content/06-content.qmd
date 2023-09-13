@@ -7,18 +7,24 @@ date: "2023-10-17"
 
 - {{< fa book >}} Chapters 4 and 13 in *The Effect* [@Huntington-Klein:2021]
 
+We’ll review all this regression stuff in class, so don’t panic if this all looks terrifying!
+
 ## Optional material
 
 - The following sections of Chapter 13 in *The Effect* are optional---feel free to skip them.
 
 13.2.2 Polynomials  
 13.2.3 Variable transformations   
-13.2.5 Coding Up Polynomials and Interactions   
-13.2.6 Nonlinear Regression   
-13.3 Your Standard Errors are Probably Wrong   
-13.4 Additional Regression Concerns   
+13.2.5 Coding Up polynomials and interactions   
+13.2.6 Nonlinear regression   
+13.3 Your standard errors are probably wrong   
+13.4 Additional regression concerns   
 
 - {{< fa arrow-up-right-from-square >}} Abby Long. ["10 Things to Know About Reading a Regression Table,"](https://egap.org/resource/10-things-to-know-about-reading-a-regression-table/) *egap*, 21 July 2016.
+
+
+- {{< fa arrow-up-right-from-square >}} Allison Horst. ["Linear Regression Dragons,"](https://allisonhorst.com/linear-regression-dragons) no date.
+
 
 ## Slides
 

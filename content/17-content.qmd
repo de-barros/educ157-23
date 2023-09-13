@@ -12,7 +12,7 @@ date: "2023-11-28"
 
 - {{< fa arrow-up-right-from-square >}} Donald Green. ["10 Things to Know About Conducting a Meta-Analysis,"](https://egap.org/resource/10-things-to-know-about-conducting-a-meta-analysis/) *egap*, no date.
 
-This methods guide is optional (but you may include it in your reading reactions).
+Don Green's guide is optional (but you may include it in your reading reactions).
 
 ## Slides
 

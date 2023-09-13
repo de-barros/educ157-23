@@ -24,8 +24,8 @@ University of California, Irvine
     [Quarto](https://quarto.org/) installation embedded in it.
     Otherwise, download and install [Quarto](https://quarto.org/)
     separately.
-2.  Open `evalf22.Rproj` to open an [RStudio
-    Project](https://r4ds.had.co.nz/workflow-projects.html).
+2.  Open `educ157-23.Rproj` to open an [RStudio
+    Project](https://r4ds.hadley.nz/workflow-scripts.html#projects).
 3.  If it’s not installed already, R *should* try to install the [{renv}
     package](https://rstudio.github.io/renv/) when you open the RStudio
     Project for the first time. If you don’t see a message about package
@@ -110,6 +110,8 @@ Galbert](https://scholar.harvard.edu/pierredegalbert/home), [Alejandro
 Ganimian](https://www.alejandroganimian.com/), [Andrew
 Ho](https://www.gse.harvard.edu/directory/faculty/andrew-ho), [Justine
 Knebelmann](https://sites.google.com/view/justine-knebelmann/home),
+[Francisco
+Lagos](https://education.umd.edu/student-directory/francisco-lagos),
 [Fernanda
 Ramirez-Espinoza](https://sites.google.com/site/ramirezespinozafernanda/),
 and [Carly Robinson](https://www.carlydrobinson.com/).

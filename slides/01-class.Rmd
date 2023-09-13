@@ -1,6 +1,6 @@
 ---
 title: "Class 1: Evaluation and the causal revolution"
-author: "Andrew Heiss"
+author: "Andreas de Barros"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -33,11 +33,11 @@ class: middle
 
 .box-5.large[Join the Slack workspace]
 
-.center.large.sp-after[[andhs.co/slack](https://andhs.co/slack)]
+.center.large.sp-after[[educ157-23.slack.com](https://educ157-23.slack.com)]
 
 .box-5.large[Join the Posit Cloud workspace]
 
-.center.large[[andhs.co/posit](https://andhs.co/rstudio)]
+.center.large[[rstudio.cloud](https://rstudio.cloud)]
 
 ---
 
@@ -49,8 +49,8 @@ class: center middle main-title section-title-3
 
 **January 12, 2023**
 
-.light[PMAP 8521: Program evaluation<br>
-Andrew Young School of Policy Studies
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
 ]
 
 ]

@@ -277,134 +277,134 @@ Slides with title bars at the top
 }
 
 .title-1 {
-  border-top-color: #170C3A;
+  border-top-color: #dbac49;
 }
 
 .title-2 {
-  border-top-color: #480B6A;
+  border-top-color: #add7ed;
 }
 
 .title-3 {
-  border-top-color: #771C6D;
+  border-top-color: #a93e31;
 }
 
 .title-4 {
-  border-top-color: #A52C60;
+  border-top-color: #244a70;
 }
 
 .title-5 {
-  border-top-color: #CF4446;
+  border-top-color: #dfc67f;
 }
 
 .title-6 {
-  border-top-color: #EE6A24;
+  border-top-color: #6c9fb4;
 }
 
 .title-7 {
-  border-top-color: #FB9E07;
+  border-top-color: #a65d2e;
 }
 
 .title-8 {
-  border-top-color: #F6D645;
+  border-top-color: #1a2d49;
 }
 
 .title-inv-1 {
-  border-top-color: #B1AEC4;
+  border-top-color: #fff3d6;
 }
 
 .title-inv-2 {
-  border-top-color: #CCAEED;
+  border-top-color: #add7ed;
 }
 
 .title-inv-3 {
-  border-top-color: #F5ABEA;
+  border-top-color: #f7c6c4;
 }
 
 .title-inv-4 {
-  border-top-color: #FFB7CD;
+  border-top-color: #8baccc;
 }
 
 .title-inv-5 {
-  border-top-color: #FFC6C6;
+  border-top-color: #fff7eb;
 }
 
 .title-inv-6 {
-  border-top-color: #FFD3CA;
+  border-top-color: #d9edf3;
 }
 
 .title-inv-7 {
-  border-top-color: #FFE2D0;
+  border-top-color: #f3d8c2;
 }
 
 .title-inv-8 {
-  border-top-color: #FFF2CE;
+  border-top-color: #718baf;
 }
 
 /*
 General color classes
 */
 .color-1 {
-  color: #170C3A;
+  color: #dbac49;
 }
 
 .color-2 {
-  color: #480B6A;
+  color: #add7ed;
 }
 
 .color-3 {
-  color: #771C6D;
+  color: #a93e31;
 }
 
 .color-4 {
-  color: #A52C60;
+  color: #244a70;
 }
 
 .color-5 {
-  color: #CF4446;
+  color: #dfc67f;
 }
 
 .color-6 {
-  color: #EE6A24;
+  color: #6c9fb4;
 }
 
 .color-7 {
-  color: #FB9E07;
+  color: #a65d2e;
 }
 
 .color-8 {
-  color: #F6D645;
+  color: #1a2d49;
 }
 
 .color-light-1 {
-  color: #B1AEC4;
+  color: #fff3d6;
 }
 
 .color-light-2 {
-  color: #CCAEED;
+  color: #add7ed;
 }
 
 .color-light-3 {
-  color: #F5ABEA;
+  color: #f7c6c4;
 }
 
 .color-light-4 {
-  color: #FFB7CD;
+  color: #8baccc;
 }
 
 .color-light-5 {
-  color: #FFC6C6;
+  color: #fff7eb;
 }
 
 .color-light-6 {
-  color: #FFD3CA;
+  color: #d9edf3;
 }
 
 .color-light-7 {
-  color: #FFE2D0;
+  color: #f3d8c2;
 }
 
 .color-light-8 {
-  color: #FFF2CE;
+  color: #718baf;
 }
 
 /* 
@@ -412,130 +412,130 @@ Coloring and inverse coloring in title bars and content boxes
 */
 .box-1,
 .section-title-1 {
-  background-color: #170C3A;
+  background-color: #dbac49;
 }
 
 .box-2,
 .section-title-2 {
-  background-color: #480B6A;
+  background-color: #add7ed;
 }
 
 .box-3,
 .section-title-3 {
-  background-color: #771C6D;
+  background-color: #a93e31;
 }
 
 .box-4,
 .section-title-4 {
-  background-color: #A52C60;
+  background-color: #244a70;
 }
 
 .box-5,
 .section-title-5 {
-  background-color: #CF4446;
+  background-color: #dfc67f;
 }
 
 .box-6,
 .section-title-6 {
-  background-color: #EE6A24;
+  background-color: #6c9fb4;
 }
 
 .box-7,
 .section-title-7 {
-  background-color: #FB9E07;
+  background-color: #a65d2e;
 }
 
 .box-8,
 .section-title-8 {
-  background-color: #F6D645;
+  background-color: #1a2d49;
 }
 
 .box-inv-1,
 .section-title-inv-1 {
-  background-color: #B1AEC4;
+  background-color: #fff3d6;
 }
 
 .box-inv-2,
 .section-title-inv-2 {
-  background-color: #CCAEED;
+  background-color: #add7ed;
 }
 
 .box-inv-3,
 .section-title-inv-3 {
-  background-color: #F5ABEA;
+  background-color: #f7c6c4;
 }
 
 .box-inv-4,
 .section-title-inv-4 {
-  background-color: #FFB7CD;
+  background-color: #8baccc;
 }
 
 .box-inv-5,
 .section-title-inv-5 {
-  background-color: #FFC6C6;
+  background-color: #fff7eb;
 }
 
 .box-inv-6,
 .section-title-inv-6 {
-  background-color: #FFD3CA;
+  background-color: #d9edf3;
 }
 
 .box-inv-7,
 .section-title-inv-7 {
-  background-color: #FFE2D0;
+  background-color: #f3d8c2;
 }
 
 .box-inv-8,
 .section-title-inv-8 {
-  background-color: #FFF2CE;
+  background-color: #718baf;
 }
 
 .box-inv-1,
 .title-inv-1 h1,
 .section-title-inv-1 h1 {
-  color: #170C3A;
+  color: #dbac49;
 }
 
 .box-inv-2,
 .title-inv-2 h1,
 .section-title-inv-2 h1 {
-  color: #480B6A;
+  color: #add7ed;
 }
 
 .box-inv-3,
 .title-inv-3 h1,
 .section-title-inv-3 h1 {
-  color: #771C6D;
+  color: #a93e31;
 }
 
 .box-inv-4,
 .title-inv-4 h1,
 .section-title-inv-4 h1 {
-  color: #A52C60;
+  color: #244a70;
 }
 
 .box-inv-5,
 .title-inv-5 h1,
 .section-title-inv-5 h1 {
-  color: #CF4446;
+  color: #dfc67f;
 }
 
 .box-inv-6,
 .title-inv-6 h1,
 .section-title-inv-6 h1 {
-  color: #EE6A24;
+  color: #6c9fb4;
 }
 
 .box-inv-7,
 .title-inv-7 h1,
 .section-title-inv-7 h1 {
-  color: #FB9E07;
+  color: #a65d2e;
 }
 
 .box-inv-8,
 .title-inv-8 h1,
 .section-title-inv-8 h1 {
-  color: #F6D645;
+  color: #1a2d49;
 }
 
 .box-8, .box-7, .box-6, .box-5, .box-4, .box-3, .box-2, .box-1, .title-8 h1, .title-7 h1, .title-6 h1, .title-5 h1, .title-4 h1, .title-3 h1, .title-2 h1, .title-1 h1, .section-title h1 {
@@ -613,6 +613,6 @@ Coloring and inverse coloring in title bars and content boxes
   text-align: center;
   font-size: 0.6em;
   padding: 0.25em 0;
-  background: #A52C60;
+  background: #244a70;
   color: #FFFFFF;
 }
