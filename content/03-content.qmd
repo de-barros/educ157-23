@@ -1,12 +1,12 @@
 ---
-title: "Measurement and data collection"
+title: "Measurement"
 date: "2023-10-05"
 ---
 
 ## Readings
 
-- {{< fa book >}} Chapter 5 in *Running Randomized Evaluations* [@glennerster_running_2013]
 - {{< fa arrow-up-right-from-square >}} Kopper, Sarah, and Katie Parry. ["Introduction to measurement and indicators,"](https://www.povertyactionlab.org/resource/introduction-measurement-and-indicators) *The Abdul Latif Jameel Poverty Action Lab (J-PAL) *, February 2022.
+- {{< fa book >}} Chapter 5 in *Running Randomized Evaluations* [@glennerster_running_2013]
 
 ## Audio
 

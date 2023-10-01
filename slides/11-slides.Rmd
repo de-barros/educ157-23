@@ -374,6 +374,54 @@ https://twitter.com/kevin_stange/status/1186056025897684992
 
 ---
 
+.pull-left[
+
+.center[
+<figure>
+  <img src="img/08/hotdogs-small.jpg" alt="Hot dog prices" title="Hot dog prices" width="50%">
+</figure>
+]
+
+.small-code[
+```{r hotdogs-data, echo=FALSE}
+hotdogs <- tribble(
+  ~price, ~cheese, ~chili,
+  2.00,   FALSE,   FALSE,
+  2.35,   TRUE,    FALSE,
+  2.35,   FALSE,   TRUE,
+  2.70,   TRUE,    TRUE
+)
+```
+
+```{r show-hotdogs-data}
+hotdogs
+```
+]
+]
+
+--
+
+.pull-right.small-code[
+```{r hotdogs-diff-diff}
+model_hotdogs <- 
+  lm(price ~ cheese + chili + 
+       cheese * chili, 
+     data = hotdogs)
+```
+
+```{r show-hotdogs-diff-diff-fake, eval=FALSE}
+tidy(model_hotdogs)
+```
+
+```{r show-hotdogs-diff-diff, echo=FALSE}
+tidy(model_hotdogs) %>% 
+  select(term, estimate) %>% 
+  mutate(estimate = round(estimate, 2))
+```
+]
+
+---
+
 layout: false
 name: stuff
 class: center middle section-title section-title-3 animated fadeIn
@@ -1288,5 +1336,13 @@ ggplot(edu_age_ipw, aes(x = education, y = age, fill = treatment, size = w_ate))
         legend.margin = margin(t = 0, b = 0))
 ```
 
+---
 
+layout: false
+
+.center[
+<figure>
+  <img src="img/08-class/charles-ozzy.png" alt="King Charles and Ozzy Osbourne" title="King Charles and Ozzy Osbourne" width="50%">
+</figure>
+]
 

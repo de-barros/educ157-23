@@ -1,0 +1,415 @@
+---
+title: "Fixed effects and panel data"
+author: "Andreas de Barros"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: "libs"
+    chakra: "libs/remark-latest.min.js"
+    css: ["default", "css/ath-slides.css", "css/ath-inferno-fonts.css", "css/animate.css"]
+    seal: false
+    anchor_sections: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      navigation:   
+        scroll: true # Changed this to true to enable scrolling
+      incremental: true  # Added this line to stay on the same slide when knitting  
+      self_contained: false  # Added this line to prevent HTML caching
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+                      fig.retina = 3, fig.align = "center")
+```
+
+```{r packages-data, include=FALSE}
+library(tidyverse)
+library(flair)
+library(broom)
+library(ggdag)
+library(kableExtra)
+library(scales)
+library(patchwork)
+
+world_happiness <- read_csv("data/world_happiness.csv") %>% 
+  mutate(latin_america = region == "Latin America & Caribbean") %>% 
+  mutate(latin_america = factor(latin_america, labels = c("Not Latin America", "Latin America")))
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view"))
+```
+
+class: center middle main-title section-title-4
+
+# Fixed effects and<br>panel data
+
+.class-info[
+
+**Class 15**
+
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
+]
+
+]
+
+---
+
+```{r dd-graph, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+dd_labels2 <- tribble(
+  ~Group, ~Time, ~label,
+  "Treatment", "Before", "A",
+  "Treatment", "After", "B",
+  "Control", "Before", "C",
+  "Control", "After", "D"
+)
+
+dd_data2 <- tribble(
+  ~Group, ~Before, ~Intervention, ~After,
+  "Treatment", 30, 35, 50,
+  "Control",   20, 25, 30
+) %>% 
+  pivot_longer(cols = !Group, names_to = "Time", values_to = "avg") %>% 
+  left_join(dd_labels2, by = c("Group", "Time")) %>% 
+  mutate(across(c(Group, Time), ~fct_inorder(.)))
+
+ggplot(dd_data2, aes(x = Time, y = avg, color = Group, group = Group)) +
+  geom_vline(xintercept = "Intervention") +
+  geom_line(size = 3,
+            key_glyph = draw_key_point) +
+  annotate(geom = "segment", x = "Intervention", xend = "After",
+           y = 35, yend = 40, color = "#0074D9", size = 2, linetype = "22") +
+  annotate(geom = "segment", x = "After", xend = "After",
+           y = 40, yend = 50, color = "#FF4136", size = 2) +
+  annotate(geom = "label", x = "After", y = 45, label = "Causal\neffect",
+           family = "Fira Sans Condensed Bold", fontface = "plain", 
+           size = 5, fill = "#FF4136", color = "white") +
+  geom_point(data = filter(dd_data2, !is.na(label)), size = 15) +
+  geom_text(aes(label = label), family = "Fira Sans Condensed Bold", 
+            fontface = "plain", size = 10, color = "white") +
+  scale_color_manual(values = c("#0074D9", "#3D9970")) +
+  labs(x = NULL, y = "Outcome") +
+  coord_cartesian(ylim = c(15, 55)) +
+  theme_bw(base_size = 24, base_family = "Fira Sans Condensed")
+```
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-1.png")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-2.png")
+
+---
+
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-3.png")
+
+---
+
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-4.png")
+
+---
+
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-5.png")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/15/headstart-6.png")
+
+
+---
+
+name: outline
+class: title title-4
+
+# Plan for today
+
+--
+
+.box-1.medium.sp-after-half[Diff-in-diff with more than two units]
+
+--
+
+.box-3.medium.sp-after-half[Units that "switch on" at different times]
+
+--
+
+.box-6.medium.sp-after-half[More than one subgroup of interest]
+
+--
+
+.box-7.medium.sp-after-half[More than one post-period]
+ 
+---
+
+layout: false
+name: two-wrongs
+class: center middle section-title section-title-1 animated fadeIn
+
+# More than two units
+
+---
+
+```{r dd-graph-again, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+dd_labels2 <- tribble(
+  ~Group, ~Time, ~label,
+  "Treatment", "Before", "A",
+  "Treatment", "After", "B",
+  "Control", "Before", "C",
+  "Control", "After", "D"
+)
+
+dd_data2 <- tribble(
+  ~Group, ~Before, ~Intervention, ~After,
+  "Treatment", 30, 35, 50,
+  "Control",   20, 25, 30
+) %>% 
+  pivot_longer(cols = !Group, names_to = "Time", values_to = "avg") %>% 
+  left_join(dd_labels2, by = c("Group", "Time")) %>% 
+  mutate(across(c(Group, Time), ~fct_inorder(.)))
+
+ggplot(dd_data2, aes(x = Time, y = avg, color = Group, group = Group)) +
+  geom_vline(xintercept = "Intervention") +
+  geom_line(size = 3,
+            key_glyph = draw_key_point) +
+  annotate(geom = "segment", x = "Intervention", xend = "After",
+           y = 35, yend = 40, color = "#0074D9", size = 2, linetype = "22") +
+  annotate(geom = "segment", x = "After", xend = "After",
+           y = 40, yend = 50, color = "#FF4136", size = 2) +
+  annotate(geom = "label", x = "After", y = 45, label = "Causal\neffect",
+           family = "Fira Sans Condensed Bold", fontface = "plain", 
+           size = 5, fill = "#FF4136", color = "white") +
+  geom_point(data = filter(dd_data2, !is.na(label)), size = 15) +
+  geom_text(aes(label = label), family = "Fira Sans Condensed Bold", 
+            fontface = "plain", size = 10, color = "white") +
+  scale_color_manual(values = c("#0074D9", "#3D9970")) +
+  labs(x = NULL, y = "Outcome") +
+  coord_cartesian(ylim = c(15, 55)) +
+  theme_bw(base_size = 24, base_family = "Fira Sans Condensed")
+```
+
+---
+
+![](`r knitr::fig_chunk("min-wage-dag1", "png")`)
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta\ \color{#0074D9}{\text{Group}_i} + \gamma\ \color{#39CCCC}{\text{Time}_t} + \\
+&\delta\ \color{#FF4136}{(\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+--
+
+.center.sp-after[
+```{r dd-example-code, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
+
+--
+
+&nbsp;
+
+<span class="box-3", style="background-color: #0074D9">Group = 1 or TRUE if treatment</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">Time = 1 or TRUE if after</span>
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+.center.sp-after[
+```{r dd-example-code-again, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
+
+--
+
+<span class="box-3", style="background-color: #666666">α = Mean of control, pre-treatment</span>
+
+--
+
+<span class="box-3", style="background-color: #0074D9">β = Increase in outcome across groups</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">γ = Increase in outcome over time within units</span>
+
+--
+
+<span class="box-3", style="background-color: #FF4136">δ = Difference in differences!</span>
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+```{r dd-table-coefs, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`&ensp;Pre mean&ensp;`, ~`&ensp;Post mean&ensp;`, ~`&ensp;∆ <span class='smaller'>(post − pre)</span>&ensp;`,
+  "Control", "<b><span style='color: #666666;'>α</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #39CCCC;'>γ</span></b>", "<b><span style='color: #39CCCC;'>γ</span></b>",
+  "Treatment", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span> + <span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>",
+  "&ensp;∆ <span class='smaller'>(trtmt − ctrl)</span>&ensp;", "<b><span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #0074D9;'>β</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #FF4136'>δ</span></b>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#EEEEEE") %>% 
+  column_spec(4, background = "#EEEEEE") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta\ \color{#0074D9}{\text{Group}_i} + \gamma\ \color{#39CCCC}{\text{Time}_t} + \\
+&\delta\ \color{#FF4136}{(\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+--
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta_1\ \color{#0074D9}{\text{Subgroup 1}_i} + \beta_2\ \color{#0074D9}{\text{Subgroup 2}_i} + ... + \\ &   \gamma_1\ \color{#39CCCC}{\text{Year 1}_t} + \gamma_2\ \color{#39CCCC}{\text{Year 2}_t} + ... + \\
+&\delta\ \color{#FF4136}{(\text{Treatment}_i \times \text{Post}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+--
+
+.center.sp-after[
+```{r dd-example-code2, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ factor(group) + factor(time) + (treatment * post))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" factor(group) ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" factor(time) ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(treatment * post)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
+
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta_1\ \color{#0074D9}{\text{Subgroup 1}_i} + \beta_2\ \color{#0074D9}{\text{Subgroup 2}_i} + ... + \\ &   \gamma_1\ \color{#39CCCC}{\text{Year 1}_t} + \gamma_2\ \color{#39CCCC}{\text{Year 2}_t} + ... + \\
+&\delta\ \color{#FF4136}{(\text{Treatment}_i \times \text{Post}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+--
+
+.center.sp-after[
+```{r dd-example-code3, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ factor(group) + factor(time) + (treatment * post))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" factor(group) ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" factor(time) ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(treatment * post)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
+
+--
+
+<span class="box-3", style="background-color: #0074D9">TRUE indicates a given subgroup (e.g., born in Orange County)</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">TRUE indicates a given year</span>
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta_1\ \color{#0074D9}{\text{Subgroup 1}_i} + \beta_2\ \color{#0074D9}{\text{Subgroup 2}_i} + ... + \\ &   \gamma_1\ \color{#39CCCC}{\text{Year 1}_t} + \gamma_2\ \color{#39CCCC}{\text{Year 2}_t} + ... + \\
+&\delta\ \color{#FF4136}{(\text{Treatment}_i \times \text{Post}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+
+--
+
+<span class="box-3", style="background-color: #666666">α = Mean of reference group, year zero</span>
+
+--
+
+<span class="box-3", style="background-color: #0074D9">β = "Fixed effects" for all other subgroups</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">γ = "Fixed effects" for all years</span>
+
+--
+
+<span class="box-3", style="background-color: #FF4136">δ = Difference in differences!</span>
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{ict}}\ =\ &\alpha + \color{#0074D9}{\beta_c} + \color{#39CCCC}{\gamma_t} + 
+&\delta\ \color{#FF4136}{(\text{Treatment}_i \times \text{Post}_t)} + \varepsilon_{ict}
+\end{aligned}$$
+
+--
+
+<span class="box-3", style="background-color: #666666">α = Mean of reference group, year zero</span>
+
+--
+
+<span class="box-3", style="background-color: #0074D9">β = "Fixed effects" for all other subgroups</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">γ = "Fixed effects" for all years</span>
+
+--
+
+<span class="box-3", style="background-color: #FF4136">δ = Difference in differences!</span>
+
+
+---

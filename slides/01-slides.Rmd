@@ -79,6 +79,21 @@ class: center middle section-title section-title-1 animated fadeIn
 
 ---
 
+
+.pull-left.center[
+<figure>
+  <img src="img/01/adb.png" alt="https://www.pollev.com/adb" title="https://www.pollev.com/adb" width="75%">
+</figure>
+]
+
+.pull-right[
+
+.box-inv-1[https://www.PollEv.com/adb]
+
+]
+
+---
+
 layout: true
 class: title title-1
 

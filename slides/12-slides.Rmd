@@ -75,6 +75,114 @@ UCI School of Education
 
 ---
 
+layout: false
+class: bg-full
+background-image: url("img/01/eval-flowchart.png")
+
+
+---
+
+name: quasi-experiments
+class: center middle section-title section-title-4 animated fadeIn
+
+# Quasi-experiments
+
+---
+
+&nbsp;
+
+.box-4.large.sp-after[RCTs are great!]
+
+--
+
+.box-4.large[Super impractical to do<br>all the time though!]
+
+---
+
+layout: true
+class: title title-4
+
+---
+
+# Quasi-experiments
+
+--
+
+.box-inv-4.medium[You can't always randomly<br>assign people to do things]
+
+--
+
+.box-inv-4.medium[So let other people (or the government,<br>or nature, or something else) do it for you]
+
+---
+
+# Quasi-experiments
+
+.box-inv-4.medium.sp-after[**Quasi-experiment**<br>A situation where you, as researcher,<br>did not assign people to treatment/control]
+
+--
+
+.center.float-left.sp-after[
+.box-4[External validity 👍]&ensp;.box-4[Selection 👎]
+]
+
+--
+
+.box-inv-4.medium[Assignment to treatment is "as if" random]
+
+???
+
+Good bc of external validity; bad bc of selection
+
+---
+
+# Quasi-experiments vs. DAG adjustment
+
+--
+
+.box-inv-4[We did a lot of work with DAGs!<br>You're good at closing backdoors with matching and IPW]
+
+--
+
+.box-inv-4.sp-after[DAGs can work for any kind of observational data,<br>even without a quasi-experimentalish situation]
+
+--
+
+.box-4[Quasi-experiments are a little different:<br>the **context** isolates pathway between treatment and outcome]
+
+--
+
+.box-4.smaller[They're wildly popular in the social sciences,<br>maybe more credible (?) than just making DAG adjustments]
+
+--
+
+.box-4.smaller[You can still draw a DAG for a quasi-experiment though!]
+
+---
+
+# Analyzing quasi-experiments
+
+--
+
+.box-inv-4.medium[Instrumental variables]
+
+.box-4.small[IV]
+
+--
+
+.box-inv-4.medium[Regression discontinuity]
+
+.box-4.small.sp-after[RD; RDD]
+
+--
+
+.box-inv-4.medium[Difference-in-differences]
+
+.box-4.small.sp-after[DiD; DD; diff-in-diff]
+
+
+---
+
 name: outline
 class: title title-8
 
@@ -98,7 +206,7 @@ class: title title-8
 .box-7.medium.sp-after-half[Recap]
 
 ---
-
+layout: false
 name: endo-exo
 class: center middle section-title section-title-1 animated fadeIn
 

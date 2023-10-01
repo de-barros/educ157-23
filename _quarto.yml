@@ -74,7 +74,7 @@ website:
               file: content/01-content.qmd
             - text: "2: Theory of Change"
               file: content/02-content.qmd
-            - text: "3: Measurement and data collection"
+            - text: "3: Measurement"
               file: content/03-content.qmd
             - text: "4: Data collection and research ethics"
               file: content/04-content.qmd
@@ -96,7 +96,7 @@ website:
               file: content/12-content.qmd
             - text: "13: Regression discontinuity"
               file: content/13-content.qmd
-            - text: "14: Difference-in-difference"
+            - text: "14: Difference-in-differences"
               file: content/14-content.qmd
             - text: "15: Fixed effects and panel data"
               file: content/15-content.qmd

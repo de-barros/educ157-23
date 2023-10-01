@@ -5,8 +5,8 @@ date: "2023-11-02"
 
 ## Readings
 
-- {{< fa book >}} Chapter 12 in *Methods Matter* [@MurnaneWillett:2011]
 - {{< fa file-pdf >}} Chapter 2 in *Mastering Metrics* (2015) [Get the PDF here.](https://canvas.eee.uci.edu/files/23579000/) [@AngristPischke:2015] 
+- {{< fa book >}} Chapter 12 in *Methods Matter* [@MurnaneWillett:2011]
 
 ## Slides
 

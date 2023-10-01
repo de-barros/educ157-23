@@ -1,6 +1,6 @@
 ---
-title: "DAGs and potential outcomes"
-author: "Andrew Heiss"
+title: "The fundamental problem of causality"
+author: "Andreas de Barros"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -14,8 +14,10 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: "16:9"
-      navigation:
-        scroll: false
+      navigation:   
+        scroll: true # Changed this to true to enable scrolling
+      incremental: true  # Added this line to stay on the same slide when knitting  
+      self_contained: false  # Added this line to prevent HTML caching
 editor_options: 
   chunk_output_type: console
 ---
@@ -35,16 +37,15 @@ library(broom)
 xaringanExtra::use_xaringan_extra(c("tile_view"))
 ```
 
-class: center middle main-title section-title-7
+class: center middle main-title section-title-4
 
-# DAGs and<br>potential outcomes
+# The fundamental problem of causality
 
 .class-info[
 
-**Session 5**
-
-.light[PMAP 8521: Program evaluation<br>
-Andrew Young School of Policy Studies
+**Class 5**
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
 ]
 
 ]
@@ -52,70 +53,258 @@ Andrew Young School of Policy Studies
 ---
 
 name: outline
-class: title title-inv-8
+class: title title-4
 
 # Plan for today
 
 --
 
-.box-5.medium.sp-after-half[*do*()ing observational<br>causal inference]
+.box-1.medium.sp-after-half[Causal models]
 
 --
 
-.box-7.medium[Potential outcomes]
+.box-3.medium.sp-after-half[Paths, doors, and adjustment]
+
+--
+
+.box-6.medium[Potential outcomes]
 
 ---
 
-name: dag-adjustment
-class: center middle section-title section-title-5 animated fadeIn
+layout: false
+name: causal-models
+class: center middle section-title section-title-1 animated fadeIn
 
-# *do*()ing observational<br>causal inference
+# Causal models
 
 ---
 
 layout: true
-class: title title-5
+class: title title-1
 
 ---
 
-# Structural models
-
-.box-inv-5.small[The relationship between nodes can be described with equations]
+# Types of data
 
 .pull-left[
 
-$$
-\begin{aligned}
-\text{Loc} &= f_\text{Loc}(\text{U1}) \\
-\text{Bkgd} &= f_\text{Bkgd}(\text{U1}) \\
-\text{JobCx} &= f_\text{JobCx}(\text{Edu}) \\
-\text{Edu} &= f_\text{Edu}(\text{Req}, \text{Loc}, \text{Year}) \\
-\text{Earn} &= f_\text{Earn}(\text{Edu}, \text{Year}, \text{Bkgd}, \\
-& \quad\quad\quad\quad \text{Loc}, \text{JobCx}) \\
-\end{aligned}
-$$
+.box-inv-1.medium[Experimental]
+
+.box-1[You have control over which units get treatment]
+
+]
+
+--
+
+.pull-right[
+
+.box-inv-1.medium[Observational]
+
+.box-1[You don't have control over which units get treatment]
+
+]
+
+--
+
+.box-inv-1.medium.sp-before[Which kind lets you prove causation?]
+
+---
+
+# Causation with observational data
+
+.box-inv-1.medium.sp-after[Can you prove causation<br>with observational data?]
+
+--
+
+.box-inv-1.medium[Why is it so controversial<br>to use observational data?]
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/04/too-much-rct.jpg")
+
+---
+
+layout: true
+class: title title-1
+
+---
+
+# The causal revolution
+
+.pull-left-narrow[
+<figure>
+  <img src="img/01/book-of-why.jpg" alt="The Book of Why" title="The Book of Why" width="100%">
+</figure>
+]
+
+.pull-right-wide.center[
+<figure>
+  <img src="img/01/judea-pearl.jpg" alt="Judea Pearl" title="Judea Pearl" width="90%">
+</figure>
+]
+
+---
+
+# Causal diagrams
+
+.box-inv-1.medium[Directed acyclic graphs (DAGs)]
+
+.pull-left[
+
+.box-1.SMALL[**Directed**: Each node has an arrow that points to another node]
+
+.box-1.SMALL[**Acyclic**: You can't cycle back to a node (and arrows only have one direction)]
+
+.box-1.SMALL[**Graph**: It's… um… a graph]
+
 ]
 
 .pull-right[
-```{r structural-dag, echo=FALSE, fig.width=6, fig.height=4.5, out.width="90%"}
+
+```{r simple-dag, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+
+]
+
+---
+
+# Causal diagrams
+
+.box-inv-1.medium[Directed acyclic graphs (DAGs)]
+
+.pull-left[
+
+.box-1.SMALL[Graphical model of the process that generates the data]
+
+.box-1.SMALL[Maps your philosophical model]
+
+.box-1.SMALL[Fancy math ("*do*-calculus") tells you what to control for to isolate and identify causation]
+
+]
+
+.pull-right[
+
+![](`r knitr::fig_chunk("simple-dag", "png")`)
+
+]
+
+---
+
+# Acyclicalness
+
+.box-inv-1[What if there's something that really is cyclical?]
+
+--
+
+.box-1[Wealth → Power → Wealth]
+
+--
+
+.box-1.sp-after[**This isn't acyclic!**<br>Wealth ↔ Power]
+
+--
+
+.box-inv-1[Split the node into different time periods]
+
+--
+
+.box-1[Wealth<sub>*t* - 1</sub> → Power<sub>*t*</sub> → Wealth<sub>*t*</sub>]
+
+---
+
+# How to draw a DAG
+
+.box-inv-1.medium[What is the causal effect of an<br>additional year of education on earnings?]
+
+--
+
+.box-1[Step 1: List variables]
+
+--
+
+.box-1[Step 2: Simplify]
+
+--
+
+.box-1[Step 3: Connect arrows]
+
+--
+
+.box-1[Step 4: Use logic and math to determine<br>which nodes and arrows to measure]
+
+---
+
+# 1. List variables
+
+.box-1.sp-after[Education (treatment) → Earnings (outcome)]
+
+.center.float-left.sp-after-half[
+.box-inv-1[Location]&ensp;.box-inv-1[Ability]&ensp;.box-inv-1[Demographics]
+]
+
+.center.float-left.sp-after-half[
+.box-inv-1[Socioeonomic status]&ensp;.box-inv-1[Year of birth]
+]
+
+.center.float-left[
+.box-inv-1[Compulsory schooling laws]&ensp;.box-inv-1[Job connections]
+]
+
+---
+
+# 2. Simplify
+
+.box-1.sp-after[Education (treatment) → Earnings (outcome)]
+
+.center.float-left.sp-after-half[
+.box-inv-1[Location]&ensp;.box-inv-3[Ability]&ensp;.box-inv-3[Demographics]
+]
+
+.center.float-left.sp-after-half[
+.box-inv-3[Socioeonomic status]&ensp;.box-inv-1[Year of birth]
+]
+
+.center.float-left[
+.box-inv-1[Compulsory schooling laws]&ensp;.box-inv-1[Job connections]
+]
+
+.box-inv-5[Background]
+
+---
+
+# 3. Draw arrows
+
+.pull-left-narrow[
+
+.box-inv-1[Education causes earnings]
+
+]
+
+.pull-right-wide[
+
+```{r edu-earn-simple, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
 edu_earn_coords <- list(x = c(Edu = 2, Earn = 4, Year = 2, Bkgd = 4, 
                               Loc = 3, JobCx = 3, Req = 1, U1 = 3),
                         y = c(Edu = 2, Earn = 2, Year = 3, Bkgd = 3, 
                               Loc = 3, JobCx = 1, Req = 2, U1 = 4))
 
 dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
-  Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  Bkgd ~ U1,
-  Loc ~ U1,
+  Earn ~ Edu,
   exposure = "Edu",
   outcome = "Earn",
-  latent = "U1",
-  labels = c("Earn" = "Earnings", "Edu" = "Education",
-             "Year" = "Year", "Bkgd" = "Background",
-             "Loc" = "Location", "JobCx" = "Job connections",
-             "U1" = "Unobserved stuff"),
   coords = edu_earn_coords) %>% 
   tidy_dagitty() %>% 
   node_status() %>% 
@@ -123,53 +312,122 @@ dagify(
   geom_dag_edges() +
   geom_dag_point(aes(color = status), size = 14) +
   geom_dag_text(color = "black", size = 5) +
-  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
                      na.value = "#7FDBFF") +
   guides(color = FALSE) +
   theme_dag()
 ```
+
 ]
+
 ---
 
-# Structural models
+# 3. Draw arrows
 
-.box-inv-5[`dagify()` in **ggdag** forces you to think this way]
+.pull-left-narrow[
 
-.pull-left.small[
-$$
-\begin{aligned}
-\text{Earn} &= f_\text{Earn}(\text{Edu}, \text{Year}, \text{Bkgd}, \\
-& \quad\quad\quad\quad \text{Loc}, \text{JobCx}) \\
-\text{Edu} &= f_\text{Edu}(\text{Req}, \text{Loc}, \text{Year}) \\
-\text{JobCx} &= f_\text{JobCx}(\text{Edu}) \\
-\text{Bkgd} &= f_\text{Bkgd}(\text{U1}) \\
-\text{Loc} &= f_\text{Loc}(\text{U1})
-\end{aligned}
-$$
+.box-inv-1[Background, year of birth, location, job connections, and school requirements all cause education]
+
 ]
 
-.pull-right.small-code[
-```{r example-structural-model, eval=FALSE}
+.pull-right-wide[
+
+```{r edu-earn-2, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
 dagify(
-  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
+  Earn ~ Edu,
   Edu ~ Req + Loc + Bkgd + Year,
-  JobCx ~ Edu,
-  Bkgd ~ U1,
-  Loc ~ U1
-)
+  exposure = "Edu",
+  outcome = "Earn",
+  coords = edu_earn_coords) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  coord_cartesian(ylim = c(1, 3)) +
+  theme_dag()
 ```
 
 ]
 
 ---
 
-# Causal identification
+# 3. Draw arrows
 
 .pull-left-narrow[
 
-.box-inv-5[All these nodes are related; there's correlation between them all]
+.box-inv-1[Background, year of birth, and location all cause earnings too]
 
-.box-inv-5[We care about<br>**Edu → Earn**, but what do we do about all the other nodes?]
+]
+
+.pull-right-wide[
+
+```{r edu-earn-3, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
+  Edu ~ Req + Loc + Bkgd + Year,
+  exposure = "Edu",
+  outcome = "Earn",
+  coords = edu_earn_coords) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+
+]
+
+---
+
+# 3. Draw arrows
+
+.pull-left-narrow[
+
+.box-inv-1[Education causes job earnings]
+
+]
+
+.pull-right-wide[
+
+```{r edu-earn-4, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
+  Edu ~ Req + Loc + Bkgd + Year,
+  JobCx ~ Edu,
+  exposure = "Edu",
+  outcome = "Earn",
+  coords = edu_earn_coords) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+
+]
+
+---
+
+# 3. Draw arrows
+
+.pull-left-narrow[
+
+.box-inv-1[Location and background are probably related, but neither causes the other. Something unobservable (U1) does that.]
 
 ]
 
@@ -206,26 +464,727 @@ dagify(
 
 ---
 
+layout: false
+name: paths-doors-adjustment
+class: center middle section-title section-title-3 animated fadeIn
+
+# Paths, doors,<br>and adjustment
+
+---
+
+layout: true
+class: title title-3
+
+---
+
 # Causal identification
 
-.box-inv-5.medium[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
+.pull-left-narrow[
+
+.box-inv-3[All these nodes are related; there's correlation between them all]
+
+.box-inv-3[We care about Edu → Earn, but what do we do about all the other nodes?]
+
+]
+
+.pull-right-wide[
+
+![](`r knitr::fig_chunk("edu-earn-full", "png")`)
+
+]
+
+---
+
+# Causal identification
+
+.box-inv-3.medium[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
 
 ---
 
 # Paths and associations
 
-.box-inv-5.medium[Arrows in a DAG transmit associations]
+.box-inv-3.medium[Arrows in a DAG transmit associations]
 
-.box-inv-5.medium[You can redirect and control those paths by "adjusting" or "conditioning"]
+.box-inv-3.medium[You can redirect and control those paths by "adjusting" or "conditioning"]
 
 ---
 
 # Three types of associations
 
 .pull-left-3[
-.box-5.medium[Confounding]
+.box-3.medium[Confounding]
 
 ```{r confounding-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 17) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+
+.box-inv-3.small[Common cause]
+]
+
+.pull-middle-3.center[
+.box-3.medium[Causation]
+
+```{r mediation-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 17) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+
+.box-inv-3.small[Mediation]
+]
+
+.pull-right-3[
+.box-3.medium[Collision]
+
+```{r collision-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
+dagify(
+  Y ~ X,
+  Z ~ Y,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 17) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+
+.box-inv-3.small[Selection /<br>endogeneity]
+]
+
+---
+
+# Confounding
+
+.pull-left-wide[
+```{r confounding-dag-big, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 15) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+]
+
+.pull-right-narrow[
+.box-inv-3.medium[**X** causes **Y**]
+
+.box-inv-3.medium[But **Z** causes both **X** and **Y**]
+
+.box-inv-3.medium[**Z** * confounds* the **X** → **Y** association]
+]
+
+---
+
+# Paths
+
+.pull-left-wide[
+![](`r knitr::fig_chunk("confounding-dag-big", "png")`)
+]
+
+.pull-right-narrow[
+.box-inv-3[Paths between<br>**X** and **Y**?]
+
+.box-3[**X** → **Y**]
+
+.box-3[**X** ← **Z** → **Y**]
+
+.box-inv-3.medium[**Z** is a *backdoor*]
+]
+
+---
+
+# *d*-connection
+
+.pull-left-wide[
+![](`r knitr::fig_chunk("confounding-dag-big", "png")`)
+]
+
+.pull-right-narrow[
+.box-inv-3[**X** and **Y** are<br>"*d*-connected" because associations can pass through **Z**]
+
+.box-3[The relationship between **X** and **Y** is not identified / isolated]
+]
+
+---
+
+# Effect of tutoring on student learning
+
+.box-inv-3.medium[What are the paths<br>between **tutoring** and **student learning**?]
+
+.pull-left[
+```{r money-elections, echo=FALSE, fig.width=5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2)),
+  exposure = "X",
+  outcome = "Y",
+  labels = c("X" = "Tutoring", "Y" = "Student learning",
+             "Z" = "Wealth")
+) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 15) +
+  geom_dag_text(color = "white", size = 5) +
+  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, -0.25, 0.25)) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+]
+
+--
+
+.pull-right[
+.box-3[Tutoring → Learning]
+
+.box-3[Tutoring ← Wealth → Learning]
+
+.box-inv-3[Wealth is a *backdoor*]
+]
+
+---
+
+# Closing doors
+
+.pull-left[
+```{r confounding-dag-adjusted, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  tidy_dagitty() %>% 
+  adjust_for("Z") %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(shape = adjusted, color = adjusted), size = 15) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_shape_manual(values = c(15, 19)) +
+  scale_color_manual(values = c("#FFDC00", "grey80")) +
+  guides(shape = FALSE, color = FALSE) +
+  theme_dag()
+```
+]
+
+.pull-right[
+.box-inv-3.medium[Close the backdoor by adjusting for **Z**]
+]
+
+---
+
+# Closing doors
+
+.pull-left[
+.box-inv-3.small[Find the part of tutoring that is explained by wealth, remove it.<br>This is the residual part of tutoring.]
+
+.box-inv-3.small[Find the part of student learning that is explained by wealth, remove it.<br>This is the residual part of learning.]
+
+.box-inv-3.small[Find the relationship between the residual part of tutoring and residual part of learning.<br>**This is the causal effect**.]
+]
+
+.pull-right[
+```{r money-elections-adjusted, echo=FALSE, fig.width=5, fig.height=3.3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  X ~ Z,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2)),
+  exposure = "X",
+  outcome = "Y",
+  labels = c("X" = "Tutoring", "Y" = "Student learning",
+             "Z" = "Wealth")
+) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  adjust_for("Z") %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status, shape = adjusted), size = 15) +
+  geom_dag_text(color = "white", size = 5) +
+  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, -0.25, 0.25)) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#FFDC00") +
+  scale_shape_manual(values = c(15, 19)) +
+  guides(color = FALSE, shape = FALSE) +
+  theme_dag()
+```
+]
+
+---
+
+# Closing doors
+
+.pull-left[
+.box-inv-3[Compare students as if they had the same wealth]
+
+.box-inv-3[Remove differences that are predicted by wealth]
+
+.box-inv-3[Hold wealth constant]
+]
+
+.pull-right[
+![](`r knitr::fig_chunk("money-elections-adjusted", "png")`)
+]
+
+---
+
+# How to adjust
+
+.box-inv-3.medium[Include term in regression]
+
+$$
+\begin{aligned}
+\text{Student learning} =& \beta_0 + \beta_1 \text{Tutoring} +\\
+& \beta_2 \text{Wealth} + \varepsilon
+\end{aligned}
+$$
+
+.center.float-left[
+.box-inv-3.medium[Matching]&ensp;.box-inv-3.medium[Stratifying]
+
+.box-inv-3.medium.sp-before-half[Inverse probability weighting]
+]
+
+---
+
+# *d*-separation
+
+.pull-left[
+![](`r knitr::fig_chunk("confounding-dag-adjusted", "png")`)
+]
+
+.pull-right[
+.box-inv-3.medium[If we control for **Z**,<br>**X** and **Y** are now<br>"*d*-separated" and the association is isolated!]
+
+]
+
+---
+
+# Closing backdoors
+
+.pull-left-narrow[
+.box-inv-3[Block all backdoor paths to identify the main pathway you care about]
+]
+
+.pull-right-wide[
+![](`r knitr::fig_chunk("edu-earn-full", "png")`)
+]
+
+---
+
+# All paths
+
+.pull-left.left[
+.box-3.smaller[Education → Earnings]
+
+.box-3.smaller[Education → Job connections → Earnings]
+
+.box-7.smaller[Education ← Background → Earnings]
+
+.box-7.smaller[Education ← Background ← U1 → Location → Earnings]
+
+.box-7.smaller[Education ← Location → Earnings]
+
+.box-7.smaller[Education ← Location ← U1 → Background → Earnings]
+
+.box-7.smaller[Education ← Year → Earnings]
+]
+
+.pull-right[
+![](`r knitr::fig_chunk("edu-earn-full", "png")`)
+]
+
+---
+
+# All paths
+
+.pull-left-narrow[
+.box-inv-3[Adjust for **Location**, **Background** and **Year** to isolate the **Education → Earnings** causal effect]
+]
+
+.pull-right-wide[
+```{r edu-earn-adjust, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
+  Edu ~ Req + Loc + Bkgd + Year,
+  JobCx ~ Edu,
+  Bkgd ~ U1,
+  Loc ~ U1,
+  exposure = "Edu",
+  outcome = "Earn",
+  latent = "U1",
+  labels = c("Earn" = "Earnings", "Edu" = "Education",
+             "Year" = "Year", "Bkgd" = "Background",
+             "Loc" = "Location", "JobCx" = "Job connections",
+             "U1" = "Unobserved stuff"),
+  coords = edu_earn_coords) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  adjust_for(c("Loc", "Bkgd", "Year")) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status, shape = adjusted), size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  scale_shape_manual(values = c(15, 19)) +
+  guides(color = FALSE, shape = FALSE) +
+  theme_dag()
+```
+]
+
+---
+
+# Causation
+
+.pull-left-wide[
+```{r causation-dag-big, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X + Z,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 15) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+]
+
+.pull-right-narrow[
+.box-inv-3.medium[**X** causes **Y**]
+
+.box-inv-3.medium[**X** causes<br>**Z** which causes **Y**]
+
+.box-3.medium[Should you control for **Z**?]
+]
+
+---
+
+# Causation
+
+.pull-left-wide[
+![](`r knitr::fig_chunk("causation-dag-big", "png")`)
+]
+
+.pull-right-narrow[
+.box-3.medium[Should you control for **Z**?]
+
+.box-inv-3.medium[No!]
+
+.box-inv-3[Overcontrolling]
+]
+
+---
+
+# Causation and overcontrolling
+
+.pull-left-wide[
+![](`r knitr::fig_chunk("edu-earn-full", "png")`)
+]
+
+.pull-right-narrow[
+.box-inv-3[Should you control for job connections?]
+]
+
+---
+
+# Colliders
+
+.pull-left-wide[
+```{r collider-dag-big, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X,
+  Z ~ Y,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2))
+) %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(color = "grey80", size = 15) +
+  geom_dag_text(color = "black", size = 5) +
+  theme_dag()
+```
+]
+
+.pull-right-narrow[
+.box-inv-3.medium[**X** causes **Z**]
+
+.box-inv-3.medium[**Y** causes **Z**]
+
+.box-3.medium[Should you control for **Z**?]
+]
+
+---
+
+# Programming and social skills
+
+.box-inv-3.medium[Do programming skills reduce social skills?]
+
+.pull-left[
+```{r programming-social-skills, echo=FALSE, fig.width=5, fig.height=3, out.width="100%"}
+dagify(
+  Y ~ X,
+  Z ~ Y,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2)),
+  exposure = "X",
+  outcome = "Y",
+  labels = c("X" = "Programming skills", "Y" = "Social skills",
+             "Z" = "Hired by a tech company")
+) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 15) +
+  geom_dag_text(color = "white", size = 5) +
+  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+]
+
+--
+
+.pull-right[
+.box-3[You go to a tech company and conduct a survey. You find a negative relationship!<br>Is it real?]
+]
+
+---
+
+# Programming and social skills
+
+.box-inv-3.medium[Do programming skills reduce social skills?]
+
+.pull-left[
+![](`r knitr::fig_chunk("programming-social-skills", "png")`)
+]
+
+.pull-right[
+.box-3[No! **Hired by a tech company** is a collider and we controlled for it.]
+
+.box-3[This inadvertently connected the two.]
+]
+
+---
+
+layout: false
+
+.pull-left[
+.box-3.medium[Colliders can create<br>fake causal effects]
+]
+
+.pull-right[
+.box-3.medium[Colliders can hide<br>real causal effects]
+]
+
+```{r bulls-scores, echo=FALSE, fig.width=6, fig.height=3.3, out.width="50%"}
+basketball <- read.csv(text = 'PointsPerGame,HeightInches
+                          20.8,75
+                          17.6,81
+                          12.7,78
+                          10.9,76
+                          10.7,83
+                          10.1,75
+                          9,81
+                          8.8,82
+                          8.8,84
+                          8.7,81
+                          5.5,75
+                          5.5,73
+                          3.9,81
+                          2.3,84
+                          2.1,81
+                          1.8,77
+                          1,74
+                          0.5,80')
+
+ggplot(basketball, aes(x = HeightInches, y = PointsPerGame)) +
+  geom_point() +
+  geom_smooth() +
+  labs(x = "Height in Inches",
+       y = "Points Per Game",
+       title = "Chicago Bulls 2009-10")
+# Data from Scott Andrews at StatCrunch
+```
+
+.center[
+.box-inv-3[Height is unrelated to basketball skill… among NBA players]
+]
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Colliders and selection bias
+
+```{r nba-dag, echo=FALSE, fig.width=5, fig.height=3, out.width="65%"}
+dagify(
+  Y ~ X,
+  Z ~ Y,
+  Z ~ X,
+  coords = list(x = c(X = 1, Y = 3, Z = 2),
+                y = c(X = 1, Y = 1, Z = 2)),
+  exposure = "X",
+  outcome = "Y",
+  labels = c("X" = "Height", "Y" = "Points scored",
+             "Z" = "Being in the NBA")
+) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 15) +
+  geom_dag_text(color = "white", size = 5) +
+  geom_dag_label_repel(aes(label = label), nudge_y = c(0.25, 0.25, -0.25)) +
+  scale_color_manual(values = c("#FF4136", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+
+---
+
+# Three types of associations
+
+.pull-left-3[
+.box-3.medium[Confounding]
+
+![](`r knitr::fig_chunk("confounding-dag", "png")`)
+
+.box-inv-3.small[Common cause]
+]
+
+.pull-middle-3[
+.box-3.medium[Causation]
+
+![](`r knitr::fig_chunk("mediation-dag", "png")`)
+
+.box-inv-3.small[Mediation]
+]
+
+.pull-right-3[
+.box-3.medium[Collision]
+
+![](`r knitr::fig_chunk("collision-dag", "png")`)
+
+.box-inv-3.small[Selection /<br>endogeneity]
+]
+
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Causal identification
+
+.pull-left-narrow[
+
+.box-inv-3[All these nodes are related; there's correlation between them all]
+
+.box-inv-3[We care about<br>**Edu → Earn**, but what do we do about all the other nodes?]
+
+]
+
+.pull-right-wide[
+
+```{r edu-earn-full2, echo=FALSE, fig.width=4.5, fig.height=3, out.width="100%"}
+dagify(
+  Earn ~ Edu + Year + Bkgd + Loc + JobCx,
+  Edu ~ Req + Loc + Bkgd + Year,
+  JobCx ~ Edu,
+  Bkgd ~ U1,
+  Loc ~ U1,
+  exposure = "Edu",
+  outcome = "Earn",
+  latent = "U1",
+  labels = c("Earn" = "Earnings", "Edu" = "Education",
+             "Year" = "Year", "Bkgd" = "Background",
+             "Loc" = "Location", "JobCx" = "Job connections",
+             "U1" = "Unobserved stuff"),
+  coords = edu_earn_coords) %>% 
+  tidy_dagitty() %>% 
+  node_status() %>% 
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges() +
+  geom_dag_point(aes(color = status), size = 14) +
+  geom_dag_text(color = "black", size = 5) +
+  scale_color_manual(values = c("#FF4136", "grey60", "#0074D9"),
+                     na.value = "#7FDBFF") +
+  guides(color = FALSE) +
+  theme_dag()
+```
+
+]
+
+---
+
+# Causal identification
+
+.box-inv-3.medium[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
+
+---
+
+# Paths and associations
+
+.box-inv-3.medium[Arrows in a DAG transmit associations]
+
+.box-inv-3.medium[You can redirect and control those paths by "adjusting" or "conditioning"]
+
+---
+
+# Three types of associations
+
+.pull-left-3[
+.box-3.medium[Confounding]
+
+```{r confounding-dag2, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
 dagify(
   Y ~ X + Z,
   X ~ Z,
@@ -239,13 +1198,13 @@ dagify(
   theme_dag()
 ```
 
-.box-inv-5.small[Common cause]
+.box-inv-3.small[Common cause]
 ]
 
 .pull-middle-3.center[
-.box-5.medium[Causation]
+.box-3.medium[Causation]
 
-```{r mediation-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
+```{r mediation-dag2, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
 dagify(
   Y ~ X + Z,
   Z ~ X,
@@ -259,13 +1218,13 @@ dagify(
   theme_dag()
 ```
 
-.box-inv-5.small[Mediation]
+.box-inv-3.small[Mediation]
 ]
 
 .pull-right-3[
-.box-5.medium[Collision]
+.box-3.medium[Collision]
 
-```{r collision-dag, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
+```{r collision-dag2, echo=FALSE, fig.width=4.5, fig.height=3.35, out.width="100%"}
 dagify(
   Y ~ X,
   Z ~ Y,
@@ -280,16 +1239,16 @@ dagify(
   theme_dag()
 ```
 
-.box-inv-5.small[Selection /<br>endogeneity]
+.box-inv-3.small[Selection /<br>endogeneity]
 ]
 
 ---
 
 # Interventions
 
-.box-inv-5.medium[*do*-operator]
+.box-inv-3.medium[*do*-operator]
 
-.box-5[Making an intervention in a DAG]
+.box-3[Making an intervention in a DAG]
 
 $$
 P[Y\ |\ do(X = x)] \quad \text{or} \quad E[Y\ |\ do(X = x)]
@@ -297,11 +1256,11 @@ $$
 
 --
 
-.box-5[P = probability distribution, or E = expectation/expected value]
+.box-3[P = probability distribution, or E = expectation/expected value]
 
 --
 
-.box-5[Y = outcome, X = treatment;<br>x = specific value of treatment]
+.box-3[Y = outcome, X = treatment;<br>x = specific value of treatment]
 
 ---
 
@@ -311,34 +1270,34 @@ $$
 E[Y\ |\ do(X = x)]
 $$
 
-.box-5[E\[ Earnings | *do*(One year of college)\] ]
+.box-3[E\[ Earnings | *do*(One year of college)\] ]
 
 --
 
-.box-5[E\[ Firm growth | *do*(Government R&D funding)\] ]
+.box-3[E\[ Firm growth | *do*(Government R&D funding)\] ]
 
 --
 
-.box-5[E\[ Air quality | *do*(Carbon tax)\] ]
+.box-3[E\[ Air quality | *do*(Carbon tax)\] ]
 
 --
 
-.box-5[E\[ Juvenile delinquency | *do*(Truancy program)\] ]
+.box-3[E\[ Juvenile delinquency | *do*(Truancy program)\] ]
 
 --
 
-.box-5[E\[ Malaria infection rate | *do*(Mosquito net)\] ]
+.box-3[E\[ Malaria infection rate | *do*(Mosquito net)\] ]
 
 ---
 
 # Interventions
 
-.box-inv-5[When you *do*() X, delete all arrows into it]
+.box-inv-3[When you *do*() X, delete all arrows into it]
 
 --
 
 .pull-left[
-.box-5.small[Observational DAG]
+.box-3.small[Observational DAG]
 ```{r observational-dag, echo=FALSE, fig.width=4, fig.height=3, out.width="90%"}
 dagify(
   Y ~ X + A,
@@ -357,7 +1316,7 @@ dagify(
 --
 
 .pull-right[
-.box-5.small[Experimental DAG]
+.box-3.small[Experimental DAG]
 ```{r experimental-dag, echo=FALSE, fig.width=4, fig.height=3, out.width="90%"}
 dagify(
   Y ~ X + A,
@@ -388,7 +1347,7 @@ $$
 --
 
 .pull-left[
-.box-5.small[Observational DAG]
+.box-3.small[Observational DAG]
 
 ```{r edu-earn-obs, echo=FALSE, fig.width=6, fig.height=4.5, out.width="90%"}
 dagify(
@@ -422,7 +1381,7 @@ dagify(
 --
 
 .pull-right[
-.box-5.small[Experimental DAG]
+.box-3.small[Experimental DAG]
 
 ```{r edu-earn-experiment, warning=FALSE, echo=FALSE, fig.width=6, fig.height=4.5, out.width="90%"}
 dagify(
@@ -456,7 +1415,7 @@ dagify(
 
 # Un*do*()ing things
 
-.box-inv-5.medium[We want to know **P[Y | *do*(X)]**<br>but all we have is<br>observational data X, Y, and Z]
+.box-inv-3.medium[We want to know **P[Y | *do*(X)]**<br>but all we have is<br>observational data X, Y, and Z]
 
 --
 
@@ -466,39 +1425,21 @@ $$
 
 --
 
-.box-5[Correlation isn't causation!]
+.box-3[Correlation isn't causation!]
 
 ---
 
 # Un*do*()ing things
 
-.box-inv-5.medium[Our goal with observational data:<br>Rewrite **P[Y | *do*(X)]** so that it doesn't have a *do*() anymore (is "*do*-free")]
-
----
-
-# *do*-calculus
-
-.box-inv-5[A set of three rules that let you manipulate a DAG<br>in special ways to remove *do*() expressions]
-
-.center[
-<figure>
-  <img src="img/05/do-calculus.png" alt="do-calculus rules" title="do-calculus rules" width="40%">
-</figure>
-]
-
-.box-5.smaller[WAAAAAY beyond the score of this class!<br>Just know it exists and computer algorithms can do it for you!]
-
-???
-
-https://arxiv.org/abs/1906.07125
+.box-inv-3.medium[Our goal with observational data:<br>Rewrite **P[Y | *do*(X)]** so that it doesn't have a *do*() anymore (is "*do*-free")]
 
 ---
 
 # Special cases of *do*-calculus
 
-.box-inv-5.medium.sp-after[Backdoor adjustment]
+.box-inv-3.medium.sp-after[Backdoor adjustment]
 
-.box-inv-5.medium[Frontdoor adjustment]
+.box-inv-3.medium[Frontdoor adjustment]
 
 ---
 
@@ -524,11 +1465,11 @@ dagify(Y ~ X + Z,
 ]
 
 .pull-right[
-.box-inv-5.small[↑ That's complicated!]
+.box-inv-3.small[↑ That's complicated!]
 
-.box-inv-5[The right-hand side of the equation means "the effect of X on Y after adjusting for Z"]
+.box-inv-3[The right-hand side of the equation means "the effect of X on Y after adjusting for Z"]
 
-.box-5[There's no *do*() on that side!]
+.box-3[There's no *do*() on that side!]
 ]
 
 ---
@@ -559,34 +1500,26 @@ dagify(C ~ T + G,
 ```
 
 
-.box-5.small[**S → T** is *d*-separated; **T → C** is *d*-separated<br>combine the effects to find **S → C**]
+.box-3.small[**S → T** is *d*-separated; **T → C** is *d*-separated<br>combine the effects to find **S → C**]
 
 ---
 
 # Moral of the story
 
-.box-inv-5.medium[If you can transform *do*() expressions to<br>*do*-free versions, you can legally make causal inferences from observational data]
-
---
-
-.box-5[Backdoor adjustment is easiest to see +<br>dagitty and **ggdag** do this for you!]
-
---
-
-.box-5.small[Fancy algorithms (found in the **causaleffect** package)<br>can do the official *do*-calculus for you too]
+.box-inv-3.medium[If you can transform *do*() expressions to<br>*do*-free versions, you can legally make causal inferences from observational data]
 
 ---
 
 layout: false
 name: potential-outcomes
-class: center middle section-title section-title-7 animated fadeIn
+class: center middle section-title section-title-6 animated fadeIn
 
 # Potential outcomes
 
 ---
 
 layout: true
-class: title title-7
+class: title title-6
 
 ---
 
@@ -600,7 +1533,7 @@ class: title title-7
 
 # Some equation translations
 
-.box-inv-7.medium[Causal effect = δ (delta)]
+.box-inv-6.medium[Causal effect = δ (delta)]
 
 $$
 \delta = P[Y\ |\ do(X)]
@@ -637,32 +1570,32 @@ https://www.thisamericanlife.org/691/gardens-of-branching-paths
 ---
 
 layout: true
-class: title title-7
+class: title title-6
 
 ---
 
 layout: false
 
-.box-7.large[Fundamental problem<br>of causal inference]
+.box-6.large[Fundamental problem<br>of causal inference]
 
 $$
 \delta_i = Y_i^1 - Y_i^0 \quad \text{in real life is} \quad \delta_i = Y_i^1 - ???
 $$
 
-.box-inv-7[Individual-level effects are impossible to observe!]
+.box-inv-6[Individual-level effects are impossible to observe!]
 
-.box-inv-7[There are no individual counterfactuals!]
+.box-inv-6[There are no individual counterfactuals!]
 
 ---
 
 layout: true
-class: title title-7
+class: title title-6
 
 ---
 
 # Average treatment effect (ATE)
 
-.box-inv-7.medium[Solution: Use averages instead]
+.box-inv-6.medium[Solution: Use averages instead]
 
 $$
 \text{ATE} = E(Y_1 - Y_0) = E(Y_1) - E(Y_0)
@@ -670,7 +1603,7 @@ $$
 
 --
 
-.box-7[Difference between average/expected value when<br>program is on vs. expected value when program is off]
+.box-6[Difference between average/expected value when<br>program is on vs. expected value when program is off]
 
 $$
 \delta = (\bar{Y}\ |\ P = 1) - (\bar{Y}\ |\ P = 0)
@@ -723,15 +1656,15 @@ $\text{ATE} = \frac{20 + 5 + 5 + 5 + 10 + 0 + -10 + 5}{8} = 5$
 
 ---
 
-class: title title-7
+class: title title-6
 
 # CATE
 
-.box-inv-7.sp-after[ATE in subgroups]
+.box-inv-6.sp-after[ATE in subgroups]
 
 --
 
-.box-7.medium[Is the program more<br>effective for specific age groups?]
+.box-6.medium[Is the program more<br>effective for specific age groups?]
 
 ---
 
@@ -757,23 +1690,23 @@ $\text{CATE}_\text{Young} = \frac{5 + 0 - 10 + 5}{4} = 0$
 
 ---
 
-class: title title-7
+class: title title-6
 
 # ATT and ATU
 
-.box-inv-7.medium[Average treatment on the treated]
+.box-inv-6.medium[Average treatment on the treated]
 
-.box-7[ATT / TOT]
+.box-6[ATT / TOT]
 
-.box-7[Effect for those with treatment]
+.box-6[Effect for those with treatment]
 
 --
 
-.box-inv-7.medium[Average treatment on the untreated]
+.box-inv-6.medium[Average treatment on the untreated]
 
-.box-7[ATU / TUT]
+.box-6[ATU / TUT]
 
-.box-7[Effect for those without treatment]
+.box-6[Effect for those without treatment]
 
 ---
 
@@ -800,13 +1733,13 @@ $\text{CATE}_\text{Untreated} = \frac{10 + 0 - 10 + 5}{4} = 1.25$
 ---
 
 layout: true
-class: title title-7
+class: title title-6
 
 ---
 
 # ATE, ATT, and ATU
 
-.box-inv-7.medium.sp-after[The ATE is the weighted average<br>of the ATT and ATU]
+.box-inv-6.medium.sp-after[The ATE is the weighted average<br>of the ATT and ATU]
 
 --
 
@@ -818,15 +1751,15 @@ $(\frac{4}{8} \times 8.75) + (\frac{4}{8} \times 1.25)$
 $4.375 + 0.625 = 5$
 ]
 
-.box-7.smaller[**π** here means "proportion," not 3.1415]
+.box-6.smaller[**π** here means "proportion," not 3.1415]
 
 ---
 
 # Selection bias
 
-.box-inv-7.medium[ATE and ATT aren't always the same]
+.box-inv-6.medium[ATE and ATT aren't always the same]
 
-.box-inv-7.medium[ATE = ATT + Selection bias]
+.box-inv-6.medium[ATE = ATT + Selection bias]
 
 $$
 \begin{aligned}
@@ -835,7 +1768,7 @@ x &= -3.75
 \end{aligned}
 $$
 
-.box-7[Randomization fixes this, makes x = 0]
+.box-6[Randomization fixes this, makes x = 0]
 
 ---
 
@@ -850,11 +1783,11 @@ po %>%
 ]
 
 .pull-right[
-.box-inv-7[Treatment not<br>randomly assigned]
+.box-inv-6[Treatment not<br>randomly assigned]
 
-.box-inv-7[We can't see<br>unit-level causal effects]
+.box-inv-6[We can't see<br>unit-level causal effects]
 
-.box-7[What do we do?!]
+.box-6[What do we do?!]
 ]
 
 ---
@@ -870,7 +1803,7 @@ po %>%
 ]
 
 .pull-right[
-.box-inv-7[Treatment seems to be correlated with age]
+.box-inv-6[Treatment seems to be correlated with age]
 
 ```{r po-dag, echo=FALSE, fig.width=5, fig.height=3.2, out.width="100%"}
 dagify(outcome ~ treatment + age,
@@ -909,9 +1842,9 @@ po %>%
 ]
 
 .pull-right[
-.box-inv-7[We can estimate the ATE by finding the weighted average of age-based CATEs]
+.box-inv-6[We can estimate the ATE by finding the weighted average of age-based CATEs]
 
-.box-inv-7.tiny[As long as we assume/pretend treatment was randomly assigned within each age = unconfoundedness]
+.box-inv-6.tiny[As long as we assume/pretend treatment was randomly assigned within each age = unconfoundedness]
 
 ]
 
@@ -972,7 +1905,7 @@ $\color{#FF851B}{\widehat{\text{ATE}}} = \color{#F012BE}{78.75} - \color{#AAAAAA
 
 &nbsp;
 
-.box-7[You can only do this if treatment is random!]
+.box-6[You can only do this if treatment is random!]
 ]
 
 
@@ -985,9 +1918,9 @@ $\widehat{\text{ATE}} = \pi_\text{Old} \widehat{\text{CATE}_\text{Old}} + \pi_\t
 ]
 
 .pull-left-wide[
-.box-inv-7[We used age here because it correlates with (and confounds) the outcome]
+.box-inv-6[We used age here because it correlates with (and confounds) the outcome]
 
-.box-7.small[And we assumed unconfoundedness;<br>that treatment is<br>randomly assigned within the groups]
+.box-6.small[And we assumed unconfoundedness;<br>that treatment is<br>randomly assigned within the groups]
 ]
 
 .pull-right-narrow[
@@ -1003,7 +1936,7 @@ layout: false
 
 &nbsp;
 
-.box-7[Does attending a private university cause an increase in earnings?]
+.box-6[Does attending a private university cause an increase in earnings?]
 ]
 
 .pull-right-wide[
@@ -1021,9 +1954,9 @@ layout: false
 ]
 
 .pull-right-narrow[
-.box-7[This is tempting!]
+.box-6[This is tempting!]
 
-.box-inv-7[Average private − Average public]
+.box-inv-6[Average private − Average public]
 
 .tiny[
 $$
@@ -1035,7 +1968,7 @@ $$
 $$
 ]
 
-.box-7[**This is wrong!**]
+.box-6[**This is wrong!**]
 ]
 
 .center[
@@ -1044,7 +1977,7 @@ $\color{#FF851B}{\widehat{\text{ATE}}} = \color{#7FDBFF}{\pi_\text{Private}} \co
 
 ---
 
-class: title title-7
+class: title title-6
 
 # Grouping and matching
 
@@ -1055,9 +1988,9 @@ class: title title-7
 ]
 
 .pull-right[
-.box-inv-7[These groups look like they have similar characteristics]
+.box-inv-6[These groups look like they have similar characteristics]
 
-.box-inv-7.tiny[Unconfoundedness?]
+.box-inv-6.tiny[Unconfoundedness?]
 
 ```{r match-dag, echo=FALSE, fig.width=5, fig.height=3.2, out.width="80%"}
 dagify(outcome ~ treatment + characteristics,
@@ -1092,7 +2025,7 @@ dagify(outcome ~ treatment + characteristics,
 ]
 
 .pull-right-narrow[
-.box-inv-7[CATE Group A + CATE Group B]
+.box-inv-6[CATE Group A + CATE Group B]
 
 .tiny[
 $$
@@ -1104,7 +2037,7 @@ $$
 $$
 ]
 
-.box-7[**This is less wrong!**]
+.box-6[**This is less wrong!**]
 ]
 
 .center[
@@ -1113,7 +2046,7 @@ $\color{#FF851B}{\widehat{\text{ATE}}} = \color{#7FDBFF}{\pi_\text{Group A}} \co
 
 ---
 
-class: title title-7
+class: title title-6
 
 # Matching with regression
 
@@ -1155,5 +2088,7 @@ lm(earnings ~ private + group_A, data = schools_small) %>%
 --
 
 .center.float-left[
-.box-7[β<sub>1</sub> = $10,000]&emsp;.box-7[This is less wrong!]&emsp;.box-7[Significance details!]
+.box-6[β<sub>1</sub> = $10,000]&emsp;.box-6[This is less wrong!]&emsp;.box-6[Significance details!]
 ]
+
+

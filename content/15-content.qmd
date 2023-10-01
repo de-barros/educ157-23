@@ -7,6 +7,10 @@ date: "2023-11-16"
 
 - {{< fa book >}} Chapter 16 in *The Effect* [@Huntington-Klein:2021]
 
+## Video
+
+- {{< fa video >}} econimate, ["The Long-Run Benefits of Public Preschool,"](https://www.youtube.com/watch?v=dsT6KKNrTvw) February 1, 2022
+
 ## Slides
 
 On the day of class, you will find my slides on Canvas. 

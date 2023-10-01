@@ -1,6 +1,6 @@
 ---
-title: "Ethics, stories, and curiosity"
-author: "Andrew Heiss"
+title: "Difference-in-differences"
+author: "Andreas de Barros"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -14,8 +14,10 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: "16:9"
-      navigation:
-        scroll: false
+      navigation:   
+        scroll: true # Changed this to true to enable scrolling
+      incremental: true  # Added this line to stay on the same slide when knitting  
+      self_contained: false  # Added this line to prevent HTML caching
 editor_options: 
   chunk_output_type: console
 ---
@@ -25,20 +27,34 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       fig.retina = 3, fig.align = "center")
 ```
 
+```{r packages-data, include=FALSE}
+library(tidyverse)
+library(flair)
+library(broom)
+library(ggdag)
+library(kableExtra)
+library(scales)
+library(patchwork)
+
+world_happiness <- read_csv("data/world_happiness.csv") %>% 
+  mutate(latin_america = region == "Latin America & Caribbean") %>% 
+  mutate(latin_america = factor(latin_america, labels = c("Not Latin America", "Latin America")))
+```
+
 ```{r xaringanExtra, echo=FALSE}
 xaringanExtra::use_xaringan_extra(c("tile_view"))
 ```
 
-class: center middle main-title section-title-7
+class: center middle main-title section-title-4
 
-# Ethics, stories,<br>and curiosity
+# Difference-in-differences
 
 .class-info[
 
-**Session 14**
+**Class 14**
 
-.light[PMAP 8521: Program evaluation<br>
-Andrew Young School of Policy Studies
+.light[EDUC 157: Educational Research and Evaluation<br>
+UCI School of Education
 ]
 
 ]
@@ -46,1329 +62,1177 @@ Andrew Young School of Policy Studies
 ---
 
 name: outline
-class: title title-inv-8
+class: title title-4
 
 # Plan for today
 
 --
 
-.box-4.medium.sp-after-half[What did we just learn?]
+.box-1.medium.sp-after-half[Case study]
 
 --
 
-.box-6.medium.sp-after-half[Ethics of data analytics]
+.box-3.medium.sp-after-half[Before-after, two groups]
 
 --
 
-.box-2.medium.sp-after-half[Ethics of storytelling]
-
---
-
-.box-5.medium.sp-after-half[Curiosity]
-
+.box-6.medium.sp-after-half[Diff-in-diff assumptions]
+ 
 ---
 
 layout: false
-name: overview
-class: center middle section-title section-title-4 animated fadeIn
+name: two-wrongs
+class: center middle section-title section-title-1 animated fadeIn
 
-# What did we just learn?
-
----
-
-.center[
-<figure>
-  <img src="img/14/course-objectives.png" alt="Course objectives" title="Course objectives" width="68%">
-</figure>
-]
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/01/eval-flowchart.png" alt="Class flowchart" title="Class flowchart" width="100%">
-</figure>
-]
-
----
-
-class: title title-4
-
-# Main takeaways
-
---
-
-.box-inv-4.medium.sp-after[Don't be afraid of causal language!]
-
---
-
-.box-4.medium[With careful use of DAGs<br>and special research designs,<br>you can make causal claims]
-
----
-
-class: bg-full
-background-image: url("img/14/the-c-word.png")
-
----
-
-layout: false
-name: ethics-analysis
-class: center middle section-title section-title-6 animated fadeIn
-
-# Ethics of data analytics
+# Case study
 
 ---
 
 layout: true
-class: title title-6
+class: title title-1
 
 ---
 
-# Powerful tools
+# School construction in Indonesia
+
+.box-inv-1.medium.sp-after-half[Did doubling the number of primary schools impact long-term life outcomes?]
 
 --
 
-.box-inv-6.medium.sp-after-half[R is an incredibly valuable skill]
+.box-1.sp-after[Did educational attainment increase?]
+
+.box-inv-1.small.sp-after[Did earnings increase?]
 
 --
+.box-inv-1.medium[INPRES started in 1973, built more than 61,000 new primary schools in 6 years]
 
-.box-inv-6.medium.sp-after-half[Causal inference is an incredibly valuable skill]
+???
 
---
+https://www.jstor.org/stable/2677813
 
-.box-6.medium.sp-after-half[These tools can be used to improve the world!]
-
---
-
-.box-6.medium[And potentially harm it]
-
----
-
-# Possible pitfalls
-
---
-
-.box-inv-6.medium[Manipulation]
-
-.box-6.small[Don't coerce people]
-
---
-
-.box-inv-6.medium[Bias]
-
-.box-6.small[There's no such thing as objective data or models]
-
---
-
-.box-inv-6.medium[Accidental evil]
-
-.box-6.small[Don't let stupidity transform into evil]
+But also see the re-analysis, here:
+https://www.openphilanthropy.org/research/does-putting-kids-in-school-now-put-money-in-their-pockets-later-revisiting-a-natural-experiment-in-indonesia/
 
 ---
 
 layout: false
-name: analysis-manipulation
-class: center middle section-title-inv section-title-inv-6
-
-# Manipulation
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/good-place.jpg" alt="The Good Place" title="The Good Place" width="95%">
-</figure>
-]
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/good-place-points.jpeg" alt="The Good Place point system" title="The Good Place point system" width="95%">
-</figure>
-]
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/wired-cover.jpg" alt="Wired social score cover" title="Wired social score cover" width="40%">
-</figure>
-]
-
-???
-
-<https://www.wired.com/story/age-of-social-credit/>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/china-bus.jpg" alt="China bus" title="China bus" width="85%">
-</figure>
-]
-
-???
-
-<https://boingboing.net/2018/11/26/just-dont-have-a-face.html>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/instagram-ranking.png" alt="Instagram ranking" title="Instagram ranking" width="50%">
-</figure>
-]
-
-???
-
-<https://techcrunch.com/2018/06/01/how-instagram-feed-works/>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/blue-feed-red-feed.png" alt="Blue Feed, Red Feed" title="Blue Feed, Red Feed" width="100%">
-</figure>
-]
-
-???
-
-<http://graphics.wsj.com/blue-feed-red-feed/>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/blue-feed-red-feed-example.png" alt="Blue Feed, Red Feed Example" title="Blue Feed, Red Feed Example" width="40%">
-</figure>
-]
-
-???
-
-<http://graphics.wsj.com/blue-feed-red-feed/#/president-trump>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/fb-like-everything.png" alt="Facebook like everything" title="Facebook like everything" width="80%">
-</figure>
-]
-
-???
-
-<https://www.wired.com/2014/08/i-liked-everything-i-saw-on-facebook-for-two-days-heres-what-it-did-to-me/>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/fb-spying.png" alt="Reply All Facebook Spying" title="Reply All Facebook Spying" width="100%">
-</figure>
-]
-
-???
-
-<https://www.gimletmedia.com/reply-all/109-facebook-spying>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/target-pregnant.png" alt="Target pregnant teen" title="Target pregnant teen" width="78%">
-</figure>
-]
-
-???
-
-<https://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/#74dc8acf6668>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/airline-seating.png" alt="Airline seating" title="Airline seating" width="100%">
-</figure>
-]
-
-???
-
-<https://www.independent.co.uk/travel/news-and-advice/airline-flights-pay-extra-to-sit-together-split-up-family-algorithm-minister-a8640771.html>
-
----
-
-class: title title-6
-
-# It's not all dystopian!
-
-.pull-left.center[
-<figure>
-  <img src="img/14/precision-health.png" alt="Precision medicine Obama" title="Precision medicine Obama" width="100%">
-</figure>
-]
-
-.pull-right.center[
-<figure>
-  <img src="img/14/crisis-text-line.png" alt="Crisis text line" title="Crisis text line" width="100%">
-</figure>
-]
-
-???
-
-<https://obamawhitehouse.archives.gov/the-press-office/2015/01/30/fact-sheet-president-obama-s-precision-medicine-initiative>
-
-<https://www.crisistextline.org/community/what-ive-been-been-up-to/>
-
----
-
-class: middle
-
-.box-6.medium[What makes the social score<br>and the crisis score<br>ethically different?]
-
-.box-inv-6.medium[Or are they the same thing?]
-
----
-
-class: title title-6
-
-# Avoid manipulation
-
---
-
-.box-inv-6.medium.sp-after-half[Think about people]
-
---
-
-.box-inv-6.medium.sp-after-half[Think about autonomy]
-
---
-
-.box-inv-6.medium.sp-after-half[Don't rely 100% on data!]
+class: bg-full
+background-image: url("img/14/inpres-1.png")
 
 ---
 
 layout: false
-name: analysis-bias
-class: center middle section-title-inv section-title-inv-6
-
-# Bias
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/predictim-headline.png" alt="Predictim article" title="Predictim article" width="100%">
-</figure>
-]
-
-???
-
-<https://gizmodo.com/predictim-claims-its-ai-can-flag-risky-babysitters-so-1830913997>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/predictim-excerpt.png" alt="Predictim article excerpt" title="Predictim article excerpt" width="100%">
-</figure>
-]
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/predictim-score.png" alt="Predictim score" title="Predictim score" width="90%">
-</figure>
-]
-
----
-
 class: bg-full
-background-image: url("img/14/bias-books.png")
-
----
-
-.center[
-<figure>
-  <img src="img/14/amazon-hiring.png" alt="Amazon hiring" title="Amazon hiring" width="70%">
-</figure>
-]
-
---
-
-.center[
-<figure>
-  <img src="img/14/compas-bad.png" alt="COMPAS bias" title="COMPAS bias" width="60%">
-</figure>
-]
-
-???
-
-<https://qz.com/1427621/companies-are-on-the-hook-if-their-hiring-algorithms-are-biased/>
-
-<https://www.popsci.com/recidivism-algorithm-random-bias>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/fb-pro-publica.png" alt="Facebook in ProPublica" title="Facebook in ProPublica" width="80%">
-</figure>
-]
-
-???
-
-<https://www.propublica.org/article/facebook-lets-advertisers-exclude-users-by-race>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/fb-hud.png" alt="Facebook HUD case" title="Facebook HUD case" width="100%">
-</figure>
-]
-
-???
-
-<https://www.hud.gov/sites/dfiles/Main/documents/HUD_v_Facebook.pdf>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/apple-card.png" alt="Apple card" title="Apple card" width="60%">
-</figure>
-]
-
----
-
-class: title title-6
-
-# Avoid bias
-
---
-
-.box-inv-6.medium.sp-after-half[Make sure your sample is representative]
-
---
-
-.box-inv-6.medium.sp-after-half[Think about theory]
-
---
-
-.box-6.medium.sp-after-half[Remember that **NO** data,<br>models, or algorithms are neutral]
-
----
-
-class: title title-6
-
-# Fight the algorithms
-
-.center.tiny.light[*Very feebly, but still…*]
-
---
-
-.box-inv-6.medium.sp-before.sp-after-half[Incognito / private windows]
-
---
-
-.box-inv-6.medium[adsettings.google.com]
+background-image: url("img/14/inpres-2.jpg")
 
 ---
 
 layout: false
-name: analysis-evil
-class: center middle section-title-inv section-title-inv-6
-
-# Accidental(?) evil
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/algorithmic-cruelty.png" alt="Eric Meyer algorithmic cruelty" title="Eric Meyer algorithmic cruelty" width="70%">
-</figure>
-]
-
-???
-
-<https://meyerweb.com/eric/thoughts/2014/12/24/inadvertent-algorithmic-cruelty/>
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/uber-crash.png" alt="Uber self-driving car crash" title="Uber self-driving car crash" width="75%">
-</figure>
-]
-
-???
-
-<https://www.npr.org/2019/11/07/777438412/feds-say-self-driving-uber-suv-did-not-recognize-jaywalking-pedestrian-in-fatal->
-
----
-
-class: middle
-
-.center[
-<figure>
-  <img src="img/14/fake-news.png" alt="NYT fake news on Facebook" title="NYT fake news on Facebook" width="60%">
-</figure>
-]
-
-???
-
-<https://www.nytimes.com/2019/01/10/us/politics/facebook-fake-news-2016-election.html>
-
----
-
 class: bg-full
-background-image: url("img/14/youtube-radicalization.png")
-
-???
-
-<https://www.nytimes.com/interactive/2019/06/08/technology/youtube-radical.html>
-
----
-
-class: bg-full
-background-image: url("img/14/youtube-algorithm.jpg")
-
-???
-
-<https://www.youtube.com/watch?v=BSpAWkQLlgM>
-
----
-
-class: bg-full
-background-image: url("img/14/bad-ai-tweets.png")
-
-???
-
-<https://twitter.com/CBSNews/status/1203801451941765120>
-
-<https://twitter.com/colourmeamused_/status/1309141783427919876>
-
----
-
-layout: false
-name: telling-stories
-class: center middle section-title section-title-2 animated fadeIn
-
-# Ethics of storytelling
+background-image: url("img/14/inpres-3.jpg")
 
 ---
 
 layout: true
-class: title title-2
+class: title title-1
 
 ---
 
-# Stories as art
+# High- vs. low-intensity regions
 
-.box-inv-2.large[**Stories** are an *art form* for<br>translating core, essential **content**<br>to different **forms**<br>for specific **audiences**.]
+.box-inv-1.medium.sp-after-half[By 1995, had boys/men in the target age range received more schooling?]
 
----
+--
 
-# Every story is the same
+.box-1[Years of education <sub>Eligible (ages 2-6 in 1974) x Low-intensity region </sub> = 9.76]
 
-.center[
-<iframe width="800" height="450" src="https://www.youtube.com/embed/LuD2Aa0zFiA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-]
+--
+
+.box-1[Years of education <sub>Eligible (ages 2-6 in 1974) x High-intensity region </sub> = 8.49]
+
+--
+
+.box-1.sp-after[∆ = -1.27]
+
+--
+
+.box-inv-1.medium[Is this the causal effect? Program failure?]
 
 ???
 
-Will Schoder, "Every Story is the Same", https://www.youtube.com/watch?v=LuD2Aa0zFiA
+No! Not possible because maybe other things happened to the group of high-intensity regions to cause that – there's no control group to compare with. This group would have also experience the same "shocks" as that region.
 
 ---
 
-# Heroes
+# High- vs. low-intensity regions
 
-.pull-left.center[
-<figure>
-  <img src="img/14/1019px-Heroesjourney.svg.png" alt="The Hero's Journey" title="The Hero's Journey" width="80%">
-</figure>
-]
+.box-inv-1.medium.sp-after-half[By 1995, had boys/men in the target age range received more schooling?]
 
-.pull-right.center[
-<figure>
-  <img src="img/14/story-cycle.png" alt="The Story Cycle" title="The Story Cycle" width="100%">
-</figure>
-]
+--
+
+.box-1[Years of edu. <sub>Ineligible (ages 12-17 in 1974) x High-intensity region </sub> = 8.02]
+
+--
+
+.box-1[Years of edu. <sub>Eligible (ages 2-6 in 1974) x High-intensity region </sub> = 8.49]
+
+--
+
+.box-1.sp-after[∆ = 0.47]
+
+--
+
+.box-inv-1.medium[Is this the causal effect? Success!?]
 
 ???
 
-https://commons.wikimedia.org/wiki/File:Heroesjourney.svg
-
-5:35 from Will Schoder, "Every Story is the Same", https://www.youtube.com/watch?v=LuD2Aa0zFiA
+No! Not possible because maybe other things happened to the different cohorts to cause that – there may be secular trends going.
 
 ---
 
-# You are not the hero
+# Problems
+
+--
+
+.box-inv-1.medium[Comparing regions by program intensity]
+
+--
+
+.box-1.small[Regions are different to start with]
+
+--
+
+.box-1.small.sp-after[Selection into treatment! Omitted variable bias!]
+
+--
+
+.box-inv-1.medium.sp-before[Comparing cohorts in high-intensity regions]
+
+--
+
+.box-1.small[Same regions]
+
+--
+
+.box-1.small[Impossible to know if change happened because of overall trends]
+
+---
+
+layout: false
+
+```{r min-wage-dag, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+node_details <- tribble(
+  ~name, ~label, ~x, ~y,
+  "treatment", "Primary school available", 1, 2,
+  "outcome", "Attainment", 3, 2,
+  "time", "Program intensity (region)", 2, 3,
+  "nj", "Eligibility (cohort/age)", 2, 1
+)
+
+node_labels <- node_details$label
+names(node_labels) <- node_details$name
+
+my_dag <- dagify(outcome ~ treatment + time + nj,
+                 treatment ~ time + nj,
+                 exposure = "treatment",
+                 outcome = "outcome",
+                 coords = node_details,
+                 labels = node_labels) %>% 
+  tidy_dagitty() %>%
+  node_status()   # Add column for exposure/outcome/latent
+
+status_colors <- c(exposure = "#0074D9", outcome = "#FF851B", latent = "grey50")
+
+# Fancier graph
+set.seed(1234)
+ggplot(my_dag, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
+                 end_cap = ggraph::circle(3, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 30) +
+  geom_dag_label_repel(aes(label = label, fill = status), seed = 1234,
+                       color = "white", fontface = "bold", size = 10,
+                       label.padding = grid::unit(0.75, "lines"),
+                       box.padding = grid::unit(2.5, "lines"),
+                       direction = "y") +
+  scale_color_manual(values = status_colors, na.value = "grey20") +
+  scale_fill_manual(values = status_colors, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE) + 
+  theme_dag(base_size = 20, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r dd-table-basic, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Too old`, ~`Eligible age`, ~`<span class='color-light-1'>∆ <span class='smaller'>(eligible − ineligible)</span></span>`,
+  "Low-intensity", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(treated a little)</small>", "<b>B − A</b>",
+  "High-intensity", "<b>C</b><br><span class='small'>(never treated)</small>", "<b>D</b><br><span class='small'>(treated a lot)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(high − low)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class=''><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(4, background = "#FFFFFF", color = "#FFFFFF") %>% 
+  row_spec(3, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+---
+
+```{r dd-table-growth, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Too old`, ~`Eligible age`, ~`<span class='color-light-1'>∆ <span class='smaller'>(eligible − ineligible)</span></span>`,
+  "Low-intensity", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(treated a little)</small>", "<b>B − A</b>",
+  "High-intensity", "<b>C</b><br><span class='small'>(never treated)</small>", "<b>D</b><br><span class='small'>(treated a lot)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(high − low)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class=''><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  row_spec(3, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+.box-1[∆ (eligible − ineligible) = **across-cohort difference**]
+
+---
+
+```{r dd-table-within, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Too old`, ~`Eligible age`, ~`<span class='color-light-1'>∆ <span class='smaller'>(eligible − ineligible)</span></span>`,
+  "Low-intensity", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(treated a little)</small>", "<b>B − A</b>",
+  "High-intensity", "<b>C</b><br><span class='small'>(never treated)</small>", "<b>D</b><br><span class='small'>(treated a lot)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(high − low)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class=''><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(4, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+.box-1[∆ (high − low-intensity) = **across-region difference**]
+
+---
+
+```{r dd-table-full, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Too old`, ~`Eligible age`, ~`<span class='color-light-1'>∆ <span class='smaller'>(eligible − ineligible)</span></span>`,
+  "Low-intensity", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(treated a little)</small>", "<b>B − A</b>",
+  "High-intensity", "<b>C</b><br><span class='small'>(never treated)</small>", "<b>D</b><br><span class='small'>(treated a lot)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(high − low)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class=''><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+.box-1[∆<sub>across cohorts</sub> − ∆<sub>across regions</sub> =<br>Difference-in-differences =<br>causal effect!]
+
+---
+
+class: middle
+
+.medium-small[
+$$\begin{aligned}
+\text{DD}\ =\ &(\bar{x}_\text{treat, eligible} - \bar{x}_\text{treat, ineligible}) \\
+&- (\bar{x}_\text{control, eligible} - \bar{x}_\text{control, ineligible})
+\end{aligned}$$
+]
+
+---
+
+```{r dd-table-numbers, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Too old`, ~`Eligible age`, ~`<span class='color-light-1'>∆ <span class='smaller'>(eligible − ineligible)</span></span>`,
+  "Low-intensity", "<b>9.40</b><br><span class='small'>A</small>", "<b>9.76</b><br><span class='small'>B</small>", "<b>0.36</b><br><span class='small'>B − A</small>",
+  "High-intensity", "<b>8.02</b><br><span class='small'>C</small>", "<b>8.49</b><br><span class='small'>D</small>", "<b>0.47</b><br><span class='small'>D − C</small>",
+  "∆<br><span class='smaller'>(high − low)</span>", "<b>-1.39</b><br><span class='small'>C − A</small>", "<b>-1.27</b><br><span class='small'>D − B</small>", "<b>(-1.27) − (−1.39) = <br><span class='color-1'>0.12</span></b>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+---
+
+layout: false
+name: diff-diff-assumptions
+class: center middle section-title section-title-3 animated fadeIn
+
+# Before-after, two groups
+
+---
+
+layout: true
+class: title title-3
+
+---
+
+# Raising the minimum wage
+
+.box-inv-3.medium.sp-after-half[What happens if you raise the minimum wage?]
+
+--
+
+.box-3.sp-after[Economic theory says there<br>should be fewer jobs]
+
+--
+
+.box-inv-3.medium[New Jersey in 1992]
+
+.box-inv-3.medium[$4.25 → $5.05]
+
+---
+
+# Before vs. after
+
+.box-inv-3.medium.sp-after-half[Average # of jobs per fast food restaurant in NJ]
+
+--
+
+.box-3[New Jersey<sub>Before change</sub> = 20.44]
+
+--
+
+.box-3[New Jersey<sub>After change</sub> = 21.03]
+
+--
+
+.box-3.sp-after[∆ = 0.59]
+
+--
+
+.box-inv-3.medium[Is this the causal effect?]
+
+???
+
+No! Not possible because maybe other things happened in NJ to cause that – there's no control state to compare with NJ
+
+---
+
+# Treatment vs. control
+
+.box-inv-3.medium.sp-after-half[Average # of jobs per fast food restaurant]
+
+--
+
+.box-3[Pennsylvania<sub>After change</sub> = 21.17]
+
+--
+
+.box-3[New Jersey<sub>After change</sub> = 21.03]
+
+--
+
+.box-3.sp-after[∆ = −0.14]
+
+--
+
+.box-inv-3.medium[Is this the causal effect?]
+
+???
+
+No! There's no pre-level to compare with. Maybe both states went up, maybe both went down. Can't tell.
+
+---
+
+# Problems
+
+--
+
+.box-inv-3.medium[Comparing only before/after]
+
+--
+
+.box-3.small[You're only looking at the treatment group!]
+
+--
+
+.box-3.small.sp-after[Impossible to know if change happened because of treatment or just naturally]
+
+--
+
+.box-inv-3.medium.sp-before[Comparing only treatment/control]
+
+--
+
+.box-3.small[You're only looking at post-treatment values]
+
+--
+
+.box-3.small[Impossible to know if change happened because of natural growth]
+
+---
+
+layout: false
+
+```{r min-wage-dag1, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+node_details1 <- tribble(
+  ~name, ~label, ~x, ~y,
+  "treatment", "Minimum wage", 1, 2,
+  "outcome", "Jobs", 3, 2,
+  "time", "Time (year)", 2, 3,
+  "nj", "Being in New Jersey", 2, 1
+)
+
+node_labels1 <- node_details1$label
+names(node_labels1) <- node_details1$name
+
+my_dag1 <- dagify(outcome ~ treatment + time + nj,
+                 treatment ~ time + nj,
+                 exposure = "treatment",
+                 outcome = "outcome",
+                 coords = node_details1,
+                 labels = node_labels1) %>% 
+  tidy_dagitty() %>%
+  node_status()   # Add column for exposure/outcome/latent
+
+status_colors <- c(exposure = "#0074D9", outcome = "#FF851B", latent = "grey50")
+
+# Fancier graph
+set.seed(1234)
+ggplot(my_dag1, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_edges(start_cap = ggraph::circle(3, "lines"),
+                 end_cap = ggraph::circle(3, "lines"),
+                 edge_width = 1.5, 
+                 arrow_directed = grid::arrow(length = grid::unit(0.75, "lines"), type = "closed")) +
+  geom_dag_point(aes(color = status), size = 30) +
+  geom_dag_label_repel(aes(label = label, fill = status), seed = 1234,
+                       color = "white", fontface = "bold", size = 10,
+                       label.padding = grid::unit(0.75, "lines"),
+                       box.padding = grid::unit(2.5, "lines"),
+                       direction = "y") +
+  scale_color_manual(values = status_colors, na.value = "grey20") +
+  scale_fill_manual(values = status_colors, na.value = "grey20") +
+  guides(color = FALSE, fill = FALSE) + 
+  theme_dag(base_size = 20, base_family = "Fira Sans Condensed")
+```
+
+---
+
+```{r dd-table-basic2, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`<span class='color-light-3'>∆ <span class='smaller'>(post − pre)</span></span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(B − A) − (D − C)</b></span> <i>or</i><br><span class=''><b>(B − D) − (A − C)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(4, background = "#FFFFFF", color = "#FFFFFF") %>% 
+  row_spec(3, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+---
+
+```{r dd-table-growth3, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`∆ <span class='smaller'>(post − pre)</span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>A − C</b>", "<b>B − D</b>", "<span class=''><b>(B − A) − (D − C)</b></span> <i>or</i><br><span class=''><b>(B − D) − (A − C)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  row_spec(3, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+.box-3[∆ (post − pre) = **within-unit growth**]
+
+---
+
+```{r dd-table-within4, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`<span class='color-light-3'>∆ <span class='smaller'>(post − pre)</span></span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class=''><b>(B − A) − (D − C)</b></span> <i>or</i><br><span class=''><b>(B − D) − (A − C)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(4, background = "#FFFFFF", color = "#FFFFFF")
+```
+
+.box-3[∆ (treatment − control) = **across-group growth**]
+
+---
+
+```{r dd-table-full5, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`∆ <span class='smaller'>(post − pre)</span>`,
+  "Control", "<b>A</b><br><span class='small'>(never treated)</small>", "<b>B</b><br><span class='small'>(never treated)</small>", "<b>B − A</b>",
+  "Treatment", "<b>C</b><br><span class='small'>(not yet treated)</small>", "<b>D</b><br><span class='small'>(treated)</small>", "<b>D − C</b>",
+  "∆<br><span class='smaller'>(treatment − control)</span>", "<b>C − A</b>", "<b>D − B</b>", "<span class='color-3'><b>(D − C) − (B − A)</b></span> <i>or</i><br><span class='color-3'><b>(D − B) − (C − A)</b></span>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+.box-3[∆<sub>within units</sub> − ∆<sub>within groups</sub> =<br>Difference-in-differences =<br>causal effect!]
+
+---
+
+class: middle
+
+.medium[
+$$\begin{aligned}
+\text{DD}\ =\ &(\bar{x}_\text{treatment, post} - \bar{x}_\text{treatment, pre}) \\
+&- (\bar{x}_\text{control, post} - \bar{x}_\text{control, pre})
+\end{aligned}$$
+]
+
+---
+
+```{r dd-table-numbers6, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`Pre mean`, ~`Post mean`, ~`∆ <span class='smaller'>(post − pre)</span>`,
+  "Pennsylvania", "<b>23.33</b><br><span class='small'>A</small>", "<b>21.17</b><br><span class='small'>B</small>", "<b>-2.16</b><br><span class='small'>B − A</small>",
+  "New Jersey", "<b>20.44</b><br><span class='small'>C</small>", "<b>21.03</b><br><span class='small'>D</small>", "<b>0.59</b><br><span class='small'>D − C</small>",
+  "∆<br><span class='smaller'>(NJ − PA)</span>", "<b>-2.89</b><br><span class='small'>C − A</small>", "<b>-0.14</b><br><span class='small'>D − B</small>", "<b>(0.59) − (−2.16) = <br><span class='color-3'>2.76</span></b>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#DDDDDD") %>% 
+  column_spec(4, background = "#DDDDDD") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+---
+
+```{r dd-graph7, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+dd_labels <- tribble(
+  ~Group, ~Time, ~label,
+  "Treatment", "Before", "A",
+  "Treatment", "After", "B",
+  "Control", "Before", "C",
+  "Control", "After", "D"
+)
+
+dd_data <- tribble(
+  ~Group, ~Before, ~Intervention, ~After,
+  "Treatment", 30, 35, 50,
+  "Control",   20, 25, 30
+) %>% 
+  pivot_longer(cols = !Group, names_to = "Time", values_to = "avg") %>% 
+  left_join(dd_labels, by = c("Group", "Time")) %>% 
+  mutate(across(c(Group, Time), ~fct_inorder(.)))
+
+ggplot(dd_data, aes(x = Time, y = avg, color = Group, group = Group)) +
+  geom_vline(xintercept = "Intervention") +
+  geom_line(size = 3,
+            key_glyph = draw_key_point) +
+  annotate(geom = "segment", x = "Intervention", xend = "After",
+           y = 35, yend = 40, color = "#0074D9", size = 2, linetype = "22") +
+  annotate(geom = "segment", x = "After", xend = "After",
+           y = 40, yend = 50, color = "#FF4136", size = 2) +
+  annotate(geom = "label", x = "After", y = 45, label = "Causal\neffect",
+           family = "Fira Sans Condensed Bold", fontface = "plain", 
+           size = 5, fill = "#FF4136", color = "white") +
+  geom_point(data = filter(dd_data, !is.na(label)), size = 15) +
+  geom_text(aes(label = label), family = "Fira Sans Condensed Bold", 
+            fontface = "plain", size = 10, color = "white") +
+  scale_color_manual(values = c("#0074D9", "#3D9970")) +
+  labs(x = NULL, y = "Outcome") +
+  coord_cartesian(ylim = c(15, 55)) +
+  theme_bw(base_size = 24, base_family = "Fira Sans Condensed")
+```
+
+---
+
+class: title title-3
+
+# An easier way?
+
+--
+
+.box-inv-3.medium[Finding all the group<br>means is tedious!]
+
+--
+
+.box-inv-3.medium.sp-after[What if there are other<br>backdoors to worry about?]
+
+--
+
+.box-3.medium[Regression to the rescue!]
+
+---
+
+![](`r knitr::fig_chunk("min-wage-dag1", "png")`)
+
+---
+
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta\ \color{#0074D9}{\text{Group}_i} + \gamma\ \color{#39CCCC}{\text{Time}_t} + \\
+&\delta\ \color{#FF4136}{(\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+--
+
+.center.sp-after[
+```{r dd-example-code, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
+
+--
 
 &nbsp;
 
-.center[
-<figure>
-  <img src="img/14/bad-slides.png" alt="Bad slides" title="Bad slides" width="100%">
-  <figcaption>From Cole Nussbaumer Knaflic, <i>Storytelling with Data: A Data Visualization Guide for Business Professionals</i></figcaption>
-</figure>
-]
+<span class="box-3", style="background-color: #0074D9">Group = 1 or TRUE if treatment</span>
+
+--
+
+<span class="box-3", style="background-color: #39CCCC">Time = 1 or TRUE if after</span>
 
 ---
 
-# Should you tell stories though?
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
 
-.pull-left.center[
-<figure>
-  <img src="img/14/pro-storytelling.png" alt="Storytelling" title="Storytelling" width="100%">
-</figure>
+.center.sp-after[
+```{r dd-example-code-again, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
 ]
 
 --
 
-.pull-right.center[
-<figure>
-  <img src="img/14/against-storytelling.png" alt="Against storytelling" title="Against storytelling" width="100%">
-</figure>
-]
+<span class="box-3", style="background-color: #666666">α = Mean of control, pre-treatment</span>
 
-???
+--
 
-https://www.nature.com/articles/nmeth.2699
+<span class="box-3", style="background-color: #0074D9">β = Increase in outcome across groups</span>
 
-https://www.nature.com/articles/nmeth.2571
+--
+
+<span class="box-3", style="background-color: #39CCCC">γ = Increase in outcome over time within units</span>
+
+--
+
+<span class="box-3", style="background-color: #FF4136">δ = Difference in differences!</span>
 
 ---
 
-# Possible pitfalls
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
+
+```{r dd-table-coefs, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`&ensp;Pre mean&ensp;`, ~`&ensp;Post mean&ensp;`, ~`&ensp;∆ <span class='smaller'>(post − pre)</span>&ensp;`,
+  "Control", "<b><span style='color: #666666;'>α</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #39CCCC;'>γ</span></b>", "<b><span style='color: #39CCCC;'>γ</span></b>",
+  "Treatment", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span> + <span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>",
+  "&ensp;∆ <span class='smaller'>(trtmt − ctrl)</span>&ensp;", "<b><span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #0074D9;'>β</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #FF4136'>δ</span></b>"
+)
+
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#EEEEEE") %>% 
+  column_spec(4, background = "#EEEEEE") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
+
+---
+
+```{r dd-graph, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+dd_labels2 <- tribble(
+  ~Group, ~Time, ~label,
+  "Treatment", "Before", "A",
+  "Treatment", "After", "B",
+  "Control", "Before", "C",
+  "Control", "After", "D"
+)
+
+dd_data2 <- tribble(
+  ~Group, ~Before, ~Intervention, ~After,
+  "Treatment", 30, 35, 50,
+  "Control",   20, 25, 30
+) %>% 
+  pivot_longer(cols = !Group, names_to = "Time", values_to = "avg") %>% 
+  left_join(dd_labels2, by = c("Group", "Time")) %>% 
+  mutate(across(c(Group, Time), ~fct_inorder(.)))
+
+ggplot(dd_data2, aes(x = Time, y = avg, color = Group, group = Group)) +
+  geom_vline(xintercept = "Intervention") +
+  geom_line(size = 3,
+            key_glyph = draw_key_point) +
+  annotate(geom = "segment", x = "Intervention", xend = "After",
+           y = 35, yend = 40, color = "#0074D9", size = 2, linetype = "22") +
+  annotate(geom = "segment", x = "After", xend = "After",
+           y = 40, yend = 50, color = "#FF4136", size = 2) +
+  annotate(geom = "label", x = "After", y = 45, label = "Causal\neffect",
+           family = "Fira Sans Condensed Bold", fontface = "plain", 
+           size = 5, fill = "#FF4136", color = "white") +
+  geom_point(data = filter(dd_data2, !is.na(label)), size = 15) +
+  geom_text(aes(label = label), family = "Fira Sans Condensed Bold", 
+            fontface = "plain", size = 10, color = "white") +
+  scale_color_manual(values = c("#0074D9", "#3D9970")) +
+  labs(x = NULL, y = "Outcome") +
+  coord_cartesian(ylim = c(15, 55)) +
+  theme_bw(base_size = 24, base_family = "Fira Sans Condensed")
+```
+
+---
+
+class: title title-1
+
+# An easier way?
 
 --
 
-.box-inv-2.medium[Manipulation]
-
-.box-2.small[Don't lie or manipulate data]
-
-&nbsp;
+.box-inv-1.medium[Finding all the group<br>means is tedious!]
 
 --
+
+.box-inv-1.medium.sp-after[What if there are other<br>backdoors to worry about?]
+
+--
+
+.box-1.medium[Regression to the rescue!]
+
+---
+
+![](`r knitr::fig_chunk("min-wage-dag1", "png")`)
+
+---
 
 .pull-left[
-.box-inv-2.medium[Misinterpretation]
 
-.box-2.small[Temper expectations]
+.center[
+<figure>
+  <img src="img/08/hotdogs-small.jpg" alt="Hot dog prices" title="Hot dog prices" width="50%">
+</figure>
+]
+
+.small-code[
+```{r hotdogs-data, echo=FALSE}
+hotdogs <- tribble(
+  ~price, ~cheese, ~chili,
+  2.00,   FALSE,   FALSE,
+  2.35,   TRUE,    FALSE,
+  2.35,   FALSE,   TRUE,
+  2.70,   TRUE,    TRUE
+)
+```
+
+```{r show-hotdogs-data}
+hotdogs
+```
+]
 ]
 
 --
 
-.pull-right[
-.box-inv-2.medium[Equity]
+.pull-right.small-code[
+```{r hotdogs-diff-diff}
+model_hotdogs <- 
+  lm(price ~ cheese + chili + 
+       cheese * chili, 
+     data = hotdogs)
+```
 
-.box-2.small[Don't dumb down]
+```{r show-hotdogs-diff-diff-fake, eval=FALSE}
+tidy(model_hotdogs)
+```
 
-.box-2.small[Amplify underrepresented voices]
+```{r show-hotdogs-diff-diff, echo=FALSE}
+tidy(model_hotdogs) %>% 
+  select(term, estimate) %>% 
+  mutate(estimate = round(estimate, 2))
+```
 ]
 
 ---
 
-layout: false
-name: stories-manipulation
-class: center middle section-title-inv section-title-inv-2
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\alpha + \beta\ \color{#0074D9}{\text{Group}_i} + \gamma\ \color{#39CCCC}{\text{Time}_t} + \\
+&\delta\ \color{#FF4136}{(\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
 
-# Manipulation
+--
 
----
+.center.sp-after[
+```{r dd-example-code2, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
 
-class: center middle
-
-<figure>
-  <img src="img/14/tal-story.png" alt="This American Life" title="This American Life" width="100%">
-</figure>
-
-???
-
-https://www.thisamericanlife.org/555/the-incredible-rarity-of-changing-your-mind
-
----
-
-class: bg-full
-background-image: url("img/14/lacour-story.png")
-
-???
-
-[The Case of the Amazing Gay-Marriage Data: How a Grad Student Uncovered a Huge Fraud](https://slate.com/culture/2015/06/gay-marriage-study-faked-how-grad-student-david-broockman-uncovered-a-huge-scientific-fraud.html)
-
----
+--
 
 &nbsp;
 
-.pull-left.center[
-<figure>
-  <img src="img/14/broockman-kalla.png" alt="Irregularities in LaCour" title="Irregularities in LaCour" width="100%">
-</figure>
-]
+<span class="box-1", style="background-color: #0074D9">Group = 1 or TRUE if treatment</span>
 
 --
 
-.pull-right.center[
-<figure>
-  <img src="img/14/broockman-kalla-truth.png" alt="Durably reducing transphobia" title="Durably reducing transphobia" width="100%">
-</figure>
-]
-
-???
-
-https://dx.doi.org/10.1126/science.aad9713
+<span class="box-1", style="background-color: #39CCCC">Time = 1 or TRUE if after</span>
 
 ---
 
-class: title title-2
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
 
-# Manipulation
+.center.sp-after[
+```{r dd-example-code-again2, echo=FALSE, tidy=FALSE}
+decorate('
+model <- lm(outcome ~ group + time + (group * time))
+', eval = FALSE) %>% 
+  flair("outcome", color = "#2ECC40", before = "<b>", after = "</b>") %>% 
+  flair(" group ", color = "#0074D9", before = "<b>", after = "</b>") %>% 
+  flair(" time ", color = "#39CCCC", before = "<b>", after = "</b>") %>% 
+  flair("(group * time)", color = "#FF4136", before = "<b>", after = "</b>")
+```
+]
 
 --
 
-.box-inv-2.medium.sp-after[Don't lie]
+<span class="box-1", style="background-color: #666666">α = Mean of control, pre-treatment</span>
 
 --
 
-.box-inv-2.medium[Emphasize the story,<br>but make full data available]
+<span class="box-1", style="background-color: #0074D9">β = Increase in outcome across groups</span>
+
+--
+
+<span class="box-1", style="background-color: #39CCCC">γ = Increase in outcome over time within units</span>
+
+--
+
+<span class="box-1", style="background-color: #FF4136">δ = Difference in differences!</span>
 
 ---
 
-name: stories-misrepresentation
-class: center middle section-title-inv section-title-inv-2
+$$\begin{aligned}
+\color{#2ECC40}{Y_{it}}\ =\ &\color{#666666}{\alpha} + \color{#0074D9}{\beta\ \text{Group}_i} + \color{#39CCCC}{\gamma\ \text{Time}_t} + \\
+&\color{#FF4136}{\delta\ (\text{Group}_i \times \text{Time}_t)} + \varepsilon_{it}
+\end{aligned}$$
 
-# Misrepresentation
+```{r dd-table-coefs2, echo=FALSE}
+dd <- tribble(
+  ~` `, ~`&ensp;Pre mean&ensp;`, ~`&ensp;Post mean&ensp;`, ~`&ensp;∆ <span class='smaller'>(post − pre)</span>&ensp;`,
+  "Control", "<b><span style='color: #666666;'>α</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #39CCCC;'>γ</span></b>", "<b><span style='color: #39CCCC;'>γ</span></b>",
+  "Treatment", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #666666;'>α</span> + <span style='color: #0074D9;'>β</span> + <span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #39CCCC;'>γ</span> + <span style='color: #FF4136'>δ</span></b>",
+  "&ensp;∆ <span class='smaller'>(trtmt − ctrl)</span>&ensp;", "<b><span style='color: #0074D9;'>β</span></b>", "<b><span style='color: #0074D9;'>β</span> + <span style='color: #FF4136'>δ</span></b>", "<b><span style='color: #FF4136'>δ</span></b>"
+)
 
----
-
-.pull-left.center[
-<figure>
-  <img src="img/14/outliers.jpg" alt="Outliers" title="Outliers" width="50%">
-</figure>
-]
-
---
-
-.pull-right.center[
-.box-2.medium[**10,000 hours**]
-
-.box-inv-2["the magic number<br>of greatness"]
-]
-
---
-
-.center[
-<figure>
-  <img src="img/14/deliberate-practice.png" alt="Deliberate practice" title="Deliberate practice" width="70%">
-</figure>
-]
-
-???
-
-https://doi.org/10.1037/0033-295X.100.3.363
-
-https://graphics8.nytimes.com/images/blogs/freakonomics/pdf/DeliberatePractice(PsychologicalReview).pdf
-
----
-
-.pull-left.center[
-<figure>
-  <img src="img/14/training-history.png" alt="Training history" title="Training history" width="100%">
-</figure>
-]
-
---
-
-.pull-right.center[
-.box-inv-2[“[A] popularized but simplistic view of our work, which suggests that anyone who has accumulated sufficient number of hours of practice in a given domain will automatically become an expert and a champion.”]
-]
-
-
---
-
-.center[
-.box-2[10,000 is average&ensp;•&ensp;Quality matters&ensp;•&ensp;There are other factors]
-]
-
-
-???
-
-https://bjsm.bmj.com/content/47/9/533.long
-
----
-
-class: title title-2
-
-# Misinterpretation
-
---
-
-.box-inv-2.medium.sp-after[Be narrative, but not too narrative]
-
---
-
-.box-inv-2.medium[Temper expectations]
+dd %>% 
+  kbl(escape = FALSE, align = "cccc") %>% 
+  kable_styling(bootstrap_options = "none") %>% 
+  row_spec(1:2, background = "#FFFFFF") %>% 
+  row_spec(3, background = "#EEEEEE") %>% 
+  column_spec(4, background = "#EEEEEE") %>% 
+  row_spec(0, bold = TRUE, background = "#FFC6C6", color = "#CF4446") %>% 
+  column_spec(1, bold = TRUE, background = "#FFC6C6", color = "#CF4446")
+```
 
 ---
 
 layout: false
-name: stories-equity
-class: center middle section-title-inv section-title-inv-2
+name: diff-diff-assumptions
+class: center middle section-title section-title-6 animated fadeIn
 
-# Equity
-
----
-
-layout: true
-class: title title-2
+# Diff-in-diff assumptions
 
 ---
 
-# Dumbing down vs. translation
+class: title title-6
 
-.center[
-<iframe width="800" height="450" src="https://www.youtube.com/embed/opqIa5Jiwuw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-]
+# Nothing else "switched on"
 
-???
-
-Wired, "Neuroscientist Explains One Concept in 5 Levels of Difficulty", https://www.youtube.com/watch?v=opqIa5Jiwuw
-
-Alvin Stone, ["The arrogance of 'dumbing it down'"](https://www.linkedin.com/pulse/arrogance-dumbing-down-alvin-stone/)
-
----
-
-# Translation
-
-.pull-left.center[
-<figure>
-  <img src="img/14/walter-benjamin.jpg" alt="Walter Benjamin" title="Walter Benjamin" width="80%">
-</figure>
-]
-
-.pull-right[
-.box-inv-2[“…the task of the translator consists in finding that intended effect upon the language into which he is translating which produces in it the echo of the original”]
-
-.box-2.small[Walter Benjamin,<br>*The Task of the Translator*]
-]
-
-???
-
-https://en.wikipedia.org/wiki/Walter_Benjamin#/media/File:Walter_Benjamin_vers_1928.jpg
-
----
-
-layout: false
-class: bg-full
-background-image: url("img/14/up-goer-five@3x.png")
-
-???
-
-https://xkcd.com/1133/
-
-<https://splasho.com/upgoer5/>
-
----
-
-class: center middle
-
-<figure>
-  <img src="img/14/dilbert.png" alt="Dilbert on sexism" title="Dilbert on sexism" width="100%">
-</figure>
-
-???
-
-https://slate.com/human-interest/2014/04/how-to-explain-bitcoin-to-y-our-mom-the-new-york-times-thinks-mothers-are-idiots.html
-
-https://geekfeminism.wikia.org/wiki/So_simple,_your_mother_could_do_it
-
----
-
-class: center middle
-
-<figure>
-  <img src="img/14/caseyjohnston.png" alt="Casey Johnston mansplained" title="Casey Johnston mansplained" width="60%">
-</figure>
-
-???
-
-https://twitter.com/caseyjohnston/status/541246857385893888
-
-https://twitter.com/tsancio/status/541284790314762240
-
----
-
-class: bg-full
-background-image: url("img/14/gender-citation-gap.png")
-
-???
-
-Women engineers publish their papers in journals with higher impact factors than their male peers, but their work receives lower recognition (fewer citations) from the scientific community
-
----
-
-class: bg-full
-background-image: url("img/14/news-gender-balance.png")
-
-???
-
-http://www.womensmediacenter.com/reports/whotalks-cable-news-analysts-gender-in-2016-presidential-election-project-t
-28% overall average
-
----
-
-.pull-left.center[
-<figure>
-  <img src="img/14/waks.png" alt="Women Also Know Stuff" title="Women Also Know Stuff" width="100%">
-</figure>
-]
-
-???
-
-https://womenalsoknowstuff.com/
-
-https://twitter.com/LGBTscholars
-
-https://twitter.com/POCalsoknow
-
-https://twitter.com/AWPARocks
+.box-inv-6.medium[🎵 And nothing else matters 🎵]
 
 --
 
-.pull-right.center[
-<figure>
-  <img src="img/14/others-know-stuff.png" alt="Other 'know stuff' accounts" title="Other 'know stuff' accounts" width="85%">
-</figure>
-]
-
----
-
-.center[
-<figure>
-  <img src="img/14/gbat.png" alt="Gender Balance Assessment Tool" title="Gender Balance Assessment Tool" width="85%">
-</figure>
-]
-
-.box-2[https://jlsumner.shinyapps.io/syllabustool/]
-
----
-
-class: title title-2
-
-# Equity
+.box-6.sp-after-half[We assume only the program started at this time.<br> If something else started as well, we can't disentangle the two.]
 
 --
 
-.box-inv-2.medium.sp-after-half[Don't dumb down your findings]
+.box-6.sp-after[We assume nothing new happened in the comparison group.<br> If something else started simultaneously, it will bias our results.]
+
+---
+
+class: title title-6
+
+# Assumptions
+
+.box-inv-6.medium[Parallel trends]
 
 --
 
-.box-inv-2.medium.sp-after-half[You are a translator]
+.box-6[Treatment and control groups might have different values<br>at first, but we assume that the treatment group would<br>have changed like the control group in the absence of treatment]
+
+---
+
+```{r plot-trends-1, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+trends <- expand_grid(state = c("A", "B"), month = 1:6) %>% 
+  mutate(income_parallel = case_when(
+    state == "A" ~ 100 + 125 * month,
+    state == "B" & month <= 3 ~ 100 + 125 * month + 200,
+    state == "B" & month > 3 ~ 100 + 125 * month + 400
+  )) %>% 
+  mutate(income_flat = case_when(
+    state == "A" ~ 100 + 125 * month,
+    state == "B" & month <= 3 ~ 675,
+    state == "B" & month > 3 ~ 100 + 125 * month + 400
+  )) %>% 
+  mutate(income_down = case_when(
+    state == "A" ~ 100 + 125 * month,
+    state == "B" & month <= 3 ~ 800 - 100 * month + 200,
+    state == "B" & month > 3 ~ 100 + 125 * month + 400
+  )) %>% 
+  mutate(state = paste0("State ", state))
+
+hypothetical_end <- lm(income_parallel ~ month, 
+                       data = filter(trends, state == "State B", month <= 3)) %>% 
+  augment(newdata = tibble(month = 6)) %>% 
+  pull(.fitted)
+
+actual_end <- filter(trends, state == "State B", month == 6) %>% 
+  pull(income_parallel)
+
+dd_trends_1 <- ggplot(trends, aes(x = as.factor(month), y = income_parallel, color = state, group = state)) +
+  geom_smooth(data = filter(trends, state == "State B", month <= 3), 
+              method = "lm", fullrange = TRUE, 
+              color = "#0074D9", size = 1, linetype = "22") +
+  geom_vline(xintercept = 3.5, size = 1) +
+  geom_line(size = 3) +
+  geom_segment(aes(x = 6, xend = 6, 
+                   y = actual_end, yend = hypothetical_end),
+               color = "#FF4136", size = 2) +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+dd_trends_1
+```
+
+---
+
+```{r plot-trends-2, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+hypothetical_end <- lm(income_flat ~ month, 
+                       data = filter(trends, state == "State B", month <= 3)) %>% 
+  augment(newdata = tibble(month = 6)) %>% 
+  pull(.fitted)
+
+actual_end <- filter(trends, state == "State B", month == 6) %>% 
+  pull(income_flat)
+
+dd_trends_2 <- ggplot(trends, aes(x = as.factor(month), y = income_flat, color = state, group = state)) +
+  geom_smooth(data = filter(trends, state == "State B", month <= 3), 
+              method = "lm", fullrange = TRUE, 
+              color = "#0074D9", size = 1, linetype = "22") +
+  geom_vline(xintercept = 3.5, size = 1) +
+  geom_line(size = 3) +
+  geom_segment(aes(x = 6, xend = 6, 
+                   y = actual_end, yend = hypothetical_end),
+               color = "#FF4136", size = 2) +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+dd_trends_2
+```
+
+---
+
+```{r plot-trends-6, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+hypothetical_end <- lm(income_down ~ month, 
+                       data = filter(trends, state == "State B", month <= 3)) %>% 
+  augment(newdata = tibble(month = 6)) %>% 
+  pull(.fitted)
+
+actual_end <- filter(trends, state == "State B", month == 6) %>% 
+  pull(income_down)
+
+dd_trends_3 <- ggplot(trends, aes(x = as.factor(month), y = income_down, color = state, group = state)) +
+  geom_smooth(data = filter(trends, state == "State B", month <= 3), 
+              method = "lm", fullrange = TRUE, 
+              color = "#0074D9", size = 1, linetype = "22") +
+  geom_vline(xintercept = 3.5, size = 1) +
+  geom_line(size = 3) +
+  geom_segment(aes(x = 6, xend = 6, 
+                   y = actual_end, yend = hypothetical_end),
+               color = "#FF4136", size = 2) +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+dd_trends_3
+```
+
+---
+
+class: title title-6
+
+# Assumptions
+
+.box-inv-6.medium[Parallel trends]
 
 --
 
-.box-inv-2.medium.sp-after-half[Treat audience with respect]
-
---
-
-.box-inv-2.medium[Amplify underrepresented voices]
+.box-6[Check by pretending the treatment happened earlier;<br>if there's an effect, there's likely an underlying trend]
 
 ---
 
-layout: false
-name: curiosity
-class: center middle section-title section-title-5 animated fadeIn
+```{r plot-trends-2-back, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+state_a_start <- filter(trends, state == "State A", month == 1)$income_flat
+state_b_end <- filter(trends, state == "State B", month == 3)$income_flat
+hypothetical_start <- filter(trends, state == "State B", month == 2)$income_flat
+diff_states <-  filter(trends, state == "State B", month == 1)$income_flat - state_a_start
+hypothetical_end <- filter(trends, state == "State A", month == 2)$income_flat + diff_states
 
-# Curiosity
-
----
-
-layout: true
-class: title title-5
-
----
-
-# How do I keep learning R?
-
-.box-inv-5.medium[What class should I take next?]
-
-.box-inv-5.medium[What book should I read next?]
-
----
-
-# How do I keep learning R?
-
-.box-inv-5.medium[~~What class should I take next?~~]
-
-.box-inv-5.medium.sp-after[~~What book should I read next?~~]
-
---
-
-.box-5.large[Be curious!]
+ggplot(filter(trends, month <= 6),
+       aes(x = month, y = income_flat, color = state, group = state)) +
+  geom_ribbon(data = filter(trends, state == "State B", month <= 3),
+              aes(x = month, ymin = -Inf, ymax = Inf, color = NULL), 
+              fill = "#7FDBFF", alpha = 0.2) +
+  annotate(geom = "segment", x = 2, xend = 3,
+                   y = hypothetical_start, yend = hypothetical_end,
+               color = "#0074D9", size = 1, linetype = "22") +
+  geom_vline(xintercept = 2, size = 1) +
+  geom_line(size = 3) +
+  geom_segment(aes(x = 3, xend = 3,
+                   y = state_b_end, yend = hypothetical_end),
+               color = "#FF4136", size = 2, inherit.aes = FALSE) +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_x_continuous(breaks = 1:6) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+```
 
 ---
 
-# Teaching yourself
+```{r plot-trends-6-back, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+state_a_start <- filter(trends, state == "State A", month == 1)$income_down
+state_b_end <- filter(trends, state == "State B", month == 3)$income_down
+hypothetical_start <- filter(trends, state == "State B", month == 2)$income_down
+diff_states <-  filter(trends, state == "State B", month == 1)$income_down - state_a_start
+hypothetical_end <- filter(trends, state == "State A", month == 1)$income_down + diff_states
 
-.center[
-<figure>
-  <img src="img/14/katiemack-tweet.png" alt="@AstroKatie on googling" title="@AstroKatie on googling" width="70%">
-</figure>
-]
-
-
-???
-
-https://twitter.com/AstroKatie/status/1071442842873159681
-
----
-
-layout: false
-class: bg-full
-background-image: url("img/14/slate-coding.png")
-
-???
-
-https://slate.com/human-interest/2018/12/against-teaching-kids-to-code-creativity-problem-solving.html
-
----
-
-class: bg-full
-background-image: url("img/14/slate-coding-text.png")
-
-
-???
-
-https://slate.com/human-interest/2018/12/against-teaching-kids-to-code-creativity-problem-solving.html
+ggplot(filter(trends, month <= 6),
+       aes(x = month, y = income_down, color = state, group = state)) +
+  geom_ribbon(data = filter(trends, state == "State B", month <= 3),
+              aes(x = month, ymin = -Inf, ymax = Inf, color = NULL), 
+              fill = "#7FDBFF", alpha = 0.2) +
+  annotate(geom = "segment", x = 2, xend = 3,
+                   y = hypothetical_start, yend = hypothetical_end,
+               color = "#0074D9", size = 1, linetype = "22") +
+  geom_vline(xintercept = 2, size = 1) +
+  geom_line(size = 3) +
+  geom_segment(aes(x = 3, xend = 3,
+                   y = state_b_end, yend = hypothetical_end),
+               color = "#FF4136", size = 2, inherit.aes = FALSE) +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_x_continuous(breaks = 1:6) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+```
 
 ---
 
-layout: true
-class: title title-5
+```{r plot-trends-1-back, echo=FALSE, fig.width=12, fig.height=6, out.width="100%"}
+hypothetical_start <- filter(trends, state == "State B", month == 2)$income_parallel
+hypothetical_end <- filter(trends, state == "State B", month == 3)$income_parallel
+
+ggplot(filter(trends, month <= 6),
+       aes(x = month, y = income_parallel, color = state, group = state)) +
+  geom_ribbon(data = filter(trends, state == "State B", month <= 3),
+              aes(x = month, ymin = -Inf, ymax = Inf, color = NULL), 
+              fill = "#7FDBFF", alpha = 0.2) +
+  geom_vline(xintercept = 2, size = 1) +
+  geom_line(size = 3) +
+  annotate(geom = "segment", x = 2, xend = 3,
+                   y = hypothetical_start, yend = hypothetical_end,
+               color = "#0074D9", size = 1, linetype = "22") +
+  scale_color_manual(values = c("#3D9970", "#FF851B"), name = NULL) +
+  scale_x_continuous(breaks = 1:6) +
+  scale_y_continuous(labels = dollar) +
+  labs(x = "Month", y = "Income") +
+  theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
+```
 
----
 
-# Two secrets to master R
-
---
-
-.box-inv-5.large.sp-after[1: Find excuses to use it]
-
---
-
-.box-inv-5.large[2: Share and work in public]
-
----
-
-layout: false
-class: center middle section-title-inv section-title-inv-5
-
-# Find excuses to use R
-
----
-
-layout: true
-class: title title-5
-
----
-
-# Playing with R
-
---
-
-.box-inv-5.medium[Little exploration projects]
-
---
-
-.box-inv-5.medium[\#TidyTuesday]
-
---
-
-.box-inv-5.medium[Data play time]
-
---
-
-.box-inv-5.medium[Actual projects]
-
----
-
-layout: false
-
-.center[
-<figure>
-  <img src="img/14/mini-projects.png" alt="Mini projects folder" title="Mini projects folder" width="80%">
-</figure>
-]
-
----
-
-.center[
-<figure>
-  <img src="img/14/top_5.png" alt="Most aggressive characters in Harry Potter" title="Most aggressive characters in Harry Potter" width="70%">
-</figure>
-]
-
-???
-
-https://github.com/andrewheiss/Harry-Potter-aggression
-
----
-
-.center[
-<figure>
-  <img src="img/14/walks_2014.png" alt="2014 family walks" title="2014 family walks" width="80%">
-</figure>
-]
-
----
-
-.center[
-<figure>
-  <img src="img/14/plot_authors.png" alt="Rachel 2014 books" title="Rachel 2014 books" width="80%">
-</figure>
-]
-
----
-
-layout: false
-class: center middle section-title-inv section-title-inv-5
-
-# Radical transparency<br>and public work
-
----
-
-class: middle
-
-.box-5.medium[How we normally think of our work and goals]
-
-.center[
-<figure>
-  <img src="img/14/sharing-normal.png" alt="How we normally think of our work and goals" title="How we normally think of our work and goals" width="100%">
-</figure>
-]
-
-???
-
-https://rstudio.com/resources/rstudioconf-2019/the-unreasonable-effectiveness-of-public-work/
-
----
-
-class: middle
-
-.box-5.medium[How we should think of our work and goals]
-
-.center[
-<figure>
-  <img src="img/14/sharing-good.png" alt="How we should think of our work and goals" title="How we should think of our work and goals" width="100%">
-  <figcaption>David Robinson, <a href="https://rstudio.com/resources/rstudioconf-2019/the-unreasonable-effectiveness-of-public-work/" target="_blank">The unreasonable effectiveness of public work"</a></figcaption>
-</figure>
-]
-
-???
-
-https://rstudio.com/resources/rstudioconf-2019/the-unreasonable-effectiveness-of-public-work/
-
----
-
-layout: true
-class: title title-5
-
----
-
-# Benefits of working in public
-
---
-
-.box-inv-5[Build reputation]
-
---
-
-.box-inv-5[Learn more]
-
---
-
-.box-inv-5[Grow the community]
-
---
-
-.box-inv-5[Early feedback on ideas]
-
---
-
-.box-inv-5[Validation]
-
----
-
-layout: false
-class: bg-full
-background-image: url("img/14/blog-rejection-map.png")
-
-???
-
-https://www.andrewheiss.com/blog/2018/12/17/academic-job-market-visualized/
-
----
-
-class: bg-full
-background-image: url("img/14/blog-rejection-website.png")
-
-???
-
-https://www.andrewheiss.com/blog/2018/12/17/academic-job-market-visualized/
-
----
-
-class: bg-full
-background-image: url("img/14/blog-rejection-github.png")
-
-???
-
-https://www.andrewheiss.com/blog/2018/12/17/academic-job-market-visualized/
-
----
-
-layout: true
-class: title title-5
-
----
-
-# How to work in public
-
---
-
-.box-inv-5.medium[Tweet, blog, and meet people]
-
---
-
-.box-inv-5.medium[Play with data in public]
-
---
-
-.box-inv-5.medium[Teach concepts (for yourself too!)]
-
----
-
-# Communities
-
---
-
-.box-inv-5.medium[\#rstats]
-
---
-
-.box-inv-5.medium[R User Groups]
-
---
-
-.box-inv-5.medium[\#rladies]
-
---
-
-.box-inv-5.medium[Rmd websites, blogdown, bookdown]
-
----
-
-# Play with data in public
-
-.center[
-<figure>
-  <img src="img/14/blog-polity.png" alt="Blog post on Polity IV data" title="Blog post on Polity IV data" width="100%">
-</figure>
-]
-
-???
-
-https://www.andrewheiss.com/blog/2017/08/26/quickly-play-with-polity-iv-and-oecd-data-and-see-the-danger-of-us-democracy/
-
----
-
-layout: false
-class: bg-full
-background-image: url("img/14/blog-nlp.png")
-
-???
-
-https://www.andrewheiss.com/blog/2018/12/26/tidytext-pos-john/
-
-https://www.andrewheiss.com/blog/2018/12/28/tidytext-pos-arabic/
-
----
-
-class: title title-5
-
-# Teach a concept
-
-.center[
-<figure>
-  <img src="img/14/blog-diff-means.png" alt="Blog post on finding the difference in means" title="Blog post on finding the difference in means" width="100%">
-</figure>
-]
-
-???
-
-https://www.andrewheiss.com/blog/2019/01/29/diff-means-half-dozen-ways/
-
----
-
-class: bg-full
-background-image: url("img/14/blog-chidi.png")
-
-???
-
-https://www.andrewheiss.com/blog/2019/02/16/algebra-calculus-r-yacas/
-
----
-
-layout: false
-class: center middle section-title section-title-5 animated fadeIn
-
-# You are all expert<br>enough now.
-
----
-
-class: center middle section-title section-title-5 animated fadeIn
-
-# Go correctly<br>find causal effects!
