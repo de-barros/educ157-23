@@ -49,6 +49,13 @@ UCI School of Education
 
 ]
 
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/01/eval-flowchart.png")
+
 ---
 
 name: outline
@@ -128,20 +135,6 @@ class: title title-1
 
 ---
 
-# Impact theory
-
-.box-inv-1.medium.sp-after[Causes (activities) linked to effects (outcomes)]
-
---
-
-.center[
-<figure>
-  <img src="img/01/psd-impact-theory.png" alt="PSD impact theory" title="PSD impact theory" width="100%">
-</figure>
-]
-
----
-
 # One Laptop Per Child (OLPC)
 
 .center[
@@ -187,36 +180,6 @@ https://www.youtube.com/watch?v=H4F_0sshG28
 
 ---
 
-# PlayPumps
-
-.pull-left[
-<figure>
-  <img src="img/03/playpump-diagram.jpg" alt="PlayPump diagram" title="PlayPump diagram" width="100%">
-</figure>
-]
-
-.pull-right.center[
-<figure>
-  <img src="img/03/playpump-photo.jpg" alt="PlayPump" title="PlayPump" width="60%">
-</figure>
-]
-
-???
-
-Improved access to water → better health, better education, reduction in poverty
-
-> The Guardian calculated in 2009 that children would have to "play" for 27 hours every day to meet PlayPumps' stated targets of providing 2,500 people per pump with their daily water needs. (https://en.wikipedia.org/wiki/Roundabout_PlayPump)
-
-Have kids play to get water out. Led to overuse – main problem in many areas isn’t access to water, but scarcity of water – only works in locations with lots of good water that’s not too deep and where infrastructure is lacking
-
-Is children playing is an appropriate source of energy for water? The line between work and play isn’t as clear-cut as one would think. – can lead to exploitation
-
-https://blogs.ei.columbia.edu/2010/07/01/the-playpump-what-went-wrong/
-
-http://docan.jp/idea-source/playpumps/?lang=en
-
----
-
 # Why theorize?
 
 .pull-left[
@@ -248,73 +211,13 @@ http://docan.jp/idea-source/playpumps/?lang=en
 What difference does articulation make?
 
 ---
-
 layout: false
-
-.center[
-<figure>
-  <img src="img/03/lhi-map.jpg" alt="LHI locations" title="LHI locations" width="70%">
-</figure>
-]
-
-.pull-left.center[
-<figure>
-  <img src="img/03/lhi-serres.jpg" alt="LHI Serres" title="LHI Serres" width="90%">
-</figure>
-]
-
-.pull-right.center[
-<figure>
-  <img src="img/03/lhi-serres-kids.jpg" alt="Kids at LHI Serres" title="Kids at LHI Serres" width="85%">
-</figure>
-]
-
----
-
-.center[
-<figure>
-  <img src="img/03/plot-dist-age-1.png" alt="Serres distribution preferences by age" title="Serres distribution preferences by age" width="80%">
-</figure>
-]
-
---
-
-.center[
-<figure>
-  <img src="img/03/plot-programs-overall-1.png" alt="Serres program preferences" title="Serres program preferences" width="55%">
-</figure>
-]
-
----
-
-class: title title-1
-
-# Impact theory
-
-.box-inv-1[Ensure that the theory linking activities to the outcomes is sound!]
-
-.center[
-<figure>
-  <img src="img/03/psd-impact-theory-arrow.png" alt="PSD impact theory" title="PSD impact theory" width="100%">
-</figure>
-]
-
----
-
 class: bg-full
 background-image: url("img/03/wb-results-chain.png")
 
 ???
 
 p. 39 in *Impact Evaluation in Practice*, The World Bank
-
----
-
-.center[
-<figure>
-  <img src="img/01/psd-logic-model.png" alt="PSD logic model" title="PSD logic model" width="70%">
-</figure>
-]
 
 ---
 
@@ -349,6 +252,27 @@ class: center middle section-title section-title-3 animated fadeIn
 
 ---
 
+layout: true
+class: title title-3
+
+---
+
+# Catch Up / Teaching at the Right Level
+
+&nbsp;
+
+.pull-middle-3[
+<iframe width="660" height="315" src="https://www.youtube.com/embed/1N9A-KJbKJg?start=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+]
+
+.pull-right[
+
+.box-inv-1[https://bit.ly/resultschain]
+
+]
+
+---
+
 layout: false
 name: logic-models
 class: center middle section-title section-title-6 animated fadeIn
@@ -357,4 +281,82 @@ class: center middle section-title section-title-6 animated fadeIn
 
 ---
 
+.box-6.less-medium[Final outcome]
 
+.box-6.smaller[Problem statement]
+
+--
+
+.box-6.less-medium[Intermediate outcomes]
+
+--
+
+.box-6.less-medium[Outputs]
+
+.box-6.smaller[Program take-up]
+
+.box-6.smaller[Implementation fidelity]
+
+--
+
+.box-6.less-medium[Inputs and activities]
+
+--
+
+.box-6.less-medium[Assumptions]
+
+---
+
+.box-6.less-medium[1 Final outcome]
+
+.box-6.smaller[2 Problem statement]
+
+.box-6.less-medium[5 Intermediate outcomes]
+
+.box-6.less-medium[Outputs]
+
+.box-6.smaller[3 Program take-up]
+
+.box-6.smaller[4 Implementation fidelity]
+
+.box-6.less-medium[4 Inputs and activities]
+
+.box-6.less-medium[6 Assumptions]
+
+---
+
+
+.pull-left.center[
+<figure>
+  <img src="img/02/gdoc.png" alt="https://bit.ly/ToC-gdoc" title="https://bit.ly/ToC-gdoc" width="75%">
+</figure>
+]
+
+.pull-right[
+
+.box-inv-1[https://bit.ly/ToC-gdoc]
+
+]
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+--
+
+.box-8.medium[**Keep working on Milestone 1**]
+
+.box-inv-8.small[Meet with your team]
+
+.box-inv-8.small[Review assignment on course website]
+
+.box-inv-8.small[Due at the end of the week]
