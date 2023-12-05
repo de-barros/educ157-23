@@ -1235,4 +1235,28 @@ ggplot(filter(trends, month <= 6),
   theme_bw(base_size = 21, base_family = "Fira Sans Condensed")
 ```
 
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Look for my answers on Slack]
+
+.box-inv-8.small.sp-after[For some, this will be reaction #14. Congrats!]
+
+--
+
+.box-8.medium[**DAMs**]
+
+.box-inv-8.small[DAM 3: Review comments]
+
+.box-inv-8.small[DAM 4: Notice sections you can skim]
+
+.box-inv-8.small[DAM 4: Due at the end of the week]
 

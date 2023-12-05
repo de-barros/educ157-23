@@ -140,7 +140,7 @@ Good bc of external validity; bad bc of selection
 
 --
 
-.box-inv-4[We did a lot of work with DAGs!<br>You're good at closing backdoors with matching and IPW]
+.box-inv-4[We did a lot of work with DAGs!<br>You're good at closing backdoors with regression]
 
 --
 
@@ -210,7 +210,7 @@ layout: false
 name: endo-exo
 class: center middle section-title section-title-1 animated fadeIn
 
-# Endogeneity<br>and exoegneity
+# Endogeneity<br>and exogeneity
 
 ---
 
@@ -1693,3 +1693,30 @@ class: title title-7
 --
 
 .box-inv-7[**4: 2-stage least squares (2SLS)**<br>.smaller[program ~ instrument; outcome ~ program_hat&emsp;**OR**&emsp;`iv_robust()`]]
+
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas]
+
+.box-inv-8.small.sp-after[Look for my answers on Slack]
+
+--
+
+.box-8.medium[**Start working on DAM 3**]
+
+.box-inv-8.small[Consider teaming up]
+
+.box-inv-8.small[The Mastering 'Metrics video will be helpful]
+
+.box-inv-8.small[Due at the end of the week]
+

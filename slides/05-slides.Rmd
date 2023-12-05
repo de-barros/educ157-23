@@ -52,6 +52,12 @@ UCI School of Education
 
 ---
 
+layout: false
+class: bg-full
+background-image: url("img/01/eval-flowchart.png")
+
+---
+
 name: outline
 class: title title-4
 
@@ -326,7 +332,7 @@ dagify(
 
 .pull-left-narrow[
 
-.box-inv-1[Background, year of birth, location, job connections, and school requirements all cause education]
+.box-inv-1[Background, year of birth, location, and school requirements all cause education]
 
 ]
 
@@ -360,7 +366,7 @@ dagify(
 
 .pull-left-narrow[
 
-.box-inv-1[Background, year of birth, and location all cause earnings too]
+.box-inv-1[Background, year of birth, job connections, and location all cause earnings too]
 
 ]
 
@@ -497,7 +503,7 @@ class: title title-3
 
 # Causal identification
 
-.box-inv-3.medium[A causal effect is *identified* if the association between treatment and outcome is propertly stripped and isolated]
+.box-inv-3.medium[A causal effect is *identified* if the association between treatment and outcome is properly stripped and isolated]
 
 ---
 
@@ -1274,19 +1280,19 @@ $$
 
 --
 
-.box-3[E\[ Firm growth | *do*(Government R&D funding)\] ]
+.box-3[E\[ Test scores | *do*(Blended instruction)\] ]
 
 --
 
-.box-3[E\[ Air quality | *do*(Carbon tax)\] ]
+.box-3[E\[ Intergroup conflict | *do*(Teammates of other religion)\] ]
 
 --
 
-.box-3[E\[ Juvenile delinquency | *do*(Truancy program)\] ]
+.box-3[E\[ Well-being | *do*(Scholarship program)\] ]
 
 --
 
-.box-3[E\[ Malaria infection rate | *do*(Mosquito net)\] ]
+.box-3[E\[ Interest in health and fitness | *do*(Going to UCI)\] ]
 
 ---
 
@@ -1557,17 +1563,10 @@ $$
 \delta = Y_1 - Y_0
 $$
 
----
 
-layout: false
-class: bg-full
-background-image: url("img/05/TAL.png")
-
-???
-
-https://www.thisamericanlife.org/691/gardens-of-branching-paths
 
 ---
+
 
 layout: true
 class: title title-6
@@ -1587,6 +1586,20 @@ $$
 .box-inv-6[There are no individual counterfactuals!]
 
 ---
+
+layout: false
+class: bg-full
+background-image: url("img/05/spiderman.jpg")
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/05/multiverse.jpg")
+
+---
+
+
 
 layout: true
 class: title title-6
@@ -2091,4 +2104,27 @@ lm(earnings ~ private + group_A, data = schools_small) %>%
 .box-6[β<sub>1</sub> = $10,000]&emsp;.box-6[This is less wrong!]&emsp;.box-6[Significance details!]
 ]
 
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+--
+
+.box-8.medium[**Keep working on Milestone 2**]
+
+.box-inv-8.small[Meet with your team]
+
+.box-inv-8.small[Review assignment on course website]
+
+.box-inv-8.small[Due at the end of the week]
 

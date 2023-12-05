@@ -53,6 +53,12 @@ UCI School of Education
 
 ---
 
+layout: false
+class: bg-full
+background-image: url("img/01/eval-flowchart.png")
+
+---
+
 name: outline
 class: title title-8
 
@@ -269,7 +275,7 @@ cookies_residual_only
 
 ```{r cookies-resid-side-by-side, echo=FALSE, message=FALSE, fig.dim=c(8, 4), out.width="100%"}
 (cookies_with_residual + labs(title = "Cookies and happiness")) + 
-  (cookies_residual_only + labs(title = "Residual errors"))
+  (cookies_residual_only + labs(title = "Residuals"))
 ```
 
 ---
@@ -411,7 +417,6 @@ Letters with extra markings like $\bar{X}$ are ***calculations*** from our sampl
     <td class="cell-center">\(\bar{X} = \frac{\sum{X}}{N}\)</td>
   </tr>
   <tr>
-    <td class="cell-left">Estimate</td>
     <td class="cell-center">\(\hat{\mu}\)</td>
   </tr>
   <tr>
@@ -781,6 +786,92 @@ lm(log(income) ~ private + group_a + sat + parental_income,
 .box-inv-3[(I personally like the all-β version instead of using like the entire Greek alphabet, but you'll see both varieties in the real world)]
 
 
+
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_1.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_2.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_3.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_4.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_5.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
+---
+
+layout: false
+
+.center[
+<figure>
+  <img src="img/06/dragons_6.png" alt="Regression dragons" title="Regression dragons" width="75%">
+</figure>
+]
+
+???
+
+https://allisonhorst.com/linear-regression-dragons
+
 ---
 
 layout: true
@@ -1089,3 +1180,27 @@ $$
 tidy(car_model, conf.int = TRUE)
 ```
 ]
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+--
+
+.box-8.medium[**Start working on DAM 1**]
+
+.box-inv-8.small[Consider teaming up]
+
+.box-inv-8.small[Accept my invitation to our RStudio / Posit cloud workspace]
+
+.box-inv-8.small[Due at the end of the week]
+

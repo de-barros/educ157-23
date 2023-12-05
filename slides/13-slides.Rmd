@@ -505,7 +505,7 @@ class: title title-1
 ]
 
 .pull-right-narrow[
-.box-inv-1[Does going to the main state university (e.g. UGA) make you earn more money?]
+.box-inv-1[Does going to the main state university (e.g., CSU) make you earn more money?]
 
 .box-inv-1[SAT scores are an arbitrary cutoff for accessing the university]
 ]
@@ -1480,15 +1480,23 @@ ggplot(filter(plot_binned, letter == "C"),
 
 ---
 
-layout: false
-class: bg-full
-background-image: url("img/10/marathons.png")
+
+# 🎵 don't know about you, feeling 26.2
+
+.center[
+<figure>
+  <img src="img/10/marathons.png" alt="Marathon times" title="Marathon times" width="85%">
+</figure>
+]
 
 ???
 
 Data from <https://faculty.chicagobooth.edu/george.wu/research/marathon/data.htm> and <https://doi.org/10.1287/mnsc.2015.2417>
 
 ---
+
+layout: false
+class: bg-full
 
 .center[
 <figure>
@@ -1692,3 +1700,31 @@ ggplot(tutoring, aes(x = entrance_exam, y = tutoring_fuzzy_text, fill = entrance
 .box-inv-7.medium[Effect is only for<br>(1) compliers (2) near the cutoff]
 
 .box-7[Be specific when talking about effects;<br>definitely don't make population-level claims]
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, look at Slack]
+
+
+--
+
+.box-8.medium[**Milestone 3**]
+
+.box-inv-8.small.sp-after[Start thinking about your identification strategy (IV, RD, Dif-in-Dif)]
+
+--
+
+.box-8.medium[**Submit DAM 3**]
+
+.box-inv-8.small[Contact me by Friday if you have any questions]
+
+

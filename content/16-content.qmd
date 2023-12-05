@@ -3,10 +3,12 @@ title: "In-class exam"
 date: "2023-11-21"
 ---
 
-## Readings
+There are no reading reactions for this class.
+
+## Resources
+
+- {{< fa arrow-up-right-from-square >}} For details on the exam and a study guide, please see the exam's [assignments page](/assignment/index.qmd).
 
 - {{< fa file-pdf >}} The Abdul Latif Jameel Poverty Action Lab (J-PAL) *Impact Evaluation Methods* (no date) [Get the PDF here.](https://www.povertyactionlab.org/sites/default/files/research-resources/impact-evaluation-methods-table.pdf) 
 
-## Slides
 
-On the day of class, you will find my slides on Canvas. 

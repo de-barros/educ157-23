@@ -287,7 +287,7 @@ class: title title-3
 
 ---
 
-# Fake microfinance program results
+# Fake training program results
 
 .small.sp-after[
 ```{r fake-microfinance, echo=FALSE}
@@ -362,7 +362,7 @@ class: title title-3
 
 --
 
-.box-7.medium.sp-before[How to fix]
+.box-3.medium.sp-before[How to fix]
 
 .box-inv-3.less-medium[Use a comparison group to remove the trend]
 
@@ -502,7 +502,7 @@ Experiments in 1924-1932 at Hawthorne Works
 
 --
 
-.box-7.medium.sp-before[How to fix]
+.box-3.medium.sp-before[How to fix]
 
 .box-inv-3.less-medium[Keep two groups separate;<br>use distant control groups]
 
@@ -659,38 +659,6 @@ class: title title-6
 
 ---
 
-# Moving to Opportunity
-
-.center[
-<figure>
-  <img src="img/07/hud.jpg" alt="HUD HQ in DC" title="HUD HQ in DC" width="70%">
-</figure>
-]
-
-???
-
-**MTO** - main question = does your neighborhood matter?
-
-Subtext = kids who grow up in poor neighborhood do worse - lots of theories about that. Problems reside in the family vs. something inherent in the neighborhood / social capital or other benefits inherent in the community (be in the network of people who know where the jobs for people with low education are)
-
-Alternative explanations:
-
-- Poor parents don't do well in the labor market, so they live in cheap neighborhoods, where they're surrounded by the same type of people
-- Racism and discrimination
-
-Randomly assign people to where they live - ideally from birth or even pre-birth - but families that we can possibly randomly assign already have kids (required for receiving public housing assistance)
-
-So they randomly assign families in public housing who are willing to move and accept risk of having that move controlled - no other way to really do this - you'd have to pay middle-class and higher people a ton of money to get them to move
-
-Then randomly assign them to (1) stay, (2) move to anywhere that would take voucher, (3) anywhere with less than 10% poverty rate + get relocation counseling
-
-People were hoping to get option 2, since people already weren't choosing 3 - it's uncomfortable to move to a neighborhood where you don't fit in
-
-
-https://commons.wikimedia.org/wiki/File:Housing_and_Urban_Development_headquarters.jpg
-
----
-
 # RCTs and validity
 
 .box-inv-6.medium[Randomization fixes a ton of<br>internal validity issues]
@@ -805,3 +773,28 @@ background-image: url("img/07/vox-nobel.png")
 ???
 
 https://www.vox.com/future-perfect/2019/10/14/20913928/nobel-prize-economics-duflo-banerjee-kremer
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+.box-inv-8.small.sp-after[Note optional readings, applications]
+
+--
+
+.box-8.medium[**Start DAM 2**]
+
+.box-inv-8.small[Consider teaming up. Use Slack]
+
+.box-inv-8.small[See / contact me today if you had trouble with DAM 1]
+
+.box-inv-8.small[Open Markdown file → Fill answers → Knit → download .zip → submit on Canvas]

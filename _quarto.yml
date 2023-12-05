@@ -53,7 +53,7 @@ website:
         href: "https://educ157-23.slack.com"
         aria-label: Slack
       - icon: cloud-fill
-        href: "https://rstudio.cloud"
+        href: "https://posit.cloud/spaces/430837"
         aria-label: RStudio.cloud
       - icon: cloud
         href: "https://canvas.eee.uci.edu/courses/56847"

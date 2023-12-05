@@ -551,3 +551,30 @@ ggplot(imaginary_program,
 
 .box-inv-6[Just never for anything post-treatment]
 
+
+---
+
+name: outline
+class: title title-8
+
+# Plan for next class
+
+--
+
+.box-8.medium[**Reading reactions**]
+
+.box-inv-8.small.sp-after[Submit on Canvas, ask for help on Slack]
+
+--
+
+.box-8.medium[**Complete DAM 1**]
+
+.box-inv-8.small[Consider teaming up]
+
+.box-inv-8.small[See / contact me today if you have trouble joining the cloud workspace]
+
+.box-inv-8.small[Due at the end of the week]
+
+.box-inv-8.small[Open Markdown file → Fill answers → Knit → download .zip → submit on Canvas]
+
+

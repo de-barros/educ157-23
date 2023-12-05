@@ -3,11 +3,26 @@ title: "Learning with practitioners"
 date: "2023-12-05"
 ---
 
-This class includes a live interview with one of the organizations with which I am currently conducting a program evaluation. Instead of reading reactions, I will ask you to submit questions for our guest. 
+This class includes a live interview with Akshay Saxena, the co-founder of [Avanti Fellows](https://www.avantifellows.org/). Avanti Fellows is one of the organizations with which I am currently conducting a program evaluation. Instead of reading reactions, I will ask you to submit questions for our guest. 
+
+::: {.callout-note}
+
+## Change in time and "venue"
+
+Due to the time difference between California and India, our class will take place from 8.30pm to 9.30pm Pacific Time. This is a remote class, and I will send you a Zoom link.
+
+:::
+
 
 ## Readings
 
-I will point you to materials describing the organization. I will also provide you with background information on my evaluation.
+- {{< fa arrow-up-right-from-square >}} Avanti Fellows. ["Website"](https://www.avantifellows.org/), no date.
+
+- {{< fa file-pdf >}} Avanti Fellows *1 pager* (2023) [Get the PDF here.](https://canvas.eee.uci.edu/files/24666659/download?download_frd=1)  
+
+## Videos
+
+Please watch [this presentation](https://youtu.be/nRCUQOKDDvQ?t=1015) I recently gave at Oxford University's RISE conference (minutes 17:00 to 32:20).
 
 ## Optional material
 
@@ -15,7 +30,6 @@ The following reading is optional.
 
 - {{< fa arrow-up-right-from-square >}} Jake Bowers and Rebecca Wolfe. ["10 Conversations that Implementers and Evaluators Need to Have,"](https://egap.org/resource/10-implementer-evaluator-conversations/) *egap*, no date.
 
-
 ## Slides
 
-On the day of class, you will find my slides on Canvas. 
+There are no slides for this class. 

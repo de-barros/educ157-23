@@ -13,7 +13,7 @@ slide_details <- tibble::tribble(
   ~youtube_id,   ~title, ~slide, ~active,
   "WwW8y5dZs80", "Econometrics: The Path from Cause to Effect", "1", TRUE,
   "iPBV3BlV7jk", "Ceteris Paribus: Public vs. Private University", "magic-randomization", FALSE,
-  "W0NyALrjLA4", "Selection Bias: Will You Make More Going to a Private University?", "rct-how", FALSE
+  "6YrIDhaUQOE", "Selection Bias: Will You Make More Going to a Private University?", "rct-how", FALSE
 )
 ```
 

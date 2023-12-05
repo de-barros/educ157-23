@@ -2,4 +2,146 @@
 title: "Exam"
 ---
 
-You will take one in-class exam, which serves as an important mid-quarter check of your understanding. This exam will be closed book and without access to the internet. I will provide more information about the exam as it approaches.
+You will take one in-class exam, which serves as an important mid-quarter check of your understanding. This exam will be closed book and without access to the internet. 
+
+The exam covers the assigned materials, our classes, and your assignments. Here is a rough overview of things you should be familiar with.
+
+---
+
+## Evaluation and the causal revolution
+
+**You should understand…**
+
+- …the difference between experimental research and observational research
+- …the difference between the various types of evaluations
+- …the difference between identifying correlation (math) and identifying causation (philosophy and theory)
+- …what it means for a relationship to be causal
+
+## Theories of change and measurement
+
+**You should understand…**
+
+- …how to describe a program's theory of change
+- …the difference between inputs, activities, outputs, and outcomes
+- …how indicators can be measured at different levels of abstraction
+
+**You should be able to…**
+
+- …make informed guesses about a program's underlying theory based on its mission statement or program description
+- …draw a graphical representation of a program's theory, linking inputs to activities to outputs to outcomes
+- …map indicators to a program's theory of change
+
+## Data collection and research ethics
+
+**You should understand…**
+
+- …the difference between primary and secondary data (including administrative data), as well as their respective pros and cons
+- …the main tasks going into primary data collection  
+- …ethical principles that guide evaluations, and how to safeguard them 
+- …what permissions and approvals are needed, and why they can only be considered a "minimum must do" for an evaluation
+
+## The fundamental problem of causality
+
+**You should understand…**
+
+- …how a causal model encodes our understanding of a causal process
+- …how to identify backdoor paths between treatment/exposure and outcome
+- …why we close backdoor paths
+- …why adjusting for colliders can distort causal effects
+- …why adjusting for mediators can distort causal effects
+- …why adjusting for potential confounders can distort causal effects, if a confounder was measured post treatment
+- …the difference between individual level causal effects, average treatment effects (ATE), conditional average treatment effect (CATE), average treatment on the treated effects (ATT), and average treatment on the untreated (ATU)
+- …what the fundamental problem of causal inference is and how we can attempt to address it
+
+**You should be able to…**
+
+- …draw a possible directed acyclic graph (DAG) for a given causal relationship
+- …identify all pathways between treatment/exposure and outcome
+- …identify which nodes in the DAG need to be adjusted for (or closed)
+- …identify colliders and mediators (which should not be adjusted for)
+
+## Randomization
+
+**You should understand…**
+
+- …why randomization is crucial for causal inference and counterfactuals
+- …the various strategies and opportunities for randomization, and how they may depend on practical decisions
+- …the process for analyzing a randomized controlled trial
+
+## Threats to validity
+
+**You should understand…**
+
+- …what it means when a study has internal validity and know how to identify the major threats to internal validity, including: omitted variable bias (selection and attrition), trend issues (maturation, secular trends, seasonality, testing, regression to the mean), study calibration issues (measurement error, time frame of study), and contamination issues (Hawthorne effects, John Henry effects, spillovers, and intervening events)
+- …why selection bias is the most pernicious and difficult threat to internal validity and how we can account for it
+- …what it means when a study has external validity
+- …what it means when the measures used in a study have construct validity
+- …what it means when the analysis used in a study has statistical conclusion validity
+
+**You should be able to…**
+
+- …identify existing and potential threats to validity in a study
+- …suggest ways of addressing these threats
+
+## Regression and inference
+
+**You should understand…**
+
+- …the difference between outcome/response/dependent and explanatory/predictor/independent variables
+- …what each of the components in a regression equation stand for, in both "flavors" of notation: 
+    - $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon$ for the statistical flavor
+    - $y = \alpha + \beta x_1 + \gamma x_2 + \epsilon$ for the econometrics flavor
+- …how sliders and switches work as metaphors for regression coefficients
+- …what it means to hold variables constant (or to control for variables)
+- …how "big data" (or even data on the full population) helps little with causal inference
+
+**You should be able to…**
+
+- …interpret regression coefficients, including interaction terms
+- …interpret standard errors, p-values, and confidence intervals
+- …interpret other regression diagnostics like $R^2$
+- …write out the regression equation for an evaluation that uses random assignment and an evaluation that uses regression analysis without random assignment
+
+## Sampling and sample size 
+
+**You should understand…**
+
+- …how to standardize a variable
+- …the difference between sampling vs. treatment assignment
+- …how standard errors can be thought of in terms of repeated draws from a population
+- …what Type I and Type II errors are, and what statistical significance and statistical power mean
+- …what a Minimal Detectable Effect (MDE) is
+- …how the following "ingredients" affect statistical power and the MDE of a trial: sample size, attrition, variance of the outcome and $R^2$, the assignment split, and assignment level and intracluster correlation
+
+## Qualitative and mixed methods
+
+- Understand key characteristics of qualitative research and its strengths
+- Identify research designs (whether quantitative or qualitative) that do not allow for causal inferences and/or are likely to produce biased results 
+- Understand the limitations of qualitative research in solving the Fundamental Problem of Causal Inference
+- Understand how qualitative research can be "mixed" with and inform quantitative causal inference research 
+
+## Matching
+
+- Understand the intuition behind matching and inverse probability weighting
+- Understand the process for adjusting for confounders and closing backdoors with both matching and inverse probability weighting
+
+## Instrumental variables
+
+- Understand the intuition behind using instruments for causal inference
+- Understand the three characteristics of a good instrument
+- Understand the process for analyzing data with instrumental variables and 2SLS
+- Understand the difference between ATE and LATE
+- Understand the regression equations for an evaluation that uses instrumental variables
+
+## Regression discontinuity
+
+- Understand the intuition behind making causal inferences with regression discontinuity
+- Understand the process for analyzing regression discontinuities, both ***fuzzy*** and ***sharp***
+- Understand the difference between ATE and LATE
+- Understand the regression equation for an evaluation that uses a regression discontinuity design
+
+## Difference-in-differences, fixed effects, and panel data
+
+- Understand the intuition behind making causal inferences with difference-in-differences
+- Understand the process for analyzing diff-in-diffs
+- Understand the regression equation for an evaluation that uses a differences-in-differences design
