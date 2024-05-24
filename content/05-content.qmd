@@ -17,16 +17,16 @@ slide_details <- tibble::tribble(
 )
 ```
 
+## Readings
+
+- {{< fa book >}} Chapter 3 in *Impact Evaluation in Practice* [@wb-eval]
+- {{< fa book >}} Chapter 2 in *Running Randomized Evaluations* [@glennerster_running_2013]
+
 ## Videos
 
 ```{r show-youtube-list, echo=FALSE, results="asis"}
 youtube_list(slide_details, playlist_id)
 ```
-
-## Readings
-
-- {{< fa book >}} Chapter 3 in *Impact Evaluation in Practice* [@wb-eval]
-- {{< fa book >}} Chapter 2 in *Running Randomized Evaluations* [@glennerster_running_2013]
 
 ## Slides
 
